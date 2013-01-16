@@ -1,0 +1,95 @@
+<languageVersion: 1.0;>
+material kernel StandardMaterialNoTexcoord < namespace: "Pixel Bender 3D"; vendor: "Adobe"; version: 1; >
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	// Global properties
+	parameter float4 globalAmbient		< id: "globalAmbient"; >;
+	
+	// Material properties
+	parameter float4 ambientColor		< id: "ambientColor";	defaultValue: float4( 0., 0., 0., 1. ); >;
+	parameter float4 diffuseColor		< id: "diffuseColor";	defaultValue: float4( .5, .5, .5, 1. ); >;
+	parameter float4 emissiveColor		< id: "emissiveColor";	defaultValue: float4( 0., 0., 0., 1. ); >;
+	parameter float4 specularColor		< id: "specularColor"; >;
+	parameter float specularExponent	< id: "specularExponent"; >;
+	parameter float specularIntensity	< id: "specularIntensity"; >;
+	parameter float opacity				< id: "opacity"; >;
+	
+	// Camera properties
+	parameter float4 cameraPosition		< id: "cameraPosition"; >;
+
+	// Light properties
+	parameter float4 lightPosition		< id: "lightPosition"; >;
+	parameter float4 lightColor			< id: "lightColor"; >;
+	
+	// Vertex inputs
+	input vertex float4 vertexPosition	< id:"vertexPosition"; >;
+	input vertex float4 vertexNormal	< id:"vertexNormal"; >;
+
+	// Interpolated values
+	interpolated float4 position;
+	interpolated float4 normal;
+
+	// Outputs
+	output float4 outputColor;
+
+	// ==================================================
+
+	void evaluateVertex()
+	{
+		position	= vertexPosition;
+		normal		= vertexNormal;
+	}
+
+	// --------------------------------------------------
+
+	void evaluateFragment()
+	{
+		float4 N = normal;
+		N[ 3 ] = 0.0;
+		N = normalize( N );
+
+		float4 L = lightPosition - position;
+		float lightDistance = length( L );
+		L[ 3 ] = 0.0;
+		L = normalize( L );
+
+		// ambient term
+		float4 ambient = ambientColor * globalAmbient;
+
+		// diffuse term
+		float diffuseLight = clamp( dot( N, L ), 0.0, 1.0 );
+		float4 diffuse = diffuseColor * diffuseLight;
+		diffuse *= lightColor;
+
+		// specular term
+		float4 V = cameraPosition - position; ;
+		V[ 3 ] = 0.0;
+		V = normalize( V );
+
+		float4 H = L + V;
+		H[ 3 ] = 0.0;
+		H = normalize( H );
+
+		float specularLight = pow( max( dot( N, H ), 0.0 ), specularExponent ) * specularColor.w;
+		float4 specular = specularColor * specularLight * specularIntensity;
+		specular *= lightColor;
+
+		outputColor = ( ambient + diffuse + specular + emissiveColor );
+
+		outputColor[ 3 ] = opacity;
+	}
+}

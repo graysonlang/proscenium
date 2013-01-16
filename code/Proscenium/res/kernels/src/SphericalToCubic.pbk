@@ -1,0 +1,157 @@
+<languageVersion: 1.0;> 
+
+kernel SphericalToCubic
+<
+	namespace	: "PixelBender";
+	vendor		: "Adobe Systems";
+	version		: 1;
+>
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	input image4 src;
+	
+	output float4 pixel;
+
+	parameter int face <
+		minValue		: int( 0 );
+		maxvalue		: int( 100 );
+		defaultValue	: int( 5 );
+	>;
+
+	parameter float srcWidth
+	<
+		minValue		: float( 64. );
+		maxValue		: float( 4096. );
+		defaultValue	: float( 512. );
+	>;
+	
+	parameter float srcHeight
+	<
+		minValue		: float( 64. );
+		maxValue		: float( 4096. );
+		defaultValue	: float( 512. );
+	>;
+
+	parameter float dstSize
+	<
+		minValue		: float( 2. );
+		maxvalue		: float( 2048. );
+		defaultValue	: float( 512. );
+	>;
+	
+	parameter bool flipX;
+	parameter bool flipY;
+	parameter bool flipZ;
+
+	const float PI = 3.14159265;
+
+	void evaluatePixel()
+	{
+		float2 coord = outCoord();
+		
+		// half the destination size
+		float h = dstSize / 2.;
+		
+		// distance to plane
+		float d = ( dstSize ) / 2.;
+
+		float x, y, z;
+
+		if ( face == 1 ) // left
+		{
+			x = -d;
+			y = h - coord.y;
+			z = h - coord.x;
+		}
+		else if ( face == 4 ) // front
+		{
+			x = coord.x - h;
+			y = h - coord.y;
+			z = -d;
+		}
+		else if ( face == 0 ) // right
+		{
+			x = d;
+			y = h - coord.y;
+			z = coord.x - h;
+		}
+		else if ( face == 5 ) // back
+		{
+			x = h - coord.x;
+			y = h - coord.y;
+			z = d;
+		}
+		else if ( face == 2 ) // top
+		{
+			x = coord.x - h;
+			y = d;
+			z = h - coord.y;
+		}
+		else if ( face == 3 ) // bottom
+		{
+			x = coord.x - h;
+			y = -d;
+			z = coord.y - h;
+		}
+		
+		if ( flipX )
+			x = -x;
+			
+		if ( flipY )
+			y = -y;
+			
+		if ( flipZ )
+			z = -z;
+		
+		float3 n = float3( x, y, z );
+		n = normalize( n );
+
+		float phi = ( atan( n.x, -n.z ) / PI + 1. ) / 2.;	// [ 0, 1 ]
+		float theta = acos( n.y ) / PI;						// [ 0, 1 ]
+		
+		float u = phi * srcWidth;
+		float v = theta * srcHeight;
+	
+		u = clamp( u, 0., srcWidth );
+		v = clamp( v, .5, srcHeight - .5 );
+
+		float amount;
+		if ( u < .5 )
+		{
+			amount = .5 + u;
+			pixel =
+				amount * sample( src, float2( .5, v ) ) +
+				( 1. - amount ) * sample( src, float2( srcWidth - .5, v ) );
+		}
+		else if ( u > srcWidth - .5 )
+		{
+			amount = .5 + u - srcWidth;
+			pixel =
+				amount * sample( src, float2( .5, v ) ) +
+				( 1. - amount ) * sample( src, float2( srcWidth - .5, v ) );
+		}
+		else
+			pixel = sample( src, float2( u, v ) );
+
+		
+		//for debugging
+		//if ( u < .5 ) pixel = float4( 1., 0., 0., 1. );
+		//if ( u < srcWidth - .5 ) pixel = float4( 0., 0., 1., 1. );
+		//pixel = float4( phi, theta, 0., 1. );
+		//pixel = float4( n.x / 2. + .5, n.y / 2. + .5, n.z / 2. + .5, 1. );
+	}
+}

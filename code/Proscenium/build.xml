@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Proscenium" default="docs" basedir=".">
+
+	<!--
+	==================================================
+		Configuration
+	==================================================
+	-->
+
+	<!-- Load build.properties file -->
+	<property file="./build.properties" />
+
+	<!-- Set up access to environment variables -->
+	<property environment="env" />
+
+	<!-- Set FLEX_SDK_VERSION property from environment (if it hasn't already been defined above) -->
+	<condition property="FLEX_SDK_VERSION" value="${env.FLEX_SDK_VERSION}" else="4.6.0">
+	    <isset property="env.FLEX_SDK_VERSION" />
+	</condition>
+	
+	<condition property="FLEX_HOME" value="${env.FLEX_HOME}">
+	    <isset property="env.FLEX_HOME" />
+	</condition>
+	
+	<!-- Set FLEX_HOME property from environment (if it hasn't already been defined above) -->
+	<condition property="FLEX_HOME" value="C:/Program Files (x86)/Adobe/Adobe Flash Builder 4.6/sdks/${FLEX_SDK_VERSION}">
+		<or>
+			<os family="windows" arch="amd64" />
+			<os family="windows" arch="x86_64" />
+		</or>
+	</condition>
+
+	<condition property="FLEX_HOME" value="C:/Program Files/Adobe/Adobe Flash Builder 4.6/sdks/${FLEX_SDK_VERSION}">
+		<os family="windows" />
+	</condition>
+
+	<condition property="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.6/sdks/${FLEX_SDK_VERSION}">
+		<os family="mac" />
+	</condition>
+
+	<condition property="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.6/sdks/${FLEX_SDK_VERSION}">
+		<os family="unix" />
+	</condition>
+
+	<!-- Verify FLEX_HOME has been defined -->
+	<fail message="FLEX_HOME is not defined in build.properties or environment variables">
+		<condition>
+			<not>
+				<isset property="FLEX_HOME" />
+			</not>
+		</condition>
+	</fail>
+	
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<!-- Set path to asdoc executable -->
+	<condition property="asdoc" value="${FLEX_HOME}/bin/asdoc.exe" else="${FLEX_HOME}/bin/asdoc">
+		<os family="windows" />
+	</condition>
+
+	
+	
+	<!-- Set defaults for properties -->
+
+	<property name="SOURCE_PATH" value="src" />
+	<property name="LIBS" value="libs" />
+
+	<property name="TARGET_PLAYER" value="11.1" />
+	
+	<property name="SWC_OUTPUT_PATH" value="bin" />
+	<property name="SWC_OUTPUT_FILE" value="proscenium.swc" />
+
+	<property name="DOC_OUTPUT_PATH" value="docs" />
+	<property name="DOC_FOOTER" value="Copyright 2012 Adobe Systems Incorporated. All rights reserved." />
+	<property name="DOC_TITLE" value="ActionScript API Reference" />
+
+	<!--
+	==================================================
+		Targets
+	==================================================
+	-->
+
+	<target name="all" depends="clean,compile,docs" description="Full build with documentation" />
+	<target name="main" depends="clean,compile" description="Full build" />
+	<target name="clean" depends="clean-swc,clean-docs" description="Remove build files" />
+
+	<!-- ================================================== -->
+
+	<target name="compile" depends="clean-swc" description="Build SWC">
+		<mkdir dir="${basedir}/${SWC_OUTPUT_PATH}" />
+		<compc output="${basedir}/${SWC_OUTPUT_PATH}/${SWC_OUTPUT_FILE}" locale="en_US">
+			<define name="CONFIG::debug" value="false" />
+			<define name="CONFIG::release" value="true" />
+			<define name="CONFIG::genericBinaryLogging" value="false" />
+			<define name="CONFIG::traceInstance3DOps" value="false" />
+
+			<compiler.external-library-path dir="${LIBS}">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+
+			<swf-version>13</swf-version>
+			<target-player>${TARGET_PLAYER}</target-player>
+			<strict>true</strict>
+			<optimize>true</optimize>
+			<warnings>true</warnings>
+			<compute-digest>false</compute-digest>
+			<source-path path-element="${basedir}/${SOURCE_PATH}" />
+			<include-sources dir="${basedir}/${SOURCE_PATH}" includes="*" />
+			<metadata>
+				<publisher>Adobe</publisher>
+			</metadata>
+			<!--
+			<namespace uri="http://www.adobe.com/2009" manifest="${basedir}/res/manifest.xml"/>
+			<include-namespaces>http://www.adobe.com/2009</include-namespaces>
+-->
+		</compc>
+		<echo>SWC generated</echo>
+	</target>
+
+	<target name="docs" depends="clean-docs">
+		<echo message="basedir: ${basedir}" />
+		<echo message="SOURCE_PATH: ${SOURCE_PATH}" />
+		<echo message="DOC_OUTPUT_PATH: ${DOC_OUTPUT_PATH}" />
+		<echo message="FLEX_HOME: ${FLEX_HOME}" />
+		<echo message="TARGET_PLAYER: ${TARGET_PLAYER}" />
+
+		<asdoc output="${DOC_OUTPUT_PATH}" lenient="true" failonerror="true">
+			<source-path path-element="${basedir}/${SOURCE_PATH}" />
+			<doc-sources path-element="${basedir}/${SOURCE_PATH}" />
+
+			<compiler.define name="CONFIG::debug" value="false" />
+			<compiler.define name="CONFIG::release" value="true" />
+			<compiler.define name="CONFIG::genericBinaryLogging" value="false" />
+			<compiler.define name="CONFIG::traceInstance3DOps" value="false" />
+
+			<compiler.external-library-path file="${FLEX_HOME}/frameworks/libs/player/${TARGET_PLAYER}/playerglobal.swc" append="true" />
+			<compiler.external-library-path dir="${FLEX_HOME}/frameworks/libs/" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+			<compiler.library-path dir="${LIBS}" append="true">
+				<include name="*.swc" />
+			</compiler.library-path>
+
+			<swf-version>13</swf-version>
+			<target-player>${TARGET_PLAYER}</target-player>
+
+			<main-title>${DOC_TITLE}</main-title>
+			<footer>${DOC_FOOTER}</footer>
+		</asdoc>
+	</target>
+
+	<!-- ================================================== -->
+
+	<target name="clean-swc" description="[helper target]">
+		<delete dir="${basedir}/${SWC_OUTPUT_PATH}" failOnError="false" includeEmptyDirs="true" />
+	</target>
+
+	<target name="clean-docs" description="[helper target]">
+		<delete dir="${basedir}/${DOC_OUTPUT_PATH}" failOnError="false" includeEmptyDirs="true" />
+	</target>
+
+	<target name="info" description="Print out settings">
+		<echo message="The Project name is: ${ant.project.name}" />
+		<echo message="The home path is: ${basedir}" />
+		<echo message="Build file: ${ant.file}" />
+		<echo message="ANT_HOME: ${ant.home}" />
+		<echo message="FLEX_HOME: ${FLEX_HOME}" />
+		<echo message="Ant version: ${ant.version}" />
+		<echo message="Java version: ${ant.java.version}" />
+		<echo message="${os.name}, ${os.arch}, ${sun.arch.data.model}" />
+	</target>
+
+</project>

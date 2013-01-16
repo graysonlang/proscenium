@@ -1,0 +1,75 @@
+<languageVersion : 1.0;>
+kernel HeightToNormal
+<
+	namespace:	"Pixel Bender";
+	vendor:		"Adobe";
+	version:	1;
+>
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	parameter float width
+	<
+		defaultValue:256.0;
+		minValue:2.0;
+		maxValue:2048.0;
+	>;
+
+	parameter float height
+	<
+		defaultValue:256.0;
+		minValue:2.0;
+		maxValue:2048.0;
+	>;
+
+	parameter float scale
+	<
+		defaultValue:1.0;
+		minValue:0.001;
+		maxValue:100.0;
+	>;
+
+    input image4 src;
+    output pixel4 dst;
+
+	// 4 sample height to normal 
+	void evaluatePixel()
+	{
+		float2 coords = outCoord();
+		float x = coords.x;
+		float y = coords.y;
+
+		float2 singlePixel = pixelSize( src );
+		float dx = singlePixel.x;
+		float dy = singlePixel.y;
+		
+		// sample to the left, right, above, and below
+		float l = sampleNearest( src, float2( mod( x - dx, width ), y ) ).x;
+		float r = sampleNearest( src, float2( mod( x + dx, width ), y ) ).x;
+		float a = sampleNearest( src, float2( x, mod( y - dy, height ) ) ).x;
+		float b = sampleNearest( src, float2( x, mod( y + dy, height ) ) ).x;
+
+		// horizontal and vertical terms
+		float h = ( l - r ) * scale * .25;
+		float v = ( a - b ) * scale * .25;
+
+		// calculate inverse length
+		float s = 1. / sqrt( v * v + h * h + 1. );
+		
+		// calculate normal
+		dst = float4( h * s + .5, v * s + .5, s, 1. );
+	}
+} 

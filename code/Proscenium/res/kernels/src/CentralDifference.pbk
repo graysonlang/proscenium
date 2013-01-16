@@ -1,0 +1,64 @@
+<languageVersion : 1.0;>
+kernel CentralDifference
+<
+	namespace:	"Pixel Bender";
+	vendor:		"Adobe";
+	version:	1;
+>
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	parameter float width
+	<
+		defaultValue:256.0;
+		minValue:2.0;
+		maxValue:2048.0;
+	>;
+
+	parameter float height
+	<
+		defaultValue:256.0;
+		minValue:2.0;
+		maxValue:2048.0;
+	>;
+
+    input image4 src;
+    output pixel4 dst;
+
+	// 4 sample height to normal 
+	void evaluatePixel()
+	{
+		float2 coords = outCoord();
+		float x = coords.x;
+		float y = coords.y;
+
+		float2 singlePixel = pixelSize( src );
+		float dx = singlePixel.x;
+		float dy = singlePixel.y;
+		
+		// sample to the left, right, above, and below
+		float x0 = sampleNearest( src, float2( mod( x - dx, width ), y ) ).x;
+		float x1 = sampleNearest( src, float2( mod( x + dx, width ), y ) ).x;
+		float y0 = sampleNearest( src, float2( x, mod( y - dy, height ) ) ).x;
+		float y1 = sampleNearest( src, float2( x, mod( y + dy, height ) ) ).x;
+		
+		dst = float4(
+			( x0 - x1 ) / 2. + .5,
+			( y0 - y1 ) / 2. + .5,
+			0., 1.
+		);
+	}
+} 

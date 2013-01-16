@@ -1,0 +1,59 @@
+<languageVersion: 1.0;>
+material kernel PP_IIR1
+<
+	namespace:	"Pixel Bender 3D";
+	vendor:		"Adobe";
+	version:	1;
+>
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	///////////////////////////////////////////////////////////////////////////
+	parameter    float4 size;  		  // xy = 1/wh, zw=wh
+	parameter    float4 sizeHalf4th;  // xy = 1/wh/2,  zw = 1/wh/4
+
+	interpolated float4 voutUV;
+
+	parameter    float4 uvScale;   
+	parameter    float4 uvOffset;
+	input vertex float2 viewportUV  < id:"texcoord"; >;
+	void evaluateVertex()	{ voutUV = viewportUV.xyxy * uvScale + uvOffset; }
+	///////////////////////////////////////////////////////////////////////////
+	
+	parameter    float4 param0;  	// param0.x = x	: a0,a1,a2,a3
+	parameter    float4 param1;		// param1.x = x : b1,b2,b3,b4
+
+	input image4 X_0;	// x_n
+	input image4 Y_1;	// y_{n-1}
+
+	output float4 outputColor;
+	
+	void evaluateFragment()
+	{
+		float4 out1 = (
+						  param0.xxxx * sample( X_0, voutUV.xy, PB3D_NEAREST ) 		//   b_0 * x_n
+						+ param1.xxxx * sample( Y_1, voutUV.xy, PB3D_NEAREST )		// + a_1 * y_{n-1}
+					  );
+					  
+		// stochastic remainder handling					  
+		float4 out2   = out1 * 255.;
+		float4 outf = floor(out2);
+		float4 outr = out2 - outf;
+		float4 outrs = float4(greaterThan(outr, param1.wwww));		// outrs = outr > rand() 
+		
+		outputColor = (outf + outrs) / 255.;
+	}
+}

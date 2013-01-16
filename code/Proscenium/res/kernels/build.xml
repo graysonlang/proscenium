@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PB3D" default="all" basedir=".">
+
+	<!--
+	==================================================
+		Configuration
+	==================================================
+	-->
+	
+	<!-- Load build.properties file -->
+	<property file="./build.properties"/>
+	
+	<property name="TOOLS_PIXEL_BENDER" value="${basedir}/../../../../tools/Pixel Bender"/>
+	
+	<!-- Set path to tool executables -->
+	<condition property="pbutil" value="${TOOLS_PIXEL_BENDER}/pbutil.exe" else="${TOOLS_PIXEL_BENDER}/Pixel Bender Toolkit.app/Contents/MacOS/pbutil">
+		<os family="windows"/>
+	</condition>
+	<condition property="pb3dutil" value="${TOOLS_PIXEL_BENDER}/pb3dutil.exe" else="${TOOLS_PIXEL_BENDER}/pb3dutil.app/Contents/MacOS/pb3dutil">
+		<os family="windows"/>
+	</condition>
+
+	<!--
+	==================================================
+		Targets
+	==================================================
+	-->
+
+	<target name="all" depends="clean,compile" description="Full build"/>
+	
+	<!-- ================================================== -->
+	
+	<target name="compile" description="Compile Pixel Bender Kernels">
+		
+    	<mkdir dir="${basedir}/out/"/>
+
+		<parallel>
+			<!-- Compile 2D Pixel Bender Kernels -->
+			<apply executable="${pbutil}" dest="out">
+				<srcfile/>
+				<targetfile/>
+				<fileset dir="src" includes="*.pbk"/>
+				<mapper type="glob" from="*.pbk" to="*.pbj"/>
+			</apply>			
+
+			<!-- Compile 3D Pixel Bender Kernels -->
+			<apply executable="${pb3dutil}" dest="out">
+				<srcfile/>
+				<targetfile/>
+				<fileset dir="src" includes="*.pbvk"/>
+				<mapper type="glob" from="*.pbvk" to="*.v.pb3dasm"/>
+			</apply>
+		
+			<!-- Compile 3D Pixel Bender Material Kernels -->
+			<apply executable="${pb3dutil}" dest="out">
+				<srcfile/>
+				<targetfile/>
+				<fileset dir="src" includes="*.pbmk"/>
+				<compositemapper>
+					<mapper type="glob" from="*.pbmk" to="*.v.pb3dasm"/>
+					<mapper type="glob" from="*.pbmk" to="*.f.pb3dasm"/>
+				</compositemapper> 
+			</apply>
+		</parallel>
+		
+	</target>
+
+	<!-- ================================================== -->
+	
+	<target name="clean" description="Remove build files">
+		<delete dir="${basedir}/out/" failOnError="false" includeEmptyDirs="true"/>
+	</target>
+	
+	<target name="info" description="Print out settings">
+		<echo message="The Project name is: ${ant.project.name}"/>
+		<echo message="The home path is: ${basedir}"/>
+		<echo message="Build file: ${ant.file}"/>
+		<echo message="ANT_HOME: ${ant.home}"/>
+		<echo message="Ant version: ${ant.version}"/> 
+		<echo message="Java version: ${ant.java.version}"/>
+	</target>
+</project>

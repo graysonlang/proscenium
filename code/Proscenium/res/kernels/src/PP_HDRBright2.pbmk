@@ -1,0 +1,57 @@
+<languageVersion: 1.0;>
+material kernel PP_HDRBright2
+<
+	namespace:	"Pixel Bender 3D";
+	vendor:		"Adobe";
+	version:	1;
+>
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	///////////////////////////////////////////////////////////////////////////
+	parameter    float4 size;  		  // xy = 1/wh, zw=wh
+	parameter    float4 sizeHalf4th;  // xy = 1/wh/2,  zw = 1/wh/4
+
+	input        image4 sourceImage;
+	interpolated float4 voutUV;
+
+	parameter    float4 uvScale;   
+	parameter    float4 uvOffset;
+	input vertex float2 viewportUV  < id:"texcoord"; >;
+	void evaluateVertex()	{ voutUV = viewportUV.xyxy * uvScale + uvOffset; }
+	///////////////////////////////////////////////////////////////////////////
+	
+	parameter    float4 param0;  	// param0.x = 0.25 * (-1/K)
+	parameter    float4 param1;  	// param1.x = BRIGHT_MIN					= intensity threshold
+									// param1.y = HDR_MAX						: max
+									// param1.z = INV_BRIGHT_RANGE				=  1/(HDR_MAX - BRIGHT_MIN)
+							  		// param1.w = BRIGHT_MIN_INV_BRIGHT_RANGE	= BRIGHT_MIN/(HDR_MAX - BRIGHT_MIN)
+
+	output float4 outputColor;
+	
+	void evaluateFragment()
+	{
+		float4 uvd = sizeHalf4th.zwzw;	// 1/4 of half-res texel = 1/2 full-res texel
+		float4 color = log(1. - sample(sourceImage, float2(voutUV.x - uvd.x, voutUV.y - uvd.y), PB3D_NEAREST | PB3D_MIPDISABLE )) 
+		             + log(1. - sample(sourceImage, float2(voutUV.x + uvd.x, voutUV.y - uvd.y), PB3D_NEAREST | PB3D_MIPDISABLE )) 
+		             + log(1. - sample(sourceImage, float2(voutUV.x - uvd.x, voutUV.y + uvd.y), PB3D_NEAREST | PB3D_MIPDISABLE )) 
+		             + log(1. - sample(sourceImage, float2(voutUV.x + uvd.x, voutUV.y + uvd.y), PB3D_NEAREST | PB3D_MIPDISABLE ));
+		color = min( param0.xxxx * color, param1.yyyy );
+		color = color * param1.zzzz - param1.wwww;
+
+		outputColor = max(float4(0,0,0,0), color); 
+	}
+}

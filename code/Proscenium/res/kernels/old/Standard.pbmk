@@ -1,0 +1,150 @@
+<languageVersion: 1.0;>
+material kernel StandardMaterial < namespace: "Pixel Bender 3D"; vendor: "Adobe"; version: 1; >
+{
+// ================================================================================
+// Copyright 2012 Adobe Systems
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ================================================================================
+
+	// Vertex inputs
+	input vertex float4 vertexPosition		< id: "vertexPosition"; >;
+	input vertex float4 vertexNormal		< id: "vertexNormal"; >;
+	input vertex float4 vertexTexcoord		< id: "vertexTexcoord"; >;
+
+	input vertex float4 worldPosition		< id: "worldPosition"; >;
+	input vertex float4 worldNormal			< id: "worldNormal"; >;
+	
+	// Parameters
+	parameter float4x4 modelToWorld			< id: "modelToWorld"; >;
+	parameter float4x4 modelToWorldIT		< id: "modelToWorldIT"; >;
+	
+	parameter float4 globalAmbient			< id: "globalAmbient"; >;
+	
+	// Material properties
+	parameter float4 ambientColor			< id: "ambientColor";		defaultValue: float4( 0., 0., 0., 1. ); >;
+	parameter float4 diffuseColor			< id: "diffuseColor";		defaultValue: float4( .5, .5, .5, 1. ); >;
+	parameter float4 emissiveColor			< id: "emissiveColor";		defaultValue: float4( 0., 0., 0., 1. ); >;
+	parameter float4 specularColor			< id: "specularColor"; >;
+	parameter float specularExponent		< id: "specularExponent"; >;
+	parameter float opacity					< id: "opacity"; >;
+	
+	input image4 diffuseTexture				< id: "diffuseTexture"; >;
+	input image4 opacityTexture				< id: "opacityTexture"; >;
+	input image4 specularTexture			< id: "specularTexture"; >;
+	input image4 emissiveTexture			< id: "emissiveTexture"; >;
+	input image4 environmentTexture			< id: "environmentTexture"; >;
+	
+	// Camera properties
+	parameter float4 cameraPosition			< id: "cameraPosition"; >;
+
+	// Light properties
+	parameter float4 light1Position			< id: "light1Position"; >;
+	parameter float4 light1Color			< id: "light1Color"; >;
+	
+	parameter float4 light2Position			< id: "light2Position"; >;
+//	parameter float4 light2Color			< id: "light2Color"; >;
+	
+	// Interpolated values
+	interpolated float4 position;
+	interpolated float4 normal;
+	interpolated float4 texcoord;
+
+	// Outputs
+	output float4 outputColor;
+
+	// ==================================================
+	void evaluateVertex()
+	{
+		position	= worldPosition;
+		
+		normal		= vertexNormal;
+		normal.w	= 0.0;
+		normal		*= modelToWorld;
+		normal		*= modelToWorldIT;
+
+		texcoord	= vertexTexcoord;
+	}
+
+	// --------------------------------------------------
+	
+	float4 evaluateLighting(
+		float4 surfacePosition,
+		float4 surfaceNormal,
+		float4 viewDirection,
+		float4 lightPosition,
+		float4 lightColor,
+		float4 Kd,
+		float4 Ks,
+		float exponent
+	)
+	{
+		float4 L = lightPosition - surfacePosition;
+		L[ 3 ] = 0.0;
+		L = normalize( L );
+		
+		float4 H = L + viewDirection;
+		H[ 3 ] = 0.0;
+		H = normalize( H );
+		
+		return lightColor * (
+			Kd * clamp( dot( surfaceNormal, L ), 0.0, 1.0 )
+			+ Ks * pow( max( dot( surfaceNormal, H ), 0.0 ), exponent )
+		);		
+	}
+	
+	void evaluateFragment()
+	{
+		// diffuse term
+		float4 diffuse = sample( diffuseTexture, texcoord.xy, PB3D_REPEAT  );
+		diffuse += diffuseColor * ( 1.0 - diffuse.w );
+		diffuse.w = 1.0;
+
+		float specularAlpha = sample( specularTexture, texcoord.xy, PB3D_REPEAT ).x;
+		float4 specular = specularColor * specularAlpha;
+
+		// opacity
+		float opacityAlpha = sample( opacityTexture, texcoord.xy, PB3D_REPEAT ).x;
+		diffuse *= opacityAlpha;
+
+		// environment map
+		//float4 environmentColor = sample( environmentTexture, N, PB3D_MIPNONE | PB3D_CLAMP | PB3D_CUBE );
+
+		// emissive term
+		float4 emissive = sample( emissiveTexture, texcoord.xy, PB3D_REPEAT );
+		emissive += emissiveColor * ( 1.0 - emissive.w );
+		emissive.w = 1.0;
+
+		// ambient term
+		float4 ambient = ambientColor * opacityAlpha * globalAmbient;
+		
+		// specular term
+		float4 V = cameraPosition - position;
+		V[ 3 ] = 0.0;
+		V = normalize( V );
+
+		float4 N = normal;
+		N[ 3 ] = 0.0;
+		N = normalize( N );
+		
+		// --------------------------------------------------
+		
+		float4 P = position;
+		float4 light1 = evaluateLighting( P, N, V, light1Position, light1Color, diffuse, specular, specularExponent );
+		
+		// uncommenting light 2 lines
+		//float4 light2 = evaluateLighting( P, N, V, light1Position, light1Color, diffuse, specular, specularExponent );
+		outputColor = ambient + emissive + light1;// + light2;
+
+		outputColor[ 3 ] = opacity * opacityAlpha;
+	}
+}
