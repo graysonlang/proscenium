@@ -20,17 +20,25 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.pixelBender3D.*;
-	import com.adobe.pixelBender3D.agal.*;
-	import com.adobe.pixelBender3D.utils.*;
-	import com.adobe.scenegraph.*;
+	import com.adobe.pixelBender3D.AGALProgramPair;
+	import com.adobe.pixelBender3D.PBASMCompiler;
+	import com.adobe.pixelBender3D.PBASMProgram;
+	import com.adobe.pixelBender3D.RegisterMap;
+	import com.adobe.pixelBender3D.pb3d_debug;
+	import com.adobe.pixelBender3D.pb3d_internal;
+	import com.adobe.pixelBender3D.utils.ProgramConstantsHelper;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DCompareMode;
+	import flash.display3D.Context3DProgramType;
+	import flash.display3D.Context3DVertexBufferFormat;
+	import flash.display3D.textures.TextureBase;
+	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/**
 	 * PB3DCompute makes it easy to set up and apply image filters written in the PB3D shader language that run on the GPU.
 	 * 
@@ -343,8 +351,10 @@ package com.adobe.scenegraph
 	}
 }
 
-import com.adobe.pixelBender3D.utils.*;
-import com.adobe.scenegraph.*;
+import com.adobe.pixelBender3D.utils.ProgramConstantsHelper;
+import com.adobe.scenegraph.IndexBuffer3DHandle;
+import com.adobe.scenegraph.Program3DHandle;
+import com.adobe.scenegraph.VertexBuffer3DHandle;
 
 {
 	class Programs3D

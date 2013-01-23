@@ -20,11 +20,13 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.pixelBender3D.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.pixelBender3D.Semantics;
+	import com.adobe.pixelBender3D.VertexRegisterInfo;
 	
-	import flash.display3D.*;
-	import flash.utils.*;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class
@@ -707,7 +709,6 @@ package com.adobe.scenegraph
 	}
 }
 
-import com.adobe.scenegraph.*;
 {
 	// ===========================================================================
 	//	Class

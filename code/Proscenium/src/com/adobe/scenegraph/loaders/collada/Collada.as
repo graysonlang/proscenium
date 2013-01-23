@@ -20,11 +20,14 @@ package com.adobe.scenegraph.loaders.collada
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.fx.*;
-	import com.adobe.scenegraph.loaders.collada.kinematics.*;
-	import com.adobe.scenegraph.loaders.collada.physics.*;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaEffect;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaImage;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaMaterial;
+	import com.adobe.scenegraph.loaders.collada.kinematics.ColladaKinematicsScene;
+	import com.adobe.scenegraph.loaders.collada.physics.ColladaPhysicsScene;
 	
-	import flash.utils.*;
+	import flash.utils.ByteArray;
+	import flash.utils.getTimer;
 	
 	// ===========================================================================
 	//	Class

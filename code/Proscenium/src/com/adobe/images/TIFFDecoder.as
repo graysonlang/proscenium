@@ -20,9 +20,8 @@ package com.adobe.images
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.errors.*;
-	import flash.utils.*;
+	import flash.display.BitmapData;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class
@@ -43,9 +42,12 @@ package com.adobe.images
 // ================================================================================
 //	Imports
 // --------------------------------------------------------------------------------
-import flash.display.*;
-import flash.errors.*;
-import flash.utils.*;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.utils.ByteArray;
+import flash.utils.Dictionary;
+import flash.utils.Endian;
+import flash.utils.getTimer;
 
 {
 	// ===========================================================================

@@ -20,8 +20,7 @@ package com.adobe.scenegraph.loaders.p3d
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
+	import com.adobe.scenegraph.loaders.ModelLoader;
 	
 	// ===========================================================================
 	//	Class

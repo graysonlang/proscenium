@@ -22,7 +22,7 @@ package com.adobe.binary
 	// ---------------------------------------------------------------------------
 	import com.adobe.display.Color;
 	
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

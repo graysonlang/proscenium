@@ -20,7 +20,9 @@ package com.adobe.scenegraph.loaders.collada.fx
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.*;
+	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
+	import com.adobe.scenegraph.loaders.collada.ColladaParameter;
+	import com.adobe.scenegraph.loaders.collada.ColladaTypes;
 
 	// ===========================================================================
 	//	Class

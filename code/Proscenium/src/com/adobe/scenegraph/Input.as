@@ -17,7 +17,12 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	import com.adobe.binary.*;
+	// ===========================================================================
+	//	Imports
+	// ---------------------------------------------------------------------------
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
 	
 	// ===========================================================================
 	//	Class

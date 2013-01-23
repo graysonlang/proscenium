@@ -20,9 +20,12 @@ package com.adobe.toddler
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
+	import com.adobe.scenegraph.MeshUtils;
+	import com.adobe.scenegraph.SceneBone;
+	import com.adobe.scenegraph.SceneNode;
 	
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
 	// ===========================================================================
@@ -176,6 +179,6 @@ package com.adobe.toddler
 			{
 				mJointNodes[i].transform =  mScript.transforms[i];
 			}
-		}		
-	}	
+		}
+	}
 }

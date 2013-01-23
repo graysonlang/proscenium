@@ -20,12 +20,7 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	import flash.geom.*;
+	import com.adobe.display.Color;
 
 	// ===========================================================================
 	//	Class

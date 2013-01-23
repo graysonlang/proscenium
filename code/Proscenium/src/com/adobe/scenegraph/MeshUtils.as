@@ -20,12 +20,15 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.utils.*;
+	import com.adobe.utils.BitUtils;
+	import com.adobe.utils.Fractal2D;
+	import com.adobe.utils.HeightField;
+	import com.adobe.utils.IndexHashMap;
+	import com.adobe.utils.VertexHashMap;
 	
-	import flash.display.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

@@ -20,8 +20,9 @@ package com.adobe.utils
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.geom.*;
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
 
 	// ===========================================================================
 	//	Class

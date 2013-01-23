@@ -22,10 +22,8 @@ package com.adobe.scenegraph
 	// ---------------------------------------------------------------------------
 	import com.adobe.utils.BoundingBox;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	
 	// ===========================================================================
 	//	Class

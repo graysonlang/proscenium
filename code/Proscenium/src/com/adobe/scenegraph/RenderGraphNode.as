@@ -18,13 +18,8 @@
 package com.adobe.scenegraph
 {
 	// ===========================================================================
-	//	Imports
+	//	Class
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	
 	/**
 	 * RGNode is a node of render graph, which is used to automatically order rendering jobs.
 	 */

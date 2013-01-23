@@ -20,18 +20,12 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import flash.display3D.Context3DCompareMode;
+	import flash.geom.Vector3D;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
-	
-	/** 
-	 */ 
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	public class SceneParticles extends SceneRenderable
 	{
 		// ======================================================================

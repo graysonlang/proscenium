@@ -20,12 +20,7 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.scenegraph.P3D;
-	
-	import flash.display.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

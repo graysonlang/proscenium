@@ -20,7 +20,8 @@ package com.adobe.scenegraph.loaders.collada.kinematics
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.*;
+	import com.adobe.scenegraph.loaders.collada.Collada;
+	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
 	
 	// ===========================================================================
 	//	Class

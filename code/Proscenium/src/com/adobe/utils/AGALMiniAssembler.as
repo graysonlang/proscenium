@@ -35,7 +35,10 @@ package com.adobe.utils
   // ==========================================================================
   //  Imports
   // --------------------------------------------------------------------------
-  import flash.utils.*;
+  import flash.utils.ByteArray;
+  import flash.utils.Dictionary;
+  import flash.utils.Endian;
+  import flash.utils.getTimer;
   
   // ==========================================================================
   //  Class

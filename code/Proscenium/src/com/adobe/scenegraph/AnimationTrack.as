@@ -20,12 +20,22 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.ObjectUtils;
-	import com.adobe.wiring.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.transforms.TransformElement;
+	import com.adobe.transforms.TransformElementMatrix;
+	import com.adobe.transforms.TransformElementRotate;
+	import com.adobe.transforms.TransformElementScale;
+	import com.adobe.transforms.TransformElementTranslate;
+	import com.adobe.wiring.Attribute;
+	import com.adobe.wiring.IWirable;
+	import com.adobe.wiring.Sampler;
+	import com.adobe.wiring.SamplerBezierCurve;
+	import com.adobe.wiring.SamplerMatrix3D;
+	import com.adobe.wiring.SamplerNumber;
+	import com.adobe.wiring.SamplerNumberVector;
 	
-	import flash.geom.*;
 	import flash.utils.Dictionary;
 
 	// ===========================================================================

@@ -20,7 +20,10 @@ package com.adobe.toddler
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
+	import com.adobe.binary.GenericBinary;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
 	import com.adobe.scenegraph.AnimationController;
 	import com.adobe.wiring.AttributeNumber;
 	

@@ -20,11 +20,9 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.pixelBender3D.*;
-	
-	import flash.display3D.*;
-	import flash.utils.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
 	
 	// ===========================================================================
 	//	Class

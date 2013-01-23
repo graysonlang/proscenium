@@ -20,9 +20,10 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display3D.*;
-	import flash.utils.*;
-	import com.adobe.display.*;
+	import com.adobe.display.Color;
+	
+	import flash.display3D.Context3DCompareMode;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

@@ -20,9 +20,10 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.utils.*;
+	import com.adobe.utils.BoundingBox;
 	
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	
 	// ===========================================================================
 	//	Class

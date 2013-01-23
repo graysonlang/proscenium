@@ -21,7 +21,6 @@ package com.adobe.scenegraph.loaders.collada
 	//	Imports
 	// ---------------------------------------------------------------------------
 	import com.adobe.scenegraph.SceneMesh;
-	import com.adobe.scenegraph.loaders.*;
 
 	// ===========================================================================
 	//	Class

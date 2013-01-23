@@ -20,12 +20,15 @@ package com.adobe.wiring
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.display.*;
-	import com.adobe.math.*;
-	import com.adobe.utils.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.display.Color;
+	import com.adobe.math.Matrix4x4;
+	import com.adobe.utils.BoundingBox;
 	
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
 	
 	// ===========================================================================

@@ -20,9 +20,11 @@ package com.adobe.display
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	import flash.events.EventDispatcher;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	// ===========================================================================
 	//	Class
@@ -165,8 +167,7 @@ package com.adobe.display
 // ================================================================================
 //	Helper Classes
 // --------------------------------------------------------------------------------
-import flash.display.*;
-import flash.events.*;
+import flash.display.DisplayObject;
 {
 	// ===========================================================================
 	//	Class

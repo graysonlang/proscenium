@@ -22,11 +22,11 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
 	import flash.geom.Vector3D;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/**
 	 * RGRoot is the root node of render graph, which is used to automatically order rendering jobs.
 	 */

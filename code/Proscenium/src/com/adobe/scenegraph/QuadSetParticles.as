@@ -20,15 +20,18 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import com.adobe.utils.AGALMiniAssembler;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.display3D.Context3DVertexBufferFormat;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/**
 	 * QuadSetParticles is an class to render a set of particle rectangles. 
 	 * QuadSetParticles does not support direct rendering, i.e., is rendered by scenegraph traversal.

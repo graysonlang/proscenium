@@ -20,18 +20,61 @@ package com.adobe.scenegraph.loaders.collada
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.scenegraph.loaders.collada.fx.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import com.adobe.display.Color;
+	import com.adobe.scenegraph.AnimationController;
+	import com.adobe.scenegraph.AnimationTrack;
+	import com.adobe.scenegraph.ArrayElementFloat;
+	import com.adobe.scenegraph.Material;
+	import com.adobe.scenegraph.MaterialBinding;
+	import com.adobe.scenegraph.MaterialBindingMap;
+	import com.adobe.scenegraph.SceneBone;
+	import com.adobe.scenegraph.SceneCamera;
+	import com.adobe.scenegraph.SceneGraph;
+	import com.adobe.scenegraph.SceneLight;
+	import com.adobe.scenegraph.SceneMesh;
+	import com.adobe.scenegraph.SceneNode;
+	import com.adobe.scenegraph.SkinController;
+	import com.adobe.scenegraph.Source;
+	import com.adobe.scenegraph.VertexBinding;
+	import com.adobe.scenegraph.loaders.ModelLoader;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaBindMaterial;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaBindVertexInput;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaConstant;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaEffect;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaImage;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaInitFrom;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaInstanceMaterial;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaLambert;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaMaterial;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaMaterialTechnique;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaPhong;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaProfile;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaProfileCommon;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaSampler2D;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaSurface;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaSurfaceInitFrom;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaTechniqueFXCommon;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaTexture;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaTypeColorOrTexture;
+	import com.adobe.scenegraph.loaders.collada.fx.ColladaTypeFloatOrParam;
+	import com.adobe.transforms.TransformElementLookAt;
+	import com.adobe.transforms.TransformElementMatrix;
+	import com.adobe.transforms.TransformElementRotate;
+	import com.adobe.transforms.TransformElementScale;
+	import com.adobe.transforms.TransformElementTranslate;
+	import com.adobe.transforms.TransformStack;
+	import com.adobe.utils.URIUtils;
+	import com.adobe.wiring.Sampler;
+	import com.adobe.wiring.SamplerBezierCurve;
+	import com.adobe.wiring.SamplerMatrix3D;
+	import com.adobe.wiring.SamplerNumber;
+	import com.adobe.wiring.SamplerNumberVector;
 	
 	import flash.display.Bitmap;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class
@@ -1685,17 +1728,17 @@ package com.adobe.scenegraph.loaders.collada
 // ================================================================================
 //	Imports
 // --------------------------------------------------------------------------------
-import com.adobe.display.*;
-import com.adobe.scenegraph.*;
-import com.adobe.scenegraph.loaders.*;
-import com.adobe.scenegraph.loaders.collada.*;
-import com.adobe.scenegraph.loaders.collada.fx.*;
-import com.adobe.utils.*;
+import com.adobe.display.Color;
+import com.adobe.scenegraph.MaterialStandard;
+import com.adobe.scenegraph.SkinController;
+import com.adobe.scenegraph.Source;
+import com.adobe.scenegraph.TextureMap;
+import com.adobe.scenegraph.loaders.collada.ColladaLoaderSettings;
+import com.adobe.scenegraph.loaders.collada.fx.ColladaSampler2D;
+import com.adobe.utils.URIUtils;
 
-import flash.display.*;
-import flash.display3D.textures.*;
-import flash.geom.*;
-import flash.utils.*;
+import flash.display.Bitmap;
+import flash.utils.Dictionary;
 
 // ================================================================================
 //	Helper Classes

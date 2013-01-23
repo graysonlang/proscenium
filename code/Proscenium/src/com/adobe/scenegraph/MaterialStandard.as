@@ -20,14 +20,18 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.display.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.display.Color;
+	import com.adobe.wiring.Attribute;
+	import com.adobe.wiring.AttributeColor;
+	import com.adobe.wiring.AttributeUInt;
+	import com.adobe.wiring.IWirable;
 	
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

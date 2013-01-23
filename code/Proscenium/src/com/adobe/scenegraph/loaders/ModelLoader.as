@@ -20,13 +20,17 @@ package com.adobe.scenegraph.loaders
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.net.*;
-	import flash.utils.*;
 	import com.adobe.scenegraph.ModelData;
+	import com.adobe.utils.LoadTracker;
+	import com.adobe.utils.URIUtils;
+	
+	import flash.events.ErrorEvent;
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.events.ProgressEvent;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	import flash.utils.getTimer;
 	
 	// ===========================================================================
 	//	Events

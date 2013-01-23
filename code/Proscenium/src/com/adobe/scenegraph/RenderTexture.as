@@ -20,14 +20,10 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DTextureFormat;
+	import flash.display3D.textures.Texture;
+	import flash.display3D.textures.TextureBase;
+	import flash.geom.Rectangle;
 	
 	/** 
 	 * RenderTexture is a generic 2D buffer that can be written (rendered) to, or read (textured) from.

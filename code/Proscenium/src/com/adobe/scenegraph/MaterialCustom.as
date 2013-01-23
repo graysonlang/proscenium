@@ -20,14 +20,23 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.pixelBender3D.*;
-	import com.adobe.pixelBender3D.agal.*;
-	import com.adobe.pixelBender3D.utils.*;
+	import com.adobe.pixelBender3D.AGALProgramPair;
+	import com.adobe.pixelBender3D.PBASMCompiler;
+	import com.adobe.pixelBender3D.PBASMProgram;
+	import com.adobe.pixelBender3D.RegisterMap;
+	import com.adobe.pixelBender3D.TextureRegisterInfo;
+	import com.adobe.pixelBender3D.VertexRegisterInfo;
+	import com.adobe.pixelBender3D.pb3d_debug;
+	import com.adobe.pixelBender3D.pb3d_internal;
+	import com.adobe.pixelBender3D.utils.ProgramConstantsHelper;
 	
-	import flash.display3D.*;
-	import flash.geom.Matrix3D;
-	import flash.utils.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/**
 	 * Custom material defined by PB3D shaders. 
 	 * Meshes with MaterialCustom can cast shadows, but cannot be bone-animated.

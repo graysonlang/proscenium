@@ -22,8 +22,8 @@ package com.adobe.binary
 	// ---------------------------------------------------------------------------
 	import com.adobe.math.Matrix4x4;
 	
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Matrix3D;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

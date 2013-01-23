@@ -20,7 +20,7 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class
@@ -64,7 +64,7 @@ package com.adobe.binary
 		{
 			return writeVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
 		}
-
+		
 		override public function getByteVector():Vector.<int>		{ return _value; }
 		override public function getShortVector():Vector.<int>		{ return _value; }
 		override public function getIntVector():Vector.<int>		{ return _value; }

@@ -20,14 +20,13 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
+	import com.adobe.display.Color;
 	import com.adobe.math.Matrix4x4;
-	import com.adobe.scenegraph.*;
 	
 	import flash.display.BitmapData;
-	import flash.errors.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

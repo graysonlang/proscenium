@@ -18,16 +18,6 @@
 package com.adobe.scenegraph
 {
 	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.utils.*;
-	
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
-	
-	// ===========================================================================
 	//	Class
 	// ---------------------------------------------------------------------------
 	///** Helper class that holds the resulting program and related information from the MaterialStandardShaderFactory **/

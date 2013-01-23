@@ -20,9 +20,9 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
+	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

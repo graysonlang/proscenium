@@ -20,9 +20,9 @@ package com.adobe.wiring
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
 	
 	// ===========================================================================
 	//	Class
@@ -35,7 +35,7 @@ package com.adobe.wiring
 		public static const CLASS_NAME:String						= "SamplerXYZ";
 		internal static const FUNCTOID:Functoid						= new FunctoidXYZ();
 		protected static const STRIDE:uint							= 3;
-
+		
 		// --------------------------------------------------
 		
 		protected static const IDS:Array							= [];
@@ -75,7 +75,7 @@ package com.adobe.wiring
 		override public function sampleXYZ( time:Number, result:Vector.<Number> = null ):Vector.<Number>
 		{
 			interpolate( time );
-
+			
 			var index0:uint = _index0_ * STRIDE;
 			
 			if ( _amount_ == 0 )

@@ -20,7 +20,10 @@ package com.adobe.scenegraph.loaders.collada
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
+	import com.adobe.scenegraph.ArrayElementFloat;
+	import com.adobe.scenegraph.ArrayElementInt;
+	import com.adobe.scenegraph.ArrayElementString;
+	import com.adobe.scenegraph.Source;
 
 	// ===========================================================================
 	//	Class

@@ -20,13 +20,9 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	
 	// ===========================================================================
 	//	Class

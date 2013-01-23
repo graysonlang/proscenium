@@ -21,15 +21,12 @@ package com.adobe.toddler
 	//	Imports
 	// ---------------------------------------------------------------------------
 	import com.adobe.scenegraph.IRigidBody;
-	import com.adobe.scenegraph.SceneCamera;
 	import com.adobe.scenegraph.SceneNode;
 	
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
-	import mx.logging.errors.InvalidCategoryError;
-
 	// ===========================================================================
 	//	Class
 	// ---------------------------------------------------------------------------
@@ -44,14 +41,14 @@ package com.adobe.toddler
 		private var mLateral:Number;
 		private var mUp:Number;
 		private var mYaw:Number;
-
+		
 		private var mLastMoveTime:Number;
 		private var mImpulses:Vector.<PIFeedback>;
 		
 		private static const _bvGoal:Vector3D = new Vector3D;
 		private static const _wvNow:Vector3D = new Vector3D;
 		private static const _bwmGoal:Matrix3D = new Matrix3D;
-
+		
 		
 		// ======================================================================
 		//	Constructor
@@ -61,99 +58,99 @@ package com.adobe.toddler
 			mActor = null;
 			mCamera = null;
 			mCollider = null;
-
+			
 			mImpulses = new <PIFeedback>[ new PIFeedback, new PIFeedback ];
 			mLastMoveTime = getTimer();
-
+			
 			forward = 0;
 			lateral = 0;
 			up = 0;
 			heading = 0; // inits _vGoal
 			
 		}
-
-
+		
+		
 		// ======================================================================
 		//	Getters and Setters
 		// ----------------------------------------------------------------------
-
+		
 		public function get up():Number
-
+			
 		{
 			return mUp;
 		}
-
+		
 		public function set up(value:Number):void
-
+			
 		{
 			mUp = value;
 		}
-
+		
 		public function get base():SceneNode
-
+			
 		{
 			return mBase;
 		}
-
+		
 		public function set base(value:SceneNode):void
-
+			
 		{
 			mBase = value;
 			mCollider = value.physicsObject;
 		}
-
+		
 		public function get lateral():Number
-
+			
 		{
 			return mLateral;
 		}
-
+		
 		/**
-
+		 
 		 * Set lateral speed in the direction of x-axis.
 		 *  
-
+		 
 		 * @param value Lateral speed in physical units.
-
+		 
 		 */
-
+		
 		public function set lateral(value:Number):void
-
+			
 		{
 			mLateral = value;
 			updateGoal();
 		}
-
+		
 		public function get collider():IRigidBody
-
+			
 		{
 			return mCollider;
 		}
-
+		
 		public function get camera():IControllerCamera
-
+			
 		{
 			return mCamera;
 		}
-
+		
 		public function set camera(value:IControllerCamera):void
-
+			
 		{
 			mCamera = value;
 		}
-
+		
 		public function get actor():Actor
-
+			
 		{
 			return mActor;
 		}
-
+		
 		public function set actor(value:Actor):void
-
+			
 		{
 			mActor = value;
 		}
-
+		
 		public function get forward():Number
 		{
 			return mForward;
@@ -180,13 +177,13 @@ package com.adobe.toddler
 		 * 
 		 * @param angle Heading angle in radians as a counterclockwise rotation around y-axis. 
 		 */
-
+		
 		public function set heading( angle:Number ):void
 		{
 			mYaw = angle;
 			updateGoal();
 		}
-				
+		
 		// ======================================================================
 		//	Methods
 		// ----------------------------------------------------------------------
@@ -210,7 +207,7 @@ package com.adobe.toddler
 			_bwmGoal.appendRotation(mYaw*180/Math.PI, Vector3D.Y_AXIS);
 			_bwmGoal.transformVector(_bvGoal);
 			var wvGoal:Vector3D = _bwmGoal.transformVector(_bvGoal);
-
+			
 			mImpulses[ 0 ].setpoint = wvGoal.x;
 			mImpulses[ 1 ].setpoint = wvGoal.z;		
 		}
@@ -249,7 +246,6 @@ package com.adobe.toddler
 				mActor.base.transform = _bwmGoal;
 				mActor.moveWithTime(dt);
 			}
-		}		
-
+		}
 	}
-}	
+}

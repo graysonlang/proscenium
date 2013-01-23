@@ -20,11 +20,15 @@ package com.adobe.transforms
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.wiring.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.wiring.Attribute;
+	import com.adobe.wiring.AttributeMatrix3D;
+	import com.adobe.wiring.IWirable;
 	
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Matrix3D;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

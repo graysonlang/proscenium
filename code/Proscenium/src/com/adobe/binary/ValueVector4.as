@@ -20,10 +20,10 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.math.*;
+	import com.adobe.math.Vector4;
 	
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Vector3D;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

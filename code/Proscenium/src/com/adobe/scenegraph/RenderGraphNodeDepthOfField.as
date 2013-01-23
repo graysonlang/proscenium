@@ -20,9 +20,7 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
+	import flash.display3D.textures.Texture;
 	
 	// ===========================================================================
 	//	Class
@@ -40,5 +38,5 @@ package com.adobe.scenegraph
 		public function RenderGraphNodeDepthOfField( source:Texture, target:Texture, name:String = "RGNodeDOF" )
 		{
 		}
-	}		
+	}
 }

@@ -20,10 +20,8 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.events.*;
-	import flash.net.*;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	// ===========================================================================
 	//	Class

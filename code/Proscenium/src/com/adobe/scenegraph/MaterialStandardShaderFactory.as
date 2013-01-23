@@ -20,12 +20,11 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.utils.*;
+	import com.adobe.utils.AGALMiniAssembler;
 	
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.display3D.Context3DVertexBufferFormat;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class
@@ -2606,9 +2605,11 @@ package com.adobe.scenegraph
 	}
 }
 
-import com.adobe.scenegraph.*;
+import com.adobe.scenegraph.MaterialStandard;
+import com.adobe.scenegraph.RenderSettings;
+import com.adobe.scenegraph.VertexFormat;
 
-import flash.utils.*;
+import flash.utils.ByteArray;
 {
 	/** @private **/
 	class ShaderBinaries

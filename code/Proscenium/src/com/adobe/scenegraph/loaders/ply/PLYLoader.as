@@ -20,12 +20,16 @@ package com.adobe.scenegraph.loaders.ply
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.utils.*;
+	import com.adobe.scenegraph.MeshElement;
+	import com.adobe.scenegraph.SceneGraph;
+	import com.adobe.scenegraph.SceneMesh;
+	import com.adobe.scenegraph.VertexFormat;
+	import com.adobe.scenegraph.VertexFormatElement;
+	import com.adobe.scenegraph.loaders.ModelLoader;
 	
-	import flash.events.*;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	import flash.utils.Endian;
 	
 	// ===========================================================================
 	//	Class

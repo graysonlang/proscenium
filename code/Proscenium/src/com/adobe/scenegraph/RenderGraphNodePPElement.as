@@ -20,11 +20,10 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.pixelBender3D.utils.*;
+	import com.adobe.pixelBender3D.utils.ProgramConstantsHelper;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.display3D.textures.TextureBase;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	

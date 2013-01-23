@@ -22,7 +22,6 @@ package com.adobe.toddler
 	// ---------------------------------------------------------------------------
 	import com.adobe.scenegraph.SceneCamera;
 	
-	import flash.display.Scene;
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
 	
@@ -54,41 +53,41 @@ package com.adobe.toddler
 		}
 		
 		public function get latitude():Number
-
+			
 		{
 			return -mPitch;
 		}
-
+		
 		public function set latitude(value:Number):void
-
+			
 		{
 			mPitch = -value;
 		}
-
+		
 		public function get longitude():Number
-
+			
 		{
 			return mYaw;
 		}
-
+		
 		public function set longitude(value:Number):void
-
+			
 		{
 			mYaw = value;
 		}
-
+		
 		public function get radius():Number
-
+			
 		{
 			return mRadius;
 		}
-
+		
 		public function set radius(value:Number):void
-
+			
 		{
 			mRadius = value;
 		}
-
+		
 		public function get center():Vector3D
 		{
 			return mCenter;
@@ -98,7 +97,7 @@ package com.adobe.toddler
 		{
 			mCenter = value;
 		}
-			
+		
 		public function moveWithRotation(bwQ:Matrix3D):void
 		{
 			_cvCam.setTo(0, 0, mRadius);
@@ -107,13 +106,12 @@ package com.adobe.toddler
 				new Vector3D(mCenter.x, mCenter.y, mCenter.z),
 				new Vector3D(mPitch, mYaw, 0),
 				new Vector3D(1, 1, 1)
-				];
-				
+			];
+			
 			_cbmCam.recompose(trs);
 			trs[0] = _cbmCam.transformVector(_cvCam);
 			_cbmCam.recompose(trs);
 			mNode.transform = _cbmCam;
-
-		}		
+		}
 	}
 }

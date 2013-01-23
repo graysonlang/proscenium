@@ -22,9 +22,11 @@ package com.adobe.images
 	// ---------------------------------------------------------------------------
 	import com.adobe.display.Color;
 	
-	import flash.display.*;
+	import flash.display.BitmapData;
+	import flash.display.Shader;
 	import flash.filters.ShaderFilter;
-	import flash.geom.*;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	
 	// ===========================================================================

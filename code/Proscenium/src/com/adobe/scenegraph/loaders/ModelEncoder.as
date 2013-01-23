@@ -18,21 +18,6 @@
 package com.adobe.scenegraph.loaders
 {
 	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.net.*;
-	import flash.utils.*;
-	
-	// ===========================================================================
 	//	Class
 	// ---------------------------------------------------------------------------
 	public class ModelEncoder

@@ -20,17 +20,10 @@ package com.adobe.scenegraph.loaders.obj
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.net.*;
-	import flash.utils.*;
+	import com.adobe.scenegraph.ModelData;
+	import com.adobe.scenegraph.loaders.ModelAsset;
+	import com.adobe.scenegraph.loaders.ModelEncoder;
+	import com.adobe.scenegraph.loaders.ModelEncoderSettings;
 	
 	// ===========================================================================
 	//	Class

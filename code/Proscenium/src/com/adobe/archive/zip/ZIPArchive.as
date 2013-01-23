@@ -20,8 +20,10 @@ package com.adobe.archive.zip
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.errors.*;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	import flash.utils.Endian;
+	import flash.utils.IDataInput;
 	
 	// ===========================================================================
 	//	Class

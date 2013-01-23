@@ -18,11 +18,6 @@
 package com.adobe.scenegraph.loaders.collada.fx
 {
 	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.*;
-
-	// ===========================================================================
 	//	Class
 	// ---------------------------------------------------------------------------
 	public class ColladaTechniqueFXCommon extends ColladaTechniqueFX

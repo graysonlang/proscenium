@@ -20,16 +20,24 @@ package com.adobe.scenegraph.loaders.obj
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.display.*;
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.utils.*;
+	import com.adobe.display.Color;
+	import com.adobe.scenegraph.ArrayElementFloat;
+	import com.adobe.scenegraph.Input;
+	import com.adobe.scenegraph.Material;
+	import com.adobe.scenegraph.MeshElementTriangles;
+	import com.adobe.scenegraph.ModelData;
+	import com.adobe.scenegraph.SceneGraph;
+	import com.adobe.scenegraph.SceneMesh;
+	import com.adobe.scenegraph.Source;
+	import com.adobe.scenegraph.VertexData;
+	import com.adobe.scenegraph.loaders.ModelLoader;
+	import com.adobe.utils.URIUtils;
 	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.net.*;
-	import flash.utils.*;
+	import flash.display.Bitmap;
+	import flash.events.Event;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	import flash.utils.getTimer;
 	
 	// ===========================================================================
 	//	Class
@@ -1509,14 +1517,16 @@ package com.adobe.scenegraph.loaders.obj
 // ================================================================================
 //	Imports
 // --------------------------------------------------------------------------------
-import com.adobe.display.*;
-import com.adobe.scenegraph.*;
-import com.adobe.scenegraph.loaders.*;
+import com.adobe.display.Color;
+import com.adobe.scenegraph.MaterialStandard;
+import com.adobe.scenegraph.TextureMap;
 
-import flash.display.*;
-import flash.events.*;
-import flash.geom.*;
-import flash.utils.*;
+import flash.display.Bitmap;
+import flash.events.Event;
+import flash.events.EventDispatcher;
+import flash.events.TimerEvent;
+import flash.utils.Dictionary;
+import flash.utils.Timer;
 
 {
 	// ===========================================================================

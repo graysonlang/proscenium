@@ -20,10 +20,11 @@ package com.adobe.wiring
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.utils.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
 	
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
 	
 	// ===========================================================================
 	//	Class

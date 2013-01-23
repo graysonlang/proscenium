@@ -20,16 +20,14 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
-	import com.adobe.wiring.*;
+	import com.adobe.utils.BoundingBox;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/** 
 	 * SceneInstanceBuckets is to render massively instanced static objects. 
 	 * Multiple buckets are used. Each bucket contains many instanced objects.
@@ -63,21 +61,21 @@ package com.adobe.scenegraph
 		/**@private*/ protected var _buckets:Vector.<InstanceBucket>;
 		
 		/**@private*/ protected var _numObjects:uint = 0;
-
+		
 		// _transformListSet is built whenever objs are rendered:
 		// a mesh (in _meshes) may belong to multiple buckets
 		// we want to render that mesh with one mtrl binding.
 		// since we have multiple buckets, and each bucket has a transformation list of that mesh, 
 		// we have a set of list of matrices
 		private var _transformListSet:
-			Vector.<							// per each mesh 
-				Vector.<						// per each bucket
-					Vector.<					// list of instances
-						Vector.<Matrix3D>		// {transform, inv-transform, worldTransform, invWorldTransform}
-					>
-				>
+		Vector.<							// per each mesh 
+		Vector.<						// per each bucket
+		Vector.<					// list of instances
+		Vector.<Matrix3D>		// {transform, inv-transform, worldTransform, invWorldTransform}
+		>
+			>
 			>;	// computed per frame and sent down
-
+		
 		// ======================================================================
 		//	Constructor
 		// ----------------------------------------------------------------------
@@ -109,11 +107,11 @@ package com.adobe.scenegraph
 					_buckets.push( new InstanceBucket( _meshes ) );
 			}
 		}
-
+		
 		public function createInstance( bucketID:uint, modelID:uint, transform:Matrix3D ):void
 		{
 			makeBucket( bucketID );
-
+			
 			// build transforms
 			var mat:Matrix3D = new Matrix3D;
 			mat.copyFrom( transform );
@@ -131,14 +129,14 @@ package com.adobe.scenegraph
 			posture[3].prepend( posture[1] );
 			
 			_buckets[bucketID].addTransform( modelID, posture );
-
+			
 			_numObjects++;
 		}
 		
 		public function createInstanceAt( bucketID:uint, modelID:uint, x:Number, y:Number, z:Number ):void
 		{
 			makeBucket( bucketID );
-
+			
 			// build transforms
 			var mat:Matrix3D = new Matrix3D;
 			mat.identity();
@@ -155,9 +153,9 @@ package com.adobe.scenegraph
 			posture[2].append( posture[0] );
 			posture[3].copyFrom( modelTransform );
 			posture[3].prepend( posture[1] );
-
+			
 			_buckets[bucketID].addTransform( modelID, posture );
-
+			
 			_numObjects++;
 		}
 		
@@ -198,7 +196,7 @@ package com.adobe.scenegraph
 				}
 				return;
 			}
-
+			
 			// cull view frustum
 			var camera:SceneCamera = instance.scene.activeCamera;
 			_viewDirection = camera.worldTransform.deltaTransformVector( FRONT );
@@ -207,30 +205,30 @@ package com.adobe.scenegraph
 			for each ( bucket in _buckets )
 			{
 				_toBucket.setTo( bucket.boundingBox.centerX - camera.worldPosition.x,
-								 bucket.boundingBox.centerY - camera.worldPosition.y,
-								 bucket.boundingBox.centerZ - camera.worldPosition.z );
-
+					bucket.boundingBox.centerY - camera.worldPosition.y,
+					bucket.boundingBox.centerZ - camera.worldPosition.z );
+				
 				var distToBucket:Number = Math.sqrt( _toBucket.dotProduct( _toBucket ) );
 				_bucketDirection.copyFrom( _toBucket );
 				_bucketDirection.normalize();
-
+				
 				var angleBucketWidth:Number = ( distToBucket > 0 && distToBucket >= bucket.boundingBox.radius ) 
-											? Math.asin( bucket.boundingBox.radius / distToBucket )
-											: 1e10;
+					? Math.asin( bucket.boundingBox.radius / distToBucket )
+					: 1e10;
 				var angleBucketCenter:Number = Math.acos( _viewDirection.dotProduct( _bucketDirection ) );
 				var angle:Number = angleBucketCenter - angleBucketWidth;
 				angle *= 180/Math.PI;
 				bucket.outsideFOV = angle > camera.fov;
-
+				
 				numOuts += bucket.outsideFOV;
 			}
 			
-//			trace ( "#REJECTS=" + numOuts + " out of " + _buckets.length + " buckets");
+			//			trace ( "#REJECTS=" + numOuts + " out of " + _buckets.length + " buckets");
 			
 			// build transform list or draw billboards
 			var drawBBoxBackup:Boolean = settings.drawBoundingBox;
 			settings.drawBoundingBox = false;
-
+			
 			for each ( bucket in _buckets )
 			{
 				if ( bucket.outsideFOV )
@@ -242,12 +240,12 @@ package com.adobe.scenegraph
 						_transformListSet[modelID].push( bucket.transformList[modelID] );
 				}
 				else
-				if ( !settings.opaquePass )
-				{
-					bucket.billboardQuads.renderQuads( worldTransform, settings, style ); 
-				}
+					if ( !settings.opaquePass )
+					{
+						bucket.billboardQuads.renderQuads( worldTransform, settings, style ); 
+					}
 			}
-					
+			
 			// render
 			for ( modelID=0; modelID<_meshes.length; modelID++ )
 			{
@@ -260,13 +258,13 @@ package com.adobe.scenegraph
 			if ( settings.drawBoundingBox )
 				renderBoundingBox( settings );
 		}
-
+		
 		override public function get boundingBox():BoundingBox
 		{
 			if ( _boundingBoxDirty || _worldTransform.dirty )
 			{
- 				_boundingBox.clear();
-
+				_boundingBox.clear();
+				
 				for each ( var bucket:InstanceBucket in _buckets )
 				{
 					if ( bucket.billboarding == false )
@@ -274,8 +272,8 @@ package com.adobe.scenegraph
 				}
 				
 				for each ( var child:SceneNode in _children )
-					_boundingBox.combine( child.boundingBox );	// child is updated in child.boundingBox
-
+				_boundingBox.combine( child.boundingBox );	// child is updated in child.boundingBox
+				
 				_boundingBoxDirty = false;
 			}
 			return _boundingBox; 
@@ -288,14 +286,14 @@ package com.adobe.scenegraph
 				if (bucket.outsideFOV)
 					renderBoundingBoxUtil( bucket.boundingBox, settings, 1, 1, 1 );
 				else
-				if (bucket.billboarding)
-					renderBoundingBoxUtil( bucket.boundingBox, settings, .3, .7, 0.1 );
-				else
-					renderBoundingBoxUtil( bucket.boundingBox, settings, 0, 1, 0 );
+					if (bucket.billboarding)
+						renderBoundingBoxUtil( bucket.boundingBox, settings, .3, .7, 0.1 );
+					else
+						renderBoundingBoxUtil( bucket.boundingBox, settings, 0, 1, 0 );
 			}
 			renderBoundingBoxUtil( boundingBox, settings );
 		}
-
+		
 		public function showBillboardTexture( instance:Instance3D, bucketID:uint = 0, xpos:Number = 0 ):void
 		{
 			var w:Number  = instance.width/4/8 * RenderTextureBillboard.NUM_COLUMNS;
@@ -307,7 +305,7 @@ package com.adobe.scenegraph
 		override internal function collectPrerequisiteNodes( target:RenderGraphNode, root:RenderGraphRoot ):void
 		{
 			super.collectPrerequisiteNodes( target, root );
-
+			
 			for each ( var bucket:InstanceBucket in _buckets )
 			{
 				var bicketBillboardingPrev:Boolean = bucket.billboarding;

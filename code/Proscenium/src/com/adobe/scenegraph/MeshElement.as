@@ -20,14 +20,16 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.utils.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.utils.BoundingBox;
+	import com.adobe.utils.VertexHashMap;
 	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display3D.Context3DBlendFactor;
+	import flash.display3D.Context3DProgramType;
+	import flash.geom.Matrix3D;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class
@@ -657,9 +659,8 @@ package com.adobe.scenegraph
 	}
 }
 
-import com.adobe.scenegraph.*;
-
-import flash.display3D.*;
+import com.adobe.scenegraph.IndexBuffer3DHandle;
+import com.adobe.scenegraph.VertexBuffer3DHandle;
 {
 	/** @private **/
 	class BufferSet

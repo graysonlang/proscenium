@@ -20,10 +20,10 @@ package com.adobe.images
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.errors.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display.BitmapData;
+	import flash.geom.Matrix;
+	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class
@@ -296,8 +296,8 @@ package com.adobe.images
 // ================================================================================
 //	Imports
 // --------------------------------------------------------------------------------
-import flash.errors.*;
-import flash.utils.*;
+import flash.utils.ByteArray;
+import flash.utils.Endian;
 
 // ================================================================================
 //	Helper Classes

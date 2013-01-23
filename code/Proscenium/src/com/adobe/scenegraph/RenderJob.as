@@ -20,10 +20,15 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
+	import flash.display3D.Context3DBlendFactor;
+	import flash.display3D.Context3DClearMask;
+	import flash.display3D.Context3DCompareMode;
+	import flash.display3D.Context3DStencilAction;
+	import flash.display3D.Context3DTriangleFace;
 	
+	// ===========================================================================
+	//	Class
+	// ---------------------------------------------------------------------------
 	/**
 	 * RenderJob is on one buffer: primary, render texture, ot a face of a cube texture.
 	 */

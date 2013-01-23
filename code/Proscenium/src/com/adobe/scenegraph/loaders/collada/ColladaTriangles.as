@@ -20,8 +20,10 @@ package com.adobe.scenegraph.loaders.collada
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
+	import com.adobe.scenegraph.Input;
+	import com.adobe.scenegraph.MeshElement;
+	import com.adobe.scenegraph.MeshElementTriangles;
+	import com.adobe.scenegraph.VertexData;
 	
 	import flash.utils.Dictionary;
 	

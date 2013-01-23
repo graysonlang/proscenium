@@ -20,11 +20,12 @@ package com.adobe.utils
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.images.*;
+	import com.adobe.images.TGADecoder;
+	import com.adobe.images.TIFFDecoder;
 	
-	import flash.display.*;
-	import flash.net.*;
-	import flash.utils.*;
+	import flash.display.Bitmap;
+	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class
@@ -156,13 +157,25 @@ package com.adobe.utils
 // ================================================================================
 //	Helper Classes
 // --------------------------------------------------------------------------------
-import com.adobe.utils.*;
+import com.adobe.utils.LoadTracker;
+import com.adobe.utils.URIUtils;
 
-import flash.display.*;
-import flash.events.*;
-import flash.net.*;
-import flash.system.*;
-import flash.utils.*;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Loader;
+import flash.display.LoaderInfo;
+import flash.events.Event;
+import flash.events.EventDispatcher;
+import flash.events.HTTPStatusEvent;
+import flash.events.IOErrorEvent;
+import flash.events.ProgressEvent;
+import flash.events.SecurityErrorEvent;
+import flash.net.URLLoader;
+import flash.net.URLLoaderDataFormat;
+import flash.net.URLRequest;
+import flash.system.LoaderContext;
+import flash.utils.ByteArray;
+import flash.utils.Dictionary;
 {
 	// ===========================================================================
 	//	Class

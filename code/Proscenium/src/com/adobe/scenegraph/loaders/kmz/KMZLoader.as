@@ -20,16 +20,15 @@ package com.adobe.scenegraph.loaders.kmz
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.archive.zip.*;
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.scenegraph.loaders.collada.*;
-	import com.adobe.utils.*;
+	import com.adobe.archive.zip.ZIPArchive;
+	import com.adobe.archive.zip.ZIPEntry;
+	import com.adobe.scenegraph.loaders.collada.Collada;
+	import com.adobe.scenegraph.loaders.collada.ColladaLoader;
+	import com.adobe.scenegraph.loaders.collada.ColladaLoaderSettings;
+	import com.adobe.utils.LoadTracker;
+	import com.adobe.utils.URIUtils;
 	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

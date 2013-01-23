@@ -20,11 +20,7 @@ package com.adobe.archive.zip
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.utils.*;
-	
-	import flash.errors.*;
-	import flash.events.DataEvent;
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

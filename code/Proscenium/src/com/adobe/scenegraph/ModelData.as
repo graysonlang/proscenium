@@ -20,13 +20,19 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.transforms.*;
-	import com.adobe.utils.*;
+	import com.adobe.binary.GenericBinary;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.scenegraph.loaders.ModelAsset;
+	import com.adobe.transforms.TransformStack;
+	import com.adobe.utils.IndexHashMap;
+	import com.adobe.utils.URIUtils;
+	import com.adobe.utils.VertexHashMap;
 	
-	import flash.geom.*;
-	import flash.utils.*;
-	import com.adobe.scenegraph.loaders.*;
+	import flash.geom.Matrix3D;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	// ===========================================================================
 	//	Class

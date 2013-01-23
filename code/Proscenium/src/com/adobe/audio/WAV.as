@@ -20,11 +20,12 @@ package com.adobe.audio
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.errors.*;
-	import flash.events.*;
-	import flash.media.*;
-	import flash.utils.*;
+	import flash.events.SampleDataEvent;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	// ===========================================================================
 	//	Class

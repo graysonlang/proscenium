@@ -20,13 +20,15 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.display.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.binary.IBinarySerializable;
+	import com.adobe.display.Color;
 	import com.adobe.math.Polyhedron;
 	import com.adobe.utils.BoundingBox;
-	import com.adobe.wiring.*;
 	
-	import flash.geom.*;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	
 	// ===========================================================================
 	//	Class

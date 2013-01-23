@@ -22,8 +22,8 @@ package com.adobe.utils
 	// ---------------------------------------------------------------------------
 	import com.adobe.wiring.SamplerBezierCurve;
 	
-	import flash.display.*;
-	import flash.geom.*;
+	import flash.display.Graphics;
+	import flash.geom.Point;
 	
 	// ===========================================================================
 	//	Class

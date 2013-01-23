@@ -20,7 +20,9 @@ package com.adobe.scenegraph.loaders.collada.fx
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.*;
+	import com.adobe.scenegraph.loaders.collada.Collada;
+	import com.adobe.scenegraph.loaders.collada.ColladaInstance;
+	import com.adobe.scenegraph.loaders.collada.ColladaSetparam;
 
 	// ===========================================================================
 	//	Class
@@ -63,8 +65,7 @@ package com.adobe.scenegraph.loaders.collada.fx
 		override protected function fillXML( instance:XML ):void
 		{
 			// TODO
-			
 			super.fillXML( instance );
-		}		
+		}
 	}
 }

@@ -20,13 +20,12 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.utils.*;
-	
-	import flash.display.*;
-	import flash.display3D.*;
-	import flash.display3D.textures.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display.BitmapData;
+	import flash.display3D.Context3DTextureFormat;
+	import flash.display3D.textures.CubeTexture;
+	import flash.geom.Matrix;
+	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

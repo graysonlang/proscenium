@@ -20,11 +20,12 @@ package com.adobe.scenegraph
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.binary.*;
-	import com.adobe.utils.*;
+	import com.adobe.binary.GenericBinaryDictionary;
+	import com.adobe.binary.GenericBinaryEntry;
+	import com.adobe.utils.IndexHashMap;
+	import com.adobe.utils.VertexHashMap;
 	
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.geom.Vector3D;
 	
 	// ===========================================================================
 	//	Class

@@ -20,7 +20,7 @@ package com.adobe.binary
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.utils.*;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class
@@ -54,7 +54,7 @@ package com.adobe.binary
 				{
 					// if not, serialize the object 
 					var dictionary:GenericBinaryDictionary = container.createDictionary( value );
-
+					
 					// then add a reference to it on the container
 					reference = container.addReference( value, dictionary );
 					
@@ -81,18 +81,18 @@ package com.adobe.binary
 			
 			return result;
 		}
-
-//		public static function createReference( id:uint, container:GenericBinaryContainer, object:IBinarySerializable ):ValueDictionary
-//		{
-//			var result:ValueDictionary = new ValueDictionary( id, container );
-//			return result;
-//		}
+		
+		//		public static function createReference( id:uint, container:GenericBinaryContainer, object:IBinarySerializable ):ValueDictionary
+		//		{
+		//			var result:ValueDictionary = new ValueDictionary( id, container );
+		//			return result;
+		//		}
 		
 		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
 		{
 			var flags:uint;
 			var size:uint = 4;
-
+			
 			// 2 bytes: id
 			bytes.writeShort( id );
 			
@@ -129,7 +129,7 @@ package com.adobe.binary
 			
 			return size;
 		}
-
+		
 		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
 		{
 			var flags:uint;
@@ -158,7 +158,7 @@ package com.adobe.binary
 					xml.@type = TYPE_ID;
 					xml.@flags = flags;
 					xml.@size = 8;
-
+					
 					return 8;
 				}
 				
@@ -193,7 +193,7 @@ package com.adobe.binary
 			
 			return size;
 		}
-
+		
 		
 		override public function getObject():IBinarySerializable
 		{

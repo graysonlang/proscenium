@@ -20,9 +20,9 @@ package com.adobe.images
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import flash.display.*;
-	import flash.geom.*;
-	import flash.utils.*;
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	
 	// ===========================================================================
 	//	Class

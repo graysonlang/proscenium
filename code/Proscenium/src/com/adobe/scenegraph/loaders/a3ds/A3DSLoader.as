@@ -20,14 +20,12 @@ package com.adobe.scenegraph.loaders.a3ds
 	// ===========================================================================
 	//	Imports
 	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.utils.*;
+	import com.adobe.scenegraph.SceneGraph;
+	import com.adobe.scenegraph.loaders.ModelLoader;
 	
-	import flash.events.*;
-	import flash.geom.*;
-	import flash.utils.*;
-
+	import flash.geom.Matrix3D;
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	// ===========================================================================
 	//	Class

@@ -17,11 +17,18 @@
 // ============================================================================
 package com.adobe.math
 {
-	import com.adobe.scenegraph.*;
+	// ===========================================================================
+	//	Imports
+	// ---------------------------------------------------------------------------
+	import com.adobe.scenegraph.Instance3D;
+	import com.adobe.scenegraph.Line;
+	import com.adobe.scenegraph.RenderSettings;
+	import com.adobe.scenegraph.SceneCamera;
 	import com.adobe.utils.BoundingBox;
 	
-	import flash.display3D.*;
-	import flash.geom.*;
+	import flash.display3D.Context3DProgramType;
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 
 	// ===========================================================================
 	//	Class

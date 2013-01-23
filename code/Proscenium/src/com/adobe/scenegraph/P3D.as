@@ -17,10 +17,32 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	import com.adobe.binary.*;
-	import com.adobe.scenegraph.loaders.*;
-	import com.adobe.transforms.*;
-	import com.adobe.wiring.*;
+	// ===========================================================================
+	//	Imports
+	// ---------------------------------------------------------------------------
+	import com.adobe.binary.GenericBinaryFormatDescription;
+	import com.adobe.transforms.TransformElement;
+	import com.adobe.transforms.TransformElementLookAt;
+	import com.adobe.transforms.TransformElementMatrix;
+	import com.adobe.transforms.TransformElementRotate;
+	import com.adobe.transforms.TransformElementScale;
+	import com.adobe.transforms.TransformElementTranslate;
+	import com.adobe.transforms.TransformStack;
+	import com.adobe.wiring.Attribute;
+	import com.adobe.wiring.AttributeColor;
+	import com.adobe.wiring.AttributeMatrix3D;
+	import com.adobe.wiring.AttributeNumber;
+	import com.adobe.wiring.AttributeNumberVector;
+	import com.adobe.wiring.AttributeUInt;
+	import com.adobe.wiring.AttributeVector3D;
+	import com.adobe.wiring.AttributeXYZ;
+	import com.adobe.wiring.Sampler;
+	import com.adobe.wiring.SamplerBezierCurve;
+	import com.adobe.wiring.SamplerColor;
+	import com.adobe.wiring.SamplerMatrix3D;
+	import com.adobe.wiring.SamplerNumber;
+	import com.adobe.wiring.SamplerNumberVector;
+	import com.adobe.wiring.SamplerXYZ;
 
 	// ===========================================================================
 	//	Class
