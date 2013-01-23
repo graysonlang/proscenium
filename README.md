@@ -3,7 +3,7 @@ Proscenium
 
 ### _Note (2013.01.23)_ ###
 
->Proscenium currently relies upon the Adobe Pixel Bender 3D library, which appears to have become deprecated on Adobe Lab's page (the old links now forward to a difference page). I'm going to be removing the dependencies shortly.
+>Proscenium currently relies upon the Adobe Pixel Bender 3D library, which appears to have become deprecated on Adobe Lab's page (the old links now forward to a different page). I'm going to be removing the dependencies shortly.
 
 
 ### License ###
