@@ -1,0 +1,91 @@
+module_fragment_program PP_BlurU5
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        input image image-4 sourceImage
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+        output fragment float-4 outputColor
+    end_globals
+    
+    functions
+        external_function void evaluateFragment()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    uv-0 = allocNonSSA type(float-2) : float-2
+                    color1-0 = allocNonSSA type(float-4) : float-4
+                    color2-0 = allocNonSSA type(float-4) : float-4
+                    color3-0 = allocNonSSA type(float-4) : float-4
+                    color4-0 = allocNonSSA type(float-4) : float-4
+                    color5-0 = allocNonSSA type(float-4) : float-4
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _LD_uv-1 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _LD_uvElem%A-0 = extractVE _LD_uv-1, const(int, 0) : float
+                    sizeElem%A-0 = extractVE size, const(int, 0) : float
+                    _subResult%A-0 = sub _LD_uvElem%A-0, sizeElem%A-0 : float
+                    _LD_uv-2 = insertVE _subResult%A-0, _LD_uv-1, const(int, 0) : float-2
+                    _LD_uvElem%B-0 = extractVE _LD_uv-2, const(int, 0) : float
+                    sizeElem%B-0 = extractVE size, const(int, 0) : float
+                    _subResult%B-0 = sub _LD_uvElem%B-0, sizeElem%B-0 : float
+                    _LD_uv-3 = insertVE _subResult%B-0, _LD_uv-2, const(int, 0) : float-2
+                    _LD_color1-1 = sample sourceImage, _LD_uv-3, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _LD_uvElem%C-0 = extractVE _LD_uv-3, const(int, 0) : float
+                    sizeElem%C-0 = extractVE size, const(int, 0) : float
+                    _addResult%A-0 = add _LD_uvElem%C-0, sizeElem%C-0 : float
+                    _LD_uv-4 = insertVE _addResult%A-0, _LD_uv-3, const(int, 0) : float-2
+                    _LD_color2-1 = sample sourceImage, _LD_uv-4, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _LD_uvElem%D-0 = extractVE _LD_uv-4, const(int, 0) : float
+                    sizeElem%D-0 = extractVE size, const(int, 0) : float
+                    _addResult%B-0 = add _LD_uvElem%D-0, sizeElem%D-0 : float
+                    _LD_uv-5 = insertVE _addResult%B-0, _LD_uv-4, const(int, 0) : float-2
+                    _LD_color3-1 = sample sourceImage, _LD_uv-5, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _LD_uvElem%E-0 = extractVE _LD_uv-5, const(int, 0) : float
+                    sizeElem%E-0 = extractVE size, const(int, 0) : float
+                    _addResult%C-0 = add _LD_uvElem%E-0, sizeElem%E-0 : float
+                    _LD_uv-6 = insertVE _addResult%C-0, _LD_uv-5, const(int, 0) : float-2
+                    _LD_color4-1 = sample sourceImage, _LD_uv-6, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _LD_uvElem%F-0 = extractVE _LD_uv-6, const(int, 0) : float
+                    sizeElem%F-0 = extractVE size, const(int, 0) : float
+                    _addResult%D-0 = add _LD_uvElem%F-0, sizeElem%F-0 : float
+                    _LD_uv-7 = insertVE _addResult%D-0, _LD_uv-6, const(int, 0) : float-2
+                    _LD_color5-1 = sample sourceImage, _LD_uv-7, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _addResult%E-0 = add _LD_color1-1, _LD_color5-1 : float-4
+                    _mulResult%A-0 = mul _addResult%E-0, const(float, 0.0625) : float-4
+                    _addResult%F-0 = add _LD_color2-1, _LD_color4-1 : float-4
+                    _mulResult%B-0 = mul _addResult%F-0, const(float, 0.25) : float-4
+                    _addResult%G-0 = add _mulResult%A-0, _mulResult%B-0 : float-4
+                    _mulResult%C-0 = mul _LD_color3-1, const(float, 0.375) : float-4
+                    _LD_outputColor-1 = add _addResult%G-0, _mulResult%C-0 : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_outputColor-1, outputColor : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_fragment_program
+

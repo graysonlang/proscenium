@@ -1,0 +1,50 @@
+module_material_vertex_program PP_Default
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        input image image-4 sourceImage
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+    end_globals
+    
+    functions
+        external_function void evaluateVertex()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _anonSwizzle%A-0 = swizzleRHS viewportUV, const(int-4, (0, 1, 0, 1)) : float-4
+                    _mulResult%A-0 = mul _anonSwizzle%A-0, uvScale : float-4
+                    _LD_voutUV-1 = add _mulResult%A-0, uvOffset : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_voutUV-1, voutUV : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_material_vertex_program
+

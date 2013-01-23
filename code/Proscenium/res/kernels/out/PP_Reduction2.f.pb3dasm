@@ -1,0 +1,50 @@
+module_fragment_program PP_Reduction2
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        input image image-4 sourceImage
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+        output fragment float-4 outputColor
+    end_globals
+    
+    functions
+        external_function void evaluateFragment()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _anonSwizzle%A-0 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _LD_outputColor-1 = sample sourceImage, _anonSwizzle%A-0, const(_sample_option, linear mipdisable clamp 2D ) : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_outputColor-1, outputColor : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_fragment_program
+

@@ -1,0 +1,67 @@
+module_fragment_program PP_Bloom
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        input image image-4 bloomImage
+        global parameter float-4 param0
+        global parameter float-4 param1
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        input image image-4 sourceImage
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+        output fragment float-4 outputColor
+    end_globals
+    
+    functions
+        external_function void evaluateFragment()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    color-0 = allocNonSSA type(float-4) : float-4
+                    bloom-0 = allocNonSSA type(float-4) : float-4
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _anonSwizzle%A-0 = swizzleRHS param0, const(int-4, (0, 0, 0, 0)) : float-4
+                    _anonSwizzle%B-0 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _sampleResult%A-0 = sample sourceImage, _anonSwizzle%B-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _subResult%A-0 = sub const(float, 1), _sampleResult%A-0 : float-4
+                    _logEResult%A-0 = logE _subResult%A-0 : float-4
+                    _LD_color-1 = mul _anonSwizzle%A-0, _logEResult%A-0 : float-4
+                    _anonSwizzle%C-0 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _LD_bloom-1 = sample bloomImage, _anonSwizzle%C-0, const(_sample_option, linear mipdisable clamp 2D ) : float-4
+                    _anonSwizzle%D-0 = swizzleRHS param1, const(int-4, (2, 2, 2, 2)) : float-4
+                    _mulResult%B-0 = mul _LD_bloom-1, _anonSwizzle%D-0 : float-4
+                    _anonSwizzle%E-0 = swizzleRHS param1, const(int-4, (0, 0, 0, 0)) : float-4
+                    _LD_bloom-2 = add _mulResult%B-0, _anonSwizzle%E-0 : float-4
+                    _minResult%A-0 = min _LD_color-1, const(float-4, (1, 1, 1, 1)) : float-4
+                    _LD_outputColor-1 = add _minResult%A-0, _LD_bloom-2 : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_outputColor-1, outputColor : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_fragment_program
+

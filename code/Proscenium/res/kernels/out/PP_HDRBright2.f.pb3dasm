@@ -1,0 +1,105 @@
+module_fragment_program PP_HDRBright2
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        global parameter float-4 param0
+        global parameter float-4 param1
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        input image image-4 sourceImage
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+        output fragment float-4 outputColor
+    end_globals
+    
+    functions
+        external_function void evaluateFragment()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    uvd-0 = allocNonSSA type(float-4) : float-4
+                    color-0 = allocNonSSA type(float-4) : float-4
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _LD_uvd-1 = swizzleRHS sizeHalf4th, const(int-4, (2, 3, 2, 3)) : float-4
+                    voutUVElem%A-0 = extractVE voutUV, const(int, 0) : float
+                    _LD_uvdElem%A-0 = extractVE _LD_uvd-1, const(int, 0) : float
+                    _subResult%A-0 = sub voutUVElem%A-0, _LD_uvdElem%A-0 : float
+                    voutUVElem%B-0 = extractVE voutUV, const(int, 1) : float
+                    _LD_uvdElem%B-0 = extractVE _LD_uvd-1, const(int, 1) : float
+                    _subResult%B-0 = sub voutUVElem%B-0, _LD_uvdElem%B-0 : float
+                    _anonVec%A-0 = makeFloatVector _subResult%A-0, _subResult%B-0 : float-2
+                    _sampleResult%A-0 = sample sourceImage, _anonVec%A-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _subResult%C-0 = sub const(float, 1), _sampleResult%A-0 : float-4
+                    _logEResult%A-0 = logE _subResult%C-0 : float-4
+                    voutUVElem%C-0 = extractVE voutUV, const(int, 0) : float
+                    _LD_uvdElem%C-0 = extractVE _LD_uvd-1, const(int, 0) : float
+                    _addResult%A-0 = add voutUVElem%C-0, _LD_uvdElem%C-0 : float
+                    voutUVElem%D-0 = extractVE voutUV, const(int, 1) : float
+                    _LD_uvdElem%D-0 = extractVE _LD_uvd-1, const(int, 1) : float
+                    _subResult%D-0 = sub voutUVElem%D-0, _LD_uvdElem%D-0 : float
+                    _anonVec%B-0 = makeFloatVector _addResult%A-0, _subResult%D-0 : float-2
+                    _sampleResult%B-0 = sample sourceImage, _anonVec%B-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _subResult%E-0 = sub const(float, 1), _sampleResult%B-0 : float-4
+                    _logEResult%B-0 = logE _subResult%E-0 : float-4
+                    _addResult%B-0 = add _logEResult%A-0, _logEResult%B-0 : float-4
+                    voutUVElem%E-0 = extractVE voutUV, const(int, 0) : float
+                    _LD_uvdElem%E-0 = extractVE _LD_uvd-1, const(int, 0) : float
+                    _subResult%F-0 = sub voutUVElem%E-0, _LD_uvdElem%E-0 : float
+                    voutUVElem%F-0 = extractVE voutUV, const(int, 1) : float
+                    _LD_uvdElem%F-0 = extractVE _LD_uvd-1, const(int, 1) : float
+                    _addResult%C-0 = add voutUVElem%F-0, _LD_uvdElem%F-0 : float
+                    _anonVec%C-0 = makeFloatVector _subResult%F-0, _addResult%C-0 : float-2
+                    _sampleResult%C-0 = sample sourceImage, _anonVec%C-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _subResult%G-0 = sub const(float, 1), _sampleResult%C-0 : float-4
+                    _logEResult%C-0 = logE _subResult%G-0 : float-4
+                    _addResult%D-0 = add _addResult%B-0, _logEResult%C-0 : float-4
+                    voutUVElem%G-0 = extractVE voutUV, const(int, 0) : float
+                    _LD_uvdElem%G-0 = extractVE _LD_uvd-1, const(int, 0) : float
+                    _addResult%E-0 = add voutUVElem%G-0, _LD_uvdElem%G-0 : float
+                    voutUVElem%H-0 = extractVE voutUV, const(int, 1) : float
+                    _LD_uvdElem%H-0 = extractVE _LD_uvd-1, const(int, 1) : float
+                    _addResult%F-0 = add voutUVElem%H-0, _LD_uvdElem%H-0 : float
+                    _anonVec%D-0 = makeFloatVector _addResult%E-0, _addResult%F-0 : float-2
+                    _sampleResult%D-0 = sample sourceImage, _anonVec%D-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _subResult%H-0 = sub const(float, 1), _sampleResult%D-0 : float-4
+                    _logEResult%D-0 = logE _subResult%H-0 : float-4
+                    _LD_color-1 = add _addResult%D-0, _logEResult%D-0 : float-4
+                    _anonSwizzle%B-0 = swizzleRHS param0, const(int-4, (0, 0, 0, 0)) : float-4
+                    _mulResult%A-0 = mul _anonSwizzle%B-0, _LD_color-1 : float-4
+                    _anonSwizzle%C-0 = swizzleRHS param1, const(int-4, (1, 1, 1, 1)) : float-4
+                    _LD_color-2 = min _mulResult%A-0, _anonSwizzle%C-0 : float-4
+                    _anonSwizzle%D-0 = swizzleRHS param1, const(int-4, (2, 2, 2, 2)) : float-4
+                    _mulResult%B-0 = mul _LD_color-2, _anonSwizzle%D-0 : float-4
+                    _anonSwizzle%E-0 = swizzleRHS param1, const(int-4, (3, 3, 3, 3)) : float-4
+                    _LD_color-3 = sub _mulResult%B-0, _anonSwizzle%E-0 : float-4
+                    _LD_outputColor-1 = max const(float-4, (0, 0, 0, 0)), _LD_color-3 : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_outputColor-1, outputColor : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_fragment_program
+

@@ -1,0 +1,73 @@
+module_fragment_program PP_IIR1
+
+    metadata
+        namespace const(string, "Pixel Bender 3D")
+        vendor const(string, "Adobe")
+        version const(int, 1)
+    end_metadata
+    
+    transformations
+        SCF INTOSSA OPT(DCE* {APR DCE*}*)
+    end_transformations
+    
+    globals
+        input image image-4 X_0
+        input image image-4 Y_1
+        global parameter float-4 param0
+        global parameter float-4 param1
+        global parameter float-4 size
+        global parameter float-4 sizeHalf4th
+        global parameter float-4 uvOffset
+        global parameter float-4 uvScale
+        input vertex float-2 viewportUV
+            metadata
+                id const(string, "texcoord")
+            end_metadata
+        interpolated float-4 voutUV
+            metadata
+                id const(string, "_0_voutUV")
+            end_metadata
+        output fragment float-4 outputColor
+    end_globals
+    
+    functions
+        external_function void evaluateFragment()
+            body
+                basic_block entry%A !! outlets(basic%A)
+                    out1-0 = allocNonSSA type(float-4) : float-4
+                    out2-0 = allocNonSSA type(float-4) : float-4
+                    outf-0 = allocNonSSA type(float-4) : float-4
+                    outr-0 = allocNonSSA type(float-4) : float-4
+                    outrs-0 = allocNonSSA type(float-4) : float-4
+                    jump block(basic%A) : void
+                end_basic_block
+                basic_block basic%A !! inlets(entry%A) outlets(exit%A)
+                    _anonSwizzle%A-0 = swizzleRHS param0, const(int-4, (0, 0, 0, 0)) : float-4
+                    _anonSwizzle%B-0 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _sampleResult%A-0 = sample X_0, _anonSwizzle%B-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _mulResult%A-0 = mul _anonSwizzle%A-0, _sampleResult%A-0 : float-4
+                    _anonSwizzle%C-0 = swizzleRHS param1, const(int-4, (0, 0, 0, 0)) : float-4
+                    _anonSwizzle%D-0 = swizzleRHS voutUV, const(int-2, (0, 1)) : float-2
+                    _sampleResult%B-0 = sample Y_1, _anonSwizzle%D-0, const(_sample_option, nearest mipdisable clamp 2D ) : float-4
+                    _mulResult%B-0 = mul _anonSwizzle%C-0, _sampleResult%B-0 : float-4
+                    _LD_out1-1 = add _mulResult%A-0, _mulResult%B-0 : float-4
+                    _LD_out2-1 = mul _LD_out1-1, const(float, 255) : float-4
+                    _LD_outf-1 = floor _LD_out2-1 : float-4
+                    _LD_outr-1 = sub _LD_out2-1, _LD_outf-1 : float-4
+                    _anonSwizzle%E-0 = swizzleRHS param1, const(int-4, (3, 3, 3, 3)) : float-4
+                    _gtResult%A-0 = gt _LD_outr-1, _anonSwizzle%E-0 : bool-4
+                    _LD_outrs-1 = btof _gtResult%A-0 : float-4
+                    _addResult%B-0 = add _LD_outf-1, _LD_outrs-1 : float-4
+                    _LD_outputColor-1 = div _addResult%B-0, const(float, 255) : float-4
+                    jump block(exit%A) : void
+                end_basic_block
+                basic_block exit%A !! inlets(basic%A)
+                    moveToNonSSA _LD_outputColor-1, outputColor : void
+                    ret : void
+                end_basic_block
+            end_body
+        end_external_function
+    end_functions
+    
+end_module_fragment_program
+
