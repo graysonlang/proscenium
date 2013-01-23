@@ -5,6 +5,8 @@ Proscenium
 
 >Proscenium currently relies upon the Adobe Pixel Bender 3D library, which appears to have become deprecated on Adobe Lab's page (the old links now forward to a different page). I'm going to be removing the dependencies shortly.
 
+> Though the direct link still works for the zip file: [Link](http://download.macromedia.com/pub/labs/pixelbender3d/pixelbender3d_p3_092211.zip)
+
 
 ### License ###
 
