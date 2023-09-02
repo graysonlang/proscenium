@@ -17,126 +17,126 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.display.Color;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final public class AttributeColor extends Attribute
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "AttributeColor";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.display.Color;
 
-		// --------------------------------------------------
-		protected static const IDS:Array							= [];
-		protected static const ID_VALUE:uint						= 100;
-		IDS[ ID_VALUE ]												= "Value";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Color;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final public class AttributeColor extends Attribute
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "AttributeColor";
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function AttributeColor( owner:IWirable = null, value:Color = null, name:String = undefined )
-		{
-			super( owner, name );
-			_value = value;
-		}
+        // --------------------------------------------------
+        protected static const IDS:Array                            = [];
+        protected static const ID_VALUE:uint                        = 100;
+        IDS[ ID_VALUE ]                                             = "Value";
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function set( r:Number = 1, g:Number = 1, b:Number = 1, a:Number = 1 ):void
-		{
-			_value.r = r;
-			_value.g = g;
-			_value.b = b;
-			_value.a = a;
-		}
-		
-		override public function getColor( result:Color = null ):Color
-		{
-			if ( _source )
-				_value = _source.getColor( result );
-			else if ( _owner && dirty )
-				_owner.evaluate( this );
-			
-			_dirty = false;
-			return _value;
-		}
-		
-		override public function getColorCached():Color
-		{
-			return _value;
-		}
-		
-		override public function setColor( value:Color ):void
-		{
-			if ( _source )
-				throw( Attribute.ERROR_CANNOT_SET );
-			
-			_value.r = value.r;
-			_value.g = value.g;
-			_value.b = value.b;
-			_value.a = value.a;
-			
-			_dirty = false;
-			
-			if ( _owner )
-				_owner.setDirty( this );
-			
-			for each ( var attribute:Attribute in _targets ) {
-				attribute.dirty = true;
-			}
-		}
-		
-		public function copy( targetVector:Vector.<Number> ):void
-		{
-			
-		}
-		
-		// --------------------------------------------------
-		
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setColor( ID_VALUE, _value );
-		}
-		
-		public static function getIDString( id:uint ):String
-		{
-			var result:String = IDS[ id ];
-			return result ? result : Attribute.getIDString( id );
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Color;
 
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_VALUE:	_value = entry.getColor();	break;
-					
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function AttributeColor( owner:IWirable = null, value:Color = null, name:String = undefined )
+        {
+            super( owner, name );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function set( r:Number = 1, g:Number = 1, b:Number = 1, a:Number = 1 ):void
+        {
+            _value.r = r;
+            _value.g = g;
+            _value.b = b;
+            _value.a = a;
+        }
+
+        override public function getColor( result:Color = null ):Color
+        {
+            if ( _source )
+                _value = _source.getColor( result );
+            else if ( _owner && dirty )
+                _owner.evaluate( this );
+
+            _dirty = false;
+            return _value;
+        }
+
+        override public function getColorCached():Color
+        {
+            return _value;
+        }
+
+        override public function setColor( value:Color ):void
+        {
+            if ( _source )
+                throw( Attribute.ERROR_CANNOT_SET );
+
+            _value.r = value.r;
+            _value.g = value.g;
+            _value.b = value.b;
+            _value.a = value.a;
+
+            _dirty = false;
+
+            if ( _owner )
+                _owner.setDirty( this );
+
+            for each ( var attribute:Attribute in _targets ) {
+                attribute.dirty = true;
+            }
+        }
+
+        public function copy( targetVector:Vector.<Number> ):void
+        {
+
+        }
+
+        // --------------------------------------------------
+
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setColor( ID_VALUE, _value );
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            var result:String = IDS[ id ];
+            return result ? result : Attribute.getIDString( id );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_VALUE:  _value = entry.getColor();  break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+    }
 }
