@@ -17,126 +17,126 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.Input;
-	import com.adobe.scenegraph.MeshElement;
-	import com.adobe.scenegraph.MeshElementTriangles;
-	import com.adobe.scenegraph.VertexData;
-	
-	import flash.utils.Dictionary;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.Input;
+    import com.adobe.scenegraph.MeshElement;
+    import com.adobe.scenegraph.MeshElementTriangles;
+    import com.adobe.scenegraph.VertexData;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaPolygons extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "polygons";
+    import flash.utils.Dictionary;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var count:uint;										// @count			Required
-		public var materialName:String;								// @material		Optional
-		public var inputs:Vector.<ColladaInputShared>;				// <input>(shared)	0 or more
-		public var primitives:Vector.<Vector.<uint>>				// <p>				0 or more
-		// TODO														// <ph>				0 or more
-		;															// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaPolygons( polygons:XML )
-		{
-//			var polygons:XML = polygonsList[0];
-			super( polygons );
-			if ( !polygons )
-				return;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaPolygons extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "polygons";
 
-			count			= polygons.@count;
-			materialName	= polygons.@material;
-			
-			inputs			= ColladaInputShared.parseInputs( polygons.input ); 
-			primitives		= parsePrimitives( polygons.p );
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var count:uint;                                      // @count           Required
+        public var materialName:String;                             // @material        Optional
+        public var inputs:Vector.<ColladaInputShared>;              // <input>(shared)  0 or more
+        public var primitives:Vector.<Vector.<uint>>                // <p>              0 or more
+        // TODO                                                     // <ph>             0 or more
+        ;                                                           // <extra>          0 or more
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		protected static function parsePrimitives( primitives:XMLList ):Vector.<Vector.<uint>>
-		{
-			if ( primitives.length() == 0 )
-				return null;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaPolygons( polygons:XML )
+        {
+//          var polygons:XML = polygonsList[0];
+            super( polygons );
+            if ( !polygons )
+                return;
 
-			var result:Vector.<Vector.<uint>> = new Vector.<Vector.<uint>>();
-			
-			for each ( var primitive:XML in primitives )
-			{
-				if ( primitive.hasSimpleContent() )
-					result.push( Vector.<uint>( primitive.text().toString().split( /\s+/ ) ) );
-				else
-					throw( new Error( "Malformed primitive!" ) );
-			}
+            count           = polygons.@count;
+            materialName    = polygons.@material;
 
-			return result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+            inputs          = ColladaInputShared.parseInputs( polygons.input );
+            primitives      = parsePrimitives( polygons.p );
+        }
 
-			result.@count = count;
-			
-			if ( materialName )
-				result.@material = materialName; 
-				
-			for each ( var input:ColladaInput in inputs ) {
-				result.appendChild( input.toXML() );
-			}
-				
-			for each ( var primitive:Vector.<uint> in primitives ) {
-				result.appendChild( XML( "<p>" + primitive.join( " " ) + "</p>" ) );
-			}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        protected static function parsePrimitives( primitives:XMLList ):Vector.<Vector.<uint>>
+        {
+            if ( primitives.length() == 0 )
+                return null;
 
-			super.fillXML( result );
-			return result;
-		}
-		
-		internal static function parsePolygonsList( mesh:ColladaMesh, polygonsList:XMLList ):Vector.<ColladaPolygons>
-		{
-			var length:uint = polygonsList.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaPolygons> = new Vector.<ColladaPolygons>();	
-			for each ( var polygons:XML in polygonsList )
-			{
-				result.push( new ColladaPolygons( polygons ) );
-			}			
-			return result;
-		}
-		
-		// ----------------------------------------------------------------------
+            var result:Vector.<Vector.<uint>> = new Vector.<Vector.<uint>>();
 
-		public function toMeshElement( vertexData:VertexData, vertexInputs:Vector.<ColladaInput>, materialDict:Dictionary ):MeshElement
-		{
-			var inputs:Vector.<Input> = new Vector.<Input>();
-			for each ( var input:ColladaInputShared in this.inputs )
-			{
-				if ( input.semantic == ColladaInput.SEMANTIC_VERTEX )
-				{
-					for each ( var vertexInput:ColladaInput in vertexInputs ) {
-						inputs.push( new Input( vertexInput.semantic, vertexInput.source, input.offset, input.setNumber ) );
-					}
-				}
-				else
-					inputs.push( new Input( input.semantic, input.source, input.offset, input.setNumber ) );
-			}
-			return MeshElementTriangles.fromPolygons( vertexData, count, inputs, primitives, name, materialName, materialDict[ materialName ] );
-		}
-	}
+            for each ( var primitive:XML in primitives )
+            {
+                if ( primitive.hasSimpleContent() )
+                    result.push( Vector.<uint>( primitive.text().toString().split( /\s+/ ) ) );
+                else
+                    throw( new Error( "Malformed primitive!" ) );
+            }
+
+            return result;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.@count = count;
+
+            if ( materialName )
+                result.@material = materialName;
+
+            for each ( var input:ColladaInput in inputs ) {
+                result.appendChild( input.toXML() );
+            }
+
+            for each ( var primitive:Vector.<uint> in primitives ) {
+                result.appendChild( XML( "<p>" + primitive.join( " " ) + "</p>" ) );
+            }
+
+            super.fillXML( result );
+            return result;
+        }
+
+        internal static function parsePolygonsList( mesh:ColladaMesh, polygonsList:XMLList ):Vector.<ColladaPolygons>
+        {
+            var length:uint = polygonsList.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaPolygons> = new Vector.<ColladaPolygons>();
+            for each ( var polygons:XML in polygonsList )
+            {
+                result.push( new ColladaPolygons( polygons ) );
+            }
+            return result;
+        }
+
+        // ----------------------------------------------------------------------
+
+        public function toMeshElement( vertexData:VertexData, vertexInputs:Vector.<ColladaInput>, materialDict:Dictionary ):MeshElement
+        {
+            var inputs:Vector.<Input> = new Vector.<Input>();
+            for each ( var input:ColladaInputShared in this.inputs )
+            {
+                if ( input.semantic == ColladaInput.SEMANTIC_VERTEX )
+                {
+                    for each ( var vertexInput:ColladaInput in vertexInputs ) {
+                        inputs.push( new Input( vertexInput.semantic, vertexInput.source, input.offset, input.setNumber ) );
+                    }
+                }
+                else
+                    inputs.push( new Input( input.semantic, input.source, input.offset, input.setNumber ) );
+            }
+            return MeshElementTriangles.fromPolygons( vertexData, count, inputs, primitives, name, materialName, materialDict[ materialName ] );
+        }
+    }
 }

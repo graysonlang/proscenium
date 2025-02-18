@@ -17,49 +17,49 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTransformationElement extends ColladaElement
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var values:Vector.<Number>
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTransformationElement extends ColladaElement
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var values:Vector.<Number>
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTransformationElement( transform:XML )
-		{
-			super( transform );
-			values = parseValues( transform );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + tag + "/>" );
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
 
-			result.setChildren( values.join( " " ) );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTransformationElement( transform:XML )
+        {
+            super( transform );
+            values = parseValues( transform );
+        }
 
-			super.fillXML( result );
-			return result;
-		}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + tag + "/>" );
 
-		protected function parseValues( values:XML ):Vector.<Number>
-		{
-			if ( !values.hasSimpleContent() )
-				throw( new Error( "BAD TRANSFORMATION VALUES!" ) );
+            result.setChildren( values.join( " " ) );
 
-			return Vector.<Number>( values.text().toString().split( /\s+/ ) );
-		}
-	}
+            super.fillXML( result );
+            return result;
+        }
+
+        protected function parseValues( values:XML ):Vector.<Number>
+        {
+            if ( !values.hasSimpleContent() )
+                throw( new Error( "BAD TRANSFORMATION VALUES!" ) );
+
+            return Vector.<Number>( values.text().toString().split( /\s+/ ) );
+        }
+    }
 }

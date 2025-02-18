@@ -17,51 +17,51 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceNode extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_node";
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		public function get node():ColladaNode
-		{
-			return _collada.getNode( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceNode( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseInstanceNodes( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceNode>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceNode> = new Vector.<ColladaInstanceNode>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceNode( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceNode extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_node";
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get node():ColladaNode
+        {
+            return _collada.getNode( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceNode( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseInstanceNodes( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceNode>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceNode> = new Vector.<ColladaInstanceNode>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceNode( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

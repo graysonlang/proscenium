@@ -17,42 +17,42 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaTechniqueCommon;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaTechniqueCommon;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaMaterialTechnique extends ColladaTechniqueCommon
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var instances:Vector.<ColladaInstanceMaterial>		// <instance_material>
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaMaterialTechnique( collada:Collada, technique:XML )
-		{
-			super( technique );
-			
-			instances = ColladaInstanceMaterial.parseInstanceMaterials( collada, technique.instance_material );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( technique:XML ):void
-		{
-			for each ( var instance:ColladaInstanceMaterial in instances ) {
-				technique.appendChild( instance.toXML() );
-			}
-			
-			super.fillXML( technique );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaMaterialTechnique extends ColladaTechniqueCommon
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var instances:Vector.<ColladaInstanceMaterial>       // <instance_material>
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaMaterialTechnique( collada:Collada, technique:XML )
+        {
+            super( technique );
+
+            instances = ColladaInstanceMaterial.parseInstanceMaterials( collada, technique.instance_material );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( technique:XML ):void
+        {
+            for each ( var instance:ColladaInstanceMaterial in instances ) {
+                technique.appendChild( instance.toXML() );
+            }
+
+            super.fillXML( technique );
+        }
+    }
 }

@@ -17,51 +17,51 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceAnimation extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String							= "instance_animation";
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceAnimation extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                          = "instance_animation";
 
-		public function get animation():ColladaAnimation
-		{
-			return _collada.getAnimation( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceAnimation( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseInstanceAnimations( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceAnimation>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceAnimation> = new Vector.<ColladaInstanceAnimation>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceAnimation( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get animation():ColladaAnimation
+        {
+            return _collada.getAnimation( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceAnimation( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseInstanceAnimations( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceAnimation>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceAnimation> = new Vector.<ColladaInstanceAnimation>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceAnimation( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

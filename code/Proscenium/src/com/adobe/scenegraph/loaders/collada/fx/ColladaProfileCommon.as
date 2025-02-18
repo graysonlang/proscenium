@@ -17,57 +17,57 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileCommon extends ColladaProfile
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "profile_COMMON";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		;															// <asset>			0 or 1
-		;															// <newparam>		0 or more
-		public var technique:ColladaTechniqueFXCommon;				// <technique>(FX)	1
-		;															// <extra>			0 or more
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileCommon extends ColladaProfile
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "profile_COMMON";
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileCommon( profile:XML )
-		{
-			super( profile );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        ;                                                           // <asset>          0 or 1
+        ;                                                           // <newparam>       0 or more
+        public var technique:ColladaTechniqueFXCommon;              // <technique>(FX)  1
+        ;                                                           // <extra>          0 or more
 
-			newparams = ColladaProfileCommonNewparam.parseNewparams( profile.newparam );
-			
-			technique = new ColladaTechniqueFXCommon( profile.technique[0] );
-			if ( !technique )
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-		}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			element.technique = technique.toXML();
-			
-			super.fillXML( element );
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileCommon( profile:XML )
+        {
+            super( profile );
+
+            newparams = ColladaProfileCommonNewparam.parseNewparams( profile.newparam );
+
+            technique = new ColladaTechniqueFXCommon( profile.technique[0] );
+            if ( !technique )
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            element.technique = technique.toXML();
+
+            super.fillXML( element );
+        }
+    }
 }

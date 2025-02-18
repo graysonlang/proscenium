@@ -17,57 +17,57 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileGLES extends ColladaProfile
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "profile_GLES";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		public var platform:String;									// @platform		xs:NCName
-		;															// <asset>			0 or 1
-		;															// <newparam>		0 or more
-		public var techniques:Vector.<ColladaTechniqueFXShader>		// <technique>(FX)	1 or more
-		;															// <extra>			0 or more
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileGLES extends ColladaProfile
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "profile_GLES";
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileGLES( profile:XML )
-		{
-			super( profile );
-			
-			if ( platform )
-				platform = profile.@platform;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        public var platform:String;                                 // @platform        xs:NCName
+        ;                                                           // <asset>          0 or 1
+        ;                                                           // <newparam>       0 or more
+        public var techniques:Vector.<ColladaTechniqueFXShader>     // <technique>(FX)  1 or more
+        ;                                                           // <extra>          0 or more
 
-			techniques	= ColladaTechniqueFXShader.parseTechniques( profile.technique );
-		}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( profile:XML ):void
-		{
-			if ( platform )
-				profile.@platform = platform;
-			
-			for each ( var technique:ColladaTechniqueFXShader in techniques ) {
-				profile.appendChild( technique.toXML() );
-			}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileGLES( profile:XML )
+        {
+            super( profile );
 
-			super.fillXML( profile );
-		}
-	}
+            if ( platform )
+                platform = profile.@platform;
+
+            techniques  = ColladaTechniqueFXShader.parseTechniques( profile.technique );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( profile:XML ):void
+        {
+            if ( platform )
+                profile.@platform = platform;
+
+            for each ( var technique:ColladaTechniqueFXShader in techniques ) {
+                profile.appendChild( technique.toXML() );
+            }
+
+            super.fillXML( profile );
+        }
+    }
 }

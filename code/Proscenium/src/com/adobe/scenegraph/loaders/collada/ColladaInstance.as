@@ -17,48 +17,48 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstance extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var url:String;										// xs:anyURI	Required
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstance extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var url:String;                                      // xs:anyURI    Required
 
-		protected var _collada:Collada;
+        protected var _collada:Collada;
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstance( collada:Collada, instance:XML )
-		{
-			super( instance );
-			if ( !instance )
-				return;
-		
-			url = instance.@url;
-			_collada = collada;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + tag + "/>" );
-			
-			if ( url )
-				result.@url = url;
-			
-			fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstance( collada:Collada, instance:XML )
+        {
+            super( instance );
+            if ( !instance )
+                return;
+
+            url = instance.@url;
+            _collada = collada;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + tag + "/>" );
+
+            if ( url )
+                result.@url = url;
+
+            fillXML( result );
+            return result;
+        }
+    }
 }

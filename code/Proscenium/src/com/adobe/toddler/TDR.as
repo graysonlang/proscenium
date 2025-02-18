@@ -17,44 +17,44 @@
 // ============================================================================
 package com.adobe.toddler
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryFormatDescription;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class TDR
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const NAMESPACE:String						= "http://ns.com.adobe/tdr/2011";
-		public static const VERSION_MAJOR:uint						= 0;
-		public static const VERSION_MINOR:uint						= 1;
-		
-		private static const _FORMAT_:GenericBinaryFormatDescription = new GenericBinaryFormatDescription( NAMESPACE, VERSION_MAJOR, VERSION_MINOR );
-		
-		private static var _initialized:Boolean;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public static function get FORMAT():GenericBinaryFormatDescription
-		{
-			if ( !_initialized )
-				initialize();
-			return _FORMAT_;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		private static function initialize():void
-		{
-			_FORMAT_.addTag( 1, MotionPrimitive,	"MotionPrimitive",	MotionPrimitive.getIDString );
-			_FORMAT_.addTag( 16, SampledData,		"SampledData",		SampledData.getIDString );
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryFormatDescription;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class TDR
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const NAMESPACE:String                        = "http://ns.com.adobe/tdr/2011";
+        public static const VERSION_MAJOR:uint                      = 0;
+        public static const VERSION_MINOR:uint                      = 1;
+
+        private static const _FORMAT_:GenericBinaryFormatDescription = new GenericBinaryFormatDescription( NAMESPACE, VERSION_MAJOR, VERSION_MINOR );
+
+        private static var _initialized:Boolean;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public static function get FORMAT():GenericBinaryFormatDescription
+        {
+            if ( !_initialized )
+                initialize();
+            return _FORMAT_;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        private static function initialize():void
+        {
+            _FORMAT_.addTag( 1, MotionPrimitive,    "MotionPrimitive",  MotionPrimitive.getIDString );
+            _FORMAT_.addTag( 16, SampledData,       "SampledData",      SampledData.getIDString );
+        }
+    }
 }

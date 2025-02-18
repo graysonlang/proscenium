@@ -17,50 +17,50 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaMaterial extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "material";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaMaterial extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "material";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// <asset>				0 or 1
-		public var instanceEffect:ColladaInstanceEffect;			// <instance_effect>	1
-		;															// <extra>				0 or more
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // <asset>              0 or 1
+        public var instanceEffect:ColladaInstanceEffect;            // <instance_effect>    1
+        ;                                                           // <extra>              0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaMaterial( collada:Collada, material:XML )
-		{
-			super( material );
-			
-			instanceEffect = new ColladaInstanceEffect( collada, material.instance_effect );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaMaterial( collada:Collada, material:XML )
+        {
+            super( material );
 
-			result.appendChild( instanceEffect.toXML() );
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+            instanceEffect = new ColladaInstanceEffect( collada, material.instance_effect );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.appendChild( instanceEffect.toXML() );
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

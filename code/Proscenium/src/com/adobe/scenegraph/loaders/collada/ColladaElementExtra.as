@@ -17,41 +17,41 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * Base class for elements that have extension support via the "extra" tag
-	 */
-	public class ColladaElementExtra extends ColladaElementNamed
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var extras:Vector.<ColladaExtra>;					// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaElementExtra( element:XML )
-		{
-			super( element );
-			if ( !element )
-				return;
-			
-			extras = ColladaExtra.parseExtras( element.extra );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			for each ( var extra:ColladaExtra in extras ) {
-				element.appendChild( extra.toXML() );
-			}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * Base class for elements that have extension support via the "extra" tag
+     */
+    public class ColladaElementExtra extends ColladaElementNamed
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var extras:Vector.<ColladaExtra>;                    // <extra>          0 or more
 
-			super.fillXML( element );
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaElementExtra( element:XML )
+        {
+            super( element );
+            if ( !element )
+                return;
+
+            extras = ColladaExtra.parseExtras( element.extra );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            for each ( var extra:ColladaExtra in extras ) {
+                element.appendChild( extra.toXML() );
+            }
+
+            super.fillXML( element );
+        }
+    }
 }

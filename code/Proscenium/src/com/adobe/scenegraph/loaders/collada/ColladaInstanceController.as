@@ -17,85 +17,85 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaBindMaterial;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceController extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_controller"
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var skeletons:Vector.<String>;						// <skeleton>			0 or more		xs:anyURI
-		public var bindMaterial:ColladaBindMaterial;				// <bind_material>		0 or 1
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaBindMaterial;
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		public function get controller():ColladaController
-		{
-			return _collada.getController( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceController( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-			
-			skeletons = new Vector.<String>();
-			
-			for each ( var skeleton:XML in instance.skeleton )
-			{
-				if ( skeleton.hasSimpleContent() )
-					skeletons.push( skeleton.text().toString() );
-			}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceController extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_controller"
 
-			if ( instance.bind_material[0] )
-				bindMaterial = new ColladaBindMaterial( collada, instance.bind_material[0] );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( instance:XML ):void
-		{
-			for each ( var skeleton:String in skeletons ) {
-				instance.appendChild( new XML( "<skeleton>" + skeleton + "</skeleton>" ) );
-			}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var skeletons:Vector.<String>;                       // <skeleton>           0 or more       xs:anyURI
+        public var bindMaterial:ColladaBindMaterial;                // <bind_material>      0 or 1
 
-			if ( bindMaterial )
-				instance.bindMaterial = bindMaterial.toXML();
-			
-			super.fillXML( instance );
-		}
-		
-		public static function parseInstanceControllers( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceController>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceController> = new Vector.<ColladaInstanceController>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceController( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get controller():ColladaController
+        {
+            return _collada.getController( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceController( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+
+            skeletons = new Vector.<String>();
+
+            for each ( var skeleton:XML in instance.skeleton )
+            {
+                if ( skeleton.hasSimpleContent() )
+                    skeletons.push( skeleton.text().toString() );
+            }
+
+            if ( instance.bind_material[0] )
+                bindMaterial = new ColladaBindMaterial( collada, instance.bind_material[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( instance:XML ):void
+        {
+            for each ( var skeleton:String in skeletons ) {
+                instance.appendChild( new XML( "<skeleton>" + skeleton + "</skeleton>" ) );
+            }
+
+            if ( bindMaterial )
+                instance.bindMaterial = bindMaterial.toXML();
+
+            super.fillXML( instance );
+        }
+
+        public static function parseInstanceControllers( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceController>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceController> = new Vector.<ColladaInstanceController>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceController( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

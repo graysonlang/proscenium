@@ -17,87 +17,87 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaContributor
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "contributor";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaContributor
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "contributor";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var author:String;									// <author>				0 or 1
-		public var authorEmail:String;								// <author_email>		0 or 1
-		public var authorWebsite:String;							// <author_website>		0 or 1
-		public var authoringTool:String;							// <authoring_tool>		0 or 1
-		public var comments:String;									// <comments>			0 or 1
-		public var copyright:String;								// <copyright>			0 or 1
-		public var sourceData:String;								// <source_data>		0 or 1
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaContributor( contributor:XML = null )
-		{
-			if ( !contributor )
-				return;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var author:String;                                   // <author>             0 or 1
+        public var authorEmail:String;                              // <author_email>       0 or 1
+        public var authorWebsite:String;                            // <author_website>     0 or 1
+        public var authoringTool:String;                            // <authoring_tool>     0 or 1
+        public var comments:String;                                 // <comments>           0 or 1
+        public var copyright:String;                                // <copyright>          0 or 1
+        public var sourceData:String;                               // <source_data>        0 or 1
 
-			author					= contributor.author;
-			authorEmail				= contributor.author_email;
-			authorWebsite			= contributor.author_website;
-			authoringTool			= contributor.authoring_tool;
-			comments				= contributor.comments;
-			copyright				= contributor.copyright;
-			sourceData				= contributor.source_data;
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaContributor( contributor:XML = null )
+        {
+            if ( !contributor )
+                return;
 
-		public static function parseContributors( contributors:XMLList ):Vector.<ColladaContributor>
-		{
-			var length:uint = contributors.length();
-			if ( length == 0 )
-				return null;
+            author                  = contributor.author;
+            authorEmail             = contributor.author_email;
+            authorWebsite           = contributor.author_website;
+            authoringTool           = contributor.authoring_tool;
+            comments                = contributor.comments;
+            copyright               = contributor.copyright;
+            sourceData              = contributor.source_data;
+        }
 
-			var result:Vector.<ColladaContributor> = new Vector.<ColladaContributor>();
-			for each ( var contributor:XML in contributors )
-			{
-				result.push( new ColladaContributor( contributor ) );
-			}
-			return result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			if ( author )
-				result.author = author;
-			
-			if ( authorEmail )
-				result.author_email = authorEmail;
+        public static function parseContributors( contributors:XMLList ):Vector.<ColladaContributor>
+        {
+            var length:uint = contributors.length();
+            if ( length == 0 )
+                return null;
 
-			if ( authorWebsite )
-				result.author_website = authorWebsite;
-			
-			if ( authoringTool )
-				result.authoring_tool = authoringTool;
-			
-			if ( comments )
-				result.comments = comments;
-			
-			if ( copyright )
-			{
-				result.copyright = <copyright/>
-				result.copyright.setChildren( copyright );
-			}
+            var result:Vector.<ColladaContributor> = new Vector.<ColladaContributor>();
+            for each ( var contributor:XML in contributors )
+            {
+                result.push( new ColladaContributor( contributor ) );
+            }
+            return result;
+        }
 
-			if ( sourceData )
-				result.source_data = sourceData;
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
 
-			return result;
-		}
-	}
+            if ( author )
+                result.author = author;
+
+            if ( authorEmail )
+                result.author_email = authorEmail;
+
+            if ( authorWebsite )
+                result.author_website = authorWebsite;
+
+            if ( authoringTool )
+                result.authoring_tool = authoringTool;
+
+            if ( comments )
+                result.comments = comments;
+
+            if ( copyright )
+            {
+                result.copyright = <copyright/>
+                result.copyright.setChildren( copyright );
+            }
+
+            if ( sourceData )
+                result.source_data = sourceData;
+
+            return result;
+        }
+    }
 }

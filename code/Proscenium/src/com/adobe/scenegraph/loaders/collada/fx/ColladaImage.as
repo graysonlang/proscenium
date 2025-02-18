@@ -17,85 +17,85 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaImage extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "image";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		;															// @sid				sid_type
-		;															// @name			xs:token
-		public var format:String;									// @format			xs:token
-		public var height:uint;										// @height
-		public var width:uint;										// @width
-		public var depth:uint;										// @depth
-		
-		;															// <asset>						0 or 1
-																	// <renderable 					0 or 1
-		;															//	share=...	>				Required
-		// exclusively 0 or 1 from the following
-		public var source:ColladaInitFrom;							// <init_from mips_generate=...>
-		;															// <create_2d>
-		;															// <create_3d>
-		;															// <create_cube>
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaImage extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "image";
 
-		;															// <extra>						0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaImage( collada:Collada, image:XML )
-		{
-			super( image );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        ;                                                           // @sid             sid_type
+        ;                                                           // @name            xs:token
+        public var format:String;                                   // @format          xs:token
+        public var height:uint;                                     // @height
+        public var width:uint;                                      // @width
+        public var depth:uint;                                      // @depth
 
-			if ( "init_from" in image )
-				source = new ColladaInitFrom( image.init_from );
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-			
-			format = image.@format;
-			height = image.@height ? image.@height : 0;
-			width = image.@width ? image.@width : 0;
-			depth = image.@depth ? image.@depth : 0;
-		}
+        ;                                                           // <asset>                      0 or 1
+                                                                    // <renderable                  0 or 1
+        ;                                                           //  share=...   >               Required
+        // exclusively 0 or 1 from the following
+        public var source:ColladaInitFrom;                          // <init_from mips_generate=...>
+        ;                                                           // <create_2d>
+        ;                                                           // <create_3d>
+        ;                                                           // <create_cube>
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        ;                                                           // <extra>                      0 or more
 
-			result.init_from = source.toXML();
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaImage( collada:Collada, image:XML )
+        {
+            super( image );
 
-			if ( format )
-				result.@format = format;
-			
-			if ( height > 0 )
-				result.@height = height;
-			
-			if ( width > 0 )
-				result.@width = width;
-			
-			if ( depth > 0 )
-				result.@depth = depth;
+            if ( "init_from" in image )
+                source = new ColladaInitFrom( image.init_from );
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
 
-			super.fillXML( result );
-			return result;
-		}
-	}
+            format = image.@format;
+            height = image.@height ? image.@height : 0;
+            width = image.@width ? image.@width : 0;
+            depth = image.@depth ? image.@depth : 0;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.init_from = source.toXML();
+
+            if ( format )
+                result.@format = format;
+
+            if ( height > 0 )
+                result.@height = height;
+
+            if ( width > 0 )
+                result.@width = width;
+
+            if ( depth > 0 )
+                result.@depth = depth;
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

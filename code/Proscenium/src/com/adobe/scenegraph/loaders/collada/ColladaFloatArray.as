@@ -17,73 +17,73 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaFloatArray extends ColladaArrayElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "float_array";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var values:Vector.<Number>;
-		
-		public var digits:int;										// @digits		xs:unsignedByte		Optional
-		public var magnitude:int;									// @magnitude	xs:short			Optional
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaFloatArray extends ColladaArrayElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "float_array";
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var values:Vector.<Number>;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaFloatArray( arrayList:XMLList )
-		{
-			var array:XML = arrayList[0];
-			super( array );
-			if ( !array )
-				return;
+        public var digits:int;                                      // @digits      xs:unsignedByte     Optional
+        public var magnitude:int;                                   // @magnitude   xs:short            Optional
 
-			digits		= "@digits" in array ? array.@digits : -1;
-			magnitude	= "@digits" in array ? array.@magnitude : -1;
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
 
-			parseValues( array );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( array:XML ):void
-		{
-			array.setChildren( values.join( " " ) );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaFloatArray( arrayList:XMLList )
+        {
+            var array:XML = arrayList[0];
+            super( array );
+            if ( !array )
+                return;
 
-			if ( digits > -1 )
-				array.@digits = digits;
+            digits      = "@digits" in array ? array.@digits : -1;
+            magnitude   = "@digits" in array ? array.@magnitude : -1;
 
-			if ( magnitude > -1 )
-				array.@magnitude = magnitude;
-			
-			super.fillXML( array );
-		}
+            parseValues( array );
+        }
 
-		override protected function parseValues( array:XML ):void
-		{
-			if ( array.hasComplexContent() )
-				throw( ColladaArrayElement.ERROR_BAD_FORMAT );
-			
-			// TODO: Fix, This is really slow for large arrays.
-//						var string:String = floatArray.text().toString();
-//						values = Vector.<Number>( string.split( /\s+/ ) );
-			
-			var string:String = array.text().toString()
-			string = string.replace( /\s+/g, " " );
-			values = Vector.<Number>( string.split( " " ) );
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( array:XML ):void
+        {
+            array.setChildren( values.join( " " ) );
+
+            if ( digits > -1 )
+                array.@digits = digits;
+
+            if ( magnitude > -1 )
+                array.@magnitude = magnitude;
+
+            super.fillXML( array );
+        }
+
+        override protected function parseValues( array:XML ):void
+        {
+            if ( array.hasComplexContent() )
+                throw( ColladaArrayElement.ERROR_BAD_FORMAT );
+
+            // TODO: Fix, This is really slow for large arrays.
+//                      var string:String = floatArray.text().toString();
+//                      values = Vector.<Number>( string.split( /\s+/ ) );
+
+            var string:String = array.text().toString()
+            string = string.replace( /\s+/g, " " );
+            values = Vector.<Number>( string.split( " " ) );
+        }
+    }
 }

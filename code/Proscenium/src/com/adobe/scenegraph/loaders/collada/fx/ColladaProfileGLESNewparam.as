@@ -17,46 +17,46 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileGLESNewparam extends ColladaNewparam
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-//		bool, bool2, bool3, bool4, int, int2, int3, int4, float, float2, float3, float4, float1x1,
-//		float1x2, float1x3, float1x4, float2x1, float2x2, float2x3, float2x4, float3x1,
-//		float3x2, float3x3, float3x4, float4x1, float4x2, float4x3, float4x4, sampler2D*, enum
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileGLESNewparam(element:XML=null)
-		{
-			super(element);
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseNewparams( newparams:XMLList ):Vector.<ColladaProfileGLESNewparam>
-		{
-			var length:uint = newparams.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaProfileGLESNewparam> = new Vector.<ColladaProfileGLESNewparam>();
-			for each ( var newparam:XML in newparams ) {
-				result.push( new ColladaProfileGLESNewparam( newparam ) );
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileGLESNewparam extends ColladaNewparam
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+//      bool, bool2, bool3, bool4, int, int2, int3, int4, float, float2, float3, float4, float1x1,
+//      float1x2, float1x3, float1x4, float2x1, float2x2, float2x3, float2x4, float3x1,
+//      float3x2, float3x3, float3x4, float4x1, float4x2, float4x3, float4x4, sampler2D*, enum
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileGLESNewparam(element:XML=null)
+        {
+            super(element);
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseNewparams( newparams:XMLList ):Vector.<ColladaProfileGLESNewparam>
+        {
+            var length:uint = newparams.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaProfileGLESNewparam> = new Vector.<ColladaProfileGLESNewparam>();
+            for each ( var newparam:XML in newparams ) {
+                result.push( new ColladaProfileGLESNewparam( newparam ) );
+            }
+
+            return result;
+        }
+    }
 }

@@ -17,39 +17,39 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.physics
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaInstance;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaInstance;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstancePhysicsScene extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "instance_physics_scene";
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstancePhysicsScene( collada:Collada, instanceList:XMLList )
-		{
-			var instance:XML = instanceList[0];
-			super( collada, instance );
-			if ( !instance )
-				return;
-			
-			if ( !url || url.length < 1 )
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstancePhysicsScene extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "instance_physics_scene";
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstancePhysicsScene( collada:Collada, instanceList:XMLList )
+        {
+            var instance:XML = instanceList[0];
+            super( collada, instance );
+            if ( !instance )
+                return;
+
+            if ( !url || url.length < 1 )
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
+        }
+    }
 }

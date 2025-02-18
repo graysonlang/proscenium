@@ -17,62 +17,62 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
-	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaEffect extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "effect";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
+    import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// <asset>		0 or 1
-		public var annotates:Vector.<ColladaAnnotate>;				// <annotate>	0 or more
-		public var newparams:Vector.<ColladaNewparam>;				// <newparam>	0 or more
-		public var profiles:Vector.<ColladaProfile>;				// <profile>	1 or more
-		;															// <extra>		0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaEffect( effect:XML )
-		{
-			super( effect );
-			
-			annotates = ColladaAnnotate.parseAnnotates( effect.annotates );
-			newparams = ColladaEffectNewparam.parseNewparams( effect.newparam );
-			profiles = ColladaProfile.parseProfiles( effect.children() );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			for each ( var annotate:ColladaAnnotate in annotates ) {
-				result.appendChild( annotate.toXML() ); 
-			}
-			for each ( var profile:ColladaProfile in profiles ) {
-				result.appendChild( profile.toXML() );
-			}
-			for each ( var newparam:ColladaNewparam in newparams ) {
-				result.appendChild( newparam.toXML() ); 
-			}
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaEffect extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "effect";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // <asset>      0 or 1
+        public var annotates:Vector.<ColladaAnnotate>;              // <annotate>   0 or more
+        public var newparams:Vector.<ColladaNewparam>;              // <newparam>   0 or more
+        public var profiles:Vector.<ColladaProfile>;                // <profile>    1 or more
+        ;                                                           // <extra>      0 or more
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaEffect( effect:XML )
+        {
+            super( effect );
+
+            annotates = ColladaAnnotate.parseAnnotates( effect.annotates );
+            newparams = ColladaEffectNewparam.parseNewparams( effect.newparam );
+            profiles = ColladaProfile.parseProfiles( effect.children() );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            for each ( var annotate:ColladaAnnotate in annotates ) {
+                result.appendChild( annotate.toXML() );
+            }
+            for each ( var profile:ColladaProfile in profiles ) {
+                result.appendChild( profile.toXML() );
+            }
+            for each ( var newparam:ColladaNewparam in newparams ) {
+                result.appendChild( newparam.toXML() );
+            }
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

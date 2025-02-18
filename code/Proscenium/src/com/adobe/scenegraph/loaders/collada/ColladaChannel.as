@@ -17,64 +17,64 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaChannel
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "channel";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var source:String;									// @source		urifragment_type		Required
-		public var target:String;									// @target		sidref_type				Required
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaChannel( channel:XML = null )
-		{
-			if ( !channel )
-				return;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaChannel
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "channel";
 
-			source = Collada.parseSource( channel.@source );
-			target = channel.@target;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseChannels( channels:XMLList ):Vector.<ColladaChannel>
-		{
-			var length:uint = channels.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaChannel> = new Vector.<ColladaChannel>();
-			
-			for each ( var channel:XML in channels )
-			{
-				result.push( new ColladaChannel( channel ) );
-			}
-			
-			return result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-				
-			if ( source )
-				result.@source = source;
-			
-			if ( target )
-				result.@target = target;
-				
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var source:String;                                   // @source      urifragment_type        Required
+        public var target:String;                                   // @target      sidref_type             Required
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaChannel( channel:XML = null )
+        {
+            if ( !channel )
+                return;
+
+            source = Collada.parseSource( channel.@source );
+            target = channel.@target;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseChannels( channels:XMLList ):Vector.<ColladaChannel>
+        {
+            var length:uint = channels.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaChannel> = new Vector.<ColladaChannel>();
+
+            for each ( var channel:XML in channels )
+            {
+                result.push( new ColladaChannel( channel ) );
+            }
+
+            return result;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( source )
+                result.@source = source;
+
+            if ( target )
+                result.@target = target;
+
+            return result;
+        }
+    }
 }

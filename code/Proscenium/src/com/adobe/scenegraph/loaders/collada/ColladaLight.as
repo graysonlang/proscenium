@@ -17,53 +17,53 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaLight extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "light";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaLight extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "light";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// <asset>				0 or 1
-		public var techniqueCommon:ColladaLightTechnique;			// <technique_common>	1
-		public var techniques:Vector.<ColladaTechnique>;			// <technique>			0 or more
-		;															// <extra>				0 or more
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // <asset>              0 or 1
+        public var techniqueCommon:ColladaLightTechnique;           // <technique_common>   1
+        public var techniques:Vector.<ColladaTechnique>;            // <technique>          0 or more
+        ;                                                           // <extra>              0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaLight( collada:Collada, light:XML )
-		{
-			super( light );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaLight( collada:Collada, light:XML )
+        {
+            super( light );
 
-			if ( !light )
-				return;
-			
-			techniqueCommon = ColladaLightTechnique.parseLightTechnique( light.technique_common[0] );
-			techniques = ColladaTechnique.parseTechniques( light.technique );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+            if ( !light )
+                return;
 
-			result.appendChild( techniqueCommon.toXML() );
-			
-			for each ( var technique:ColladaTechnique in techniques ) {
-				result.appendChild( technique.toXML() );
-			}
-		
-			super.fillXML( result );
-			return result;
-		}
-	}
+            techniqueCommon = ColladaLightTechnique.parseLightTechnique( light.technique_common[0] );
+            techniques = ColladaTechnique.parseTechniques( light.technique );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.appendChild( techniqueCommon.toXML() );
+
+            for each ( var technique:ColladaTechnique in techniques ) {
+                result.appendChild( technique.toXML() );
+            }
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

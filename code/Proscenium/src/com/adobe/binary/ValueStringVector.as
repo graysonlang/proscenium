@@ -17,52 +17,52 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final internal class ValueStringVector extends ValueObject
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TYPE_ID:uint							= TYPE_UTF8_STRING;
-		public static const CLASS_NAME:String						= "ValueStringVector";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Vector.<String>;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ValueStringVector( id:uint, container:GenericBinaryContainer, value:Vector.<String> )
-		{
-			super( id, TYPE_ID, container, value );
-			_value = value;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
-		{
-			return writeVector( bytes, TYPE_ID, _value, format );
-		}
-		
-		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
-		{
-			return writeVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
-		}
-		
-		override public function getStringVector():Vector.<String>
-		{
-			return _value;
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final internal class ValueStringVector extends ValueObject
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TYPE_ID:uint                            = TYPE_UTF8_STRING;
+        public static const CLASS_NAME:String                       = "ValueStringVector";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Vector.<String>;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ValueStringVector( id:uint, container:GenericBinaryContainer, value:Vector.<String> )
+        {
+            super( id, TYPE_ID, container, value );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
+        {
+            return writeVector( bytes, TYPE_ID, _value, format );
+        }
+
+        override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
+        {
+            return writeVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
+        }
+
+        override public function getStringVector():Vector.<String>
+        {
+            return _value;
+        }
+    }
 }

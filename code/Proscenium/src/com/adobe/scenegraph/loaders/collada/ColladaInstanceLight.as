@@ -17,51 +17,51 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceLight extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_light";
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		public function get light():ColladaLight
-		{
-			return _collada.getLight( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceLight( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseInstanceLights( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceLight>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceLight> = new Vector.<ColladaInstanceLight>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceLight( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceLight extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_light";
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get light():ColladaLight
+        {
+            return _collada.getLight( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceLight( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseInstanceLights( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceLight>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceLight> = new Vector.<ColladaInstanceLight>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceLight( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

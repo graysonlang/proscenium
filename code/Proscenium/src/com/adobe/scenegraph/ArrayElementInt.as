@@ -17,70 +17,70 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ArrayElementInt extends ArrayElement implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _values:Vector.<int>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		/** @private **/
-		public function set values( v:Vector.<int> ):void
-		{
-			this.count = v.length;
-			_values = v;
-		}
-		public function get values():Vector.<int>					{ return _values; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ArrayElementInt( values:Vector.<int> = null, name:String = undefined )
-		{
-			super( values.length, name );
-			this.values = values;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setIntVector( ID_VALUES, values );
-		}
-		
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_VALUES:				_values = entry.getIntVector();	break;
-					
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
 
-		public static function getIDString( id:uint ):String
-		{
-			return ArrayElement.getIDString( id );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ArrayElementInt extends ArrayElement implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _values:Vector.<int>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        /** @private **/
+        public function set values( v:Vector.<int> ):void
+        {
+            this.count = v.length;
+            _values = v;
+        }
+        public function get values():Vector.<int>                   { return _values; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ArrayElementInt( values:Vector.<int> = null, name:String = undefined )
+        {
+            super( values.length, name );
+            this.values = values;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setIntVector( ID_VALUES, values );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_VALUES:             _values = entry.getIntVector(); break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            return ArrayElement.getIDString( id );
+        }
+    }
 }

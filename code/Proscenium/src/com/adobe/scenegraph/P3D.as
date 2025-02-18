@@ -17,140 +17,140 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryFormatDescription;
-	import com.adobe.transforms.TransformElement;
-	import com.adobe.transforms.TransformElementLookAt;
-	import com.adobe.transforms.TransformElementMatrix;
-	import com.adobe.transforms.TransformElementRotate;
-	import com.adobe.transforms.TransformElementScale;
-	import com.adobe.transforms.TransformElementTranslate;
-	import com.adobe.transforms.TransformStack;
-	import com.adobe.wiring.Attribute;
-	import com.adobe.wiring.AttributeColor;
-	import com.adobe.wiring.AttributeMatrix3D;
-	import com.adobe.wiring.AttributeNumber;
-	import com.adobe.wiring.AttributeNumberVector;
-	import com.adobe.wiring.AttributeUInt;
-	import com.adobe.wiring.AttributeVector3D;
-	import com.adobe.wiring.AttributeXYZ;
-	import com.adobe.wiring.Sampler;
-	import com.adobe.wiring.SamplerBezierCurve;
-	import com.adobe.wiring.SamplerColor;
-	import com.adobe.wiring.SamplerMatrix3D;
-	import com.adobe.wiring.SamplerNumber;
-	import com.adobe.wiring.SamplerNumberVector;
-	import com.adobe.wiring.SamplerXYZ;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryFormatDescription;
+    import com.adobe.transforms.TransformElement;
+    import com.adobe.transforms.TransformElementLookAt;
+    import com.adobe.transforms.TransformElementMatrix;
+    import com.adobe.transforms.TransformElementRotate;
+    import com.adobe.transforms.TransformElementScale;
+    import com.adobe.transforms.TransformElementTranslate;
+    import com.adobe.transforms.TransformStack;
+    import com.adobe.wiring.Attribute;
+    import com.adobe.wiring.AttributeColor;
+    import com.adobe.wiring.AttributeMatrix3D;
+    import com.adobe.wiring.AttributeNumber;
+    import com.adobe.wiring.AttributeNumberVector;
+    import com.adobe.wiring.AttributeUInt;
+    import com.adobe.wiring.AttributeVector3D;
+    import com.adobe.wiring.AttributeXYZ;
+    import com.adobe.wiring.Sampler;
+    import com.adobe.wiring.SamplerBezierCurve;
+    import com.adobe.wiring.SamplerColor;
+    import com.adobe.wiring.SamplerMatrix3D;
+    import com.adobe.wiring.SamplerNumber;
+    import com.adobe.wiring.SamplerNumberVector;
+    import com.adobe.wiring.SamplerXYZ;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class P3D
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAGS:Array								= [];
-		
-		public static const NAMESPACE:String						= "http://ns.com.adobe/p3d/2011";
-		public static const VERSION_MAJOR:uint						= 0;
-		public static const VERSION_MINOR:uint						= 1;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class P3D
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAGS:Array                              = [];
 
-		private static const _FORMAT:GenericBinaryFormatDescription	= new GenericBinaryFormatDescription( NAMESPACE );
+        public static const NAMESPACE:String                        = "http://ns.com.adobe/p3d/2011";
+        public static const VERSION_MAJOR:uint                      = 0;
+        public static const VERSION_MINOR:uint                      = 1;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		private static var _initialized:Boolean;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public static function get FORMAT():GenericBinaryFormatDescription
-		{
-			if ( !_initialized )
-				initialize();
-			
-			return _FORMAT;
-		}
-		
-		// ------------------------------------------------------------
-		//	Tags
-		// ------------------------------------------------------------
-		public static const TAG_MODEL_DATA:uint						= 10;
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		private static function initialize():void
-		{
-			_FORMAT.addTag( 10, ModelData,					"ModelData",					ModelData.getIDString );
-			
-			_FORMAT.addTag( 30, SceneNode,					"SceneNode",					SceneNode.getIDString );
-			_FORMAT.addTag( 40, SceneGraph,					"SceneGraph",					SceneGraph.getIDString );
-			_FORMAT.addTag( 41, SceneCamera,				"SceneCamera",					SceneCamera.getIDString );
-			_FORMAT.addTag( 42, SceneLight,					"SceneLight",					SceneLight.getIDString );
-			_FORMAT.addTag( 43, SceneLightInstance,			"SceneLightInstance",			SceneLightInstance.getIDString );
-			_FORMAT.addTag( 44, SceneBone,					"SceneBone",					SceneBone.getIDString );
-			_FORMAT.addTag( 60, SceneMesh,					"SceneMesh",					SceneMesh.getIDString );
-			
-			_FORMAT.addTag( 80, MeshElement,				"MeshElement",					MeshElement.getIDString );
-			_FORMAT.addTag( 81, MeshElementTriangles,		"MeshElementTriangles", 		MeshElementTriangles.getIDString );
-			
-			_FORMAT.addTag( 89, MaterialBindingMap,			"MaterialBindingMap",			MaterialBindingMap.getIDString );
-			_FORMAT.addTag( 90, MaterialBinding,			"MaterialBinding",				MaterialBinding.getIDString );
-			
-			_FORMAT.addTag( 91, Material,					"Material",						Material.getIDString );
-			_FORMAT.addTag( 92, MaterialStandard,			"MaterialStandard",				MaterialStandard.getIDString );
-			
-			_FORMAT.addTag( 100, Input,						"Input",						Input.getIDString );
-			
-			_FORMAT.addTag( 101, Source,					"Source",						Source.getIDString );
-			
-			_FORMAT.addTag( 110, ArrayElement,				"ArrayElement",					ArrayElement.getIDString );
-			_FORMAT.addTag( 111, ArrayElementFloat,			"ArrayElementFloat",			ArrayElementFloat.getIDString );
-			_FORMAT.addTag( 112, ArrayElementInt,			"ArrayElementInt",				ArrayElementInt.getIDString );
-			_FORMAT.addTag( 113, ArrayElementString,		"ArrayElementString",			ArrayElementString.getIDString );
-			
-			_FORMAT.addTag( 130, VertexFormat,				"VertexFormat",					VertexFormat.getIDString );
-			
-			_FORMAT.addTag( 131, VertexFormatElement,		"VertexFormatElement",			VertexFormatElement.getIDString );
-			
-			_FORMAT.addTag( 140, SkinController,			"SkinController",				SkinController.getIDString );
-			
-			_FORMAT.addTag( 150, TextureMap,				"TextureMap",					TextureMap.getIDString );
-			
-			_FORMAT.addTag( 160, VertexBinding,				"VertexBinding",				VertexBinding.getIDString );
-			
-			_FORMAT.addTag( 600, Attribute,					"Attribute",					Attribute.getIDString );
-			_FORMAT.addTag( 610, AttributeColor,			"AttributeColor",				AttributeColor.getIDString );
-			_FORMAT.addTag( 620, AttributeVector3D,			"AttributeVector3D",			AttributeVector3D.getIDString );
-			_FORMAT.addTag( 625, AttributeMatrix3D,			"AttributeMatrix3D",			AttributeMatrix3D.getIDString );
-			_FORMAT.addTag( 630, AttributeNumber,			"AttributeNumber",				AttributeNumber.getIDString );
-			_FORMAT.addTag( 631, AttributeNumberVector,		"AttributeNumberVector",		AttributeNumberVector.getIDString );
-			_FORMAT.addTag( 640, AttributeUInt,				"AttributeUInt",				AttributeUInt.getIDString );
-			_FORMAT.addTag( 650, AttributeXYZ,				"AttributeXYZ",					AttributeXYZ.getIDString );
-			
-			_FORMAT.addTag( 701, TransformStack,			"TransformStack",				TransformStack.getIDString );
-			_FORMAT.addTag( 710, TransformElement,			"TransformElement",				TransformElement.getIDString );
-			_FORMAT.addTag( 711, TransformElementLookAt,	"TransformElementLookAt",		TransformElementLookAt.getIDString );
-			_FORMAT.addTag( 712, TransformElementMatrix,	"TransformElementMatrix",		TransformElementMatrix.getIDString );
-			_FORMAT.addTag( 713, TransformElementRotate,	"TransformElementRotate",		TransformElementRotate.getIDString );
-			_FORMAT.addTag( 714, TransformElementScale,		"TransformElementScale",		TransformElementScale.getIDString );
-			_FORMAT.addTag( 715, TransformElementTranslate,	"TransformElementTranslate",	TransformElementTranslate.getIDString );
-			
-			_FORMAT.addTag( 800, Sampler,					"Sampler",						Sampler.getIDString );
-			_FORMAT.addTag( 805, SamplerBezierCurve,		"SamplerBezierCurve",			SamplerBezierCurve.getIDString );
-			_FORMAT.addTag( 810, SamplerColor,				"SamplerColor",					SamplerColor.getIDString );
-			_FORMAT.addTag( 820, SamplerMatrix3D,			"SamplerMatrix3D",				SamplerMatrix3D.getIDString );
-			_FORMAT.addTag( 830, SamplerNumber,				"SamplerNumber",				SamplerNumber.getIDString );
-			_FORMAT.addTag( 835, SamplerNumberVector,		"SamplerNumberVector",			SamplerNumberVector.getIDString );
-			_FORMAT.addTag( 840, SamplerXYZ,				"SamplerXYZ",					SamplerXYZ.getIDString );
+        private static const _FORMAT:GenericBinaryFormatDescription = new GenericBinaryFormatDescription( NAMESPACE );
 
-			_FORMAT.addTag( 900, AnimationController,		"AnimationController",			AnimationController.getIDString );
-			_FORMAT.addTag( 910, AnimationTrack,			"AnimationTrack",				AnimationTrack.getIDString );
-		}
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        private static var _initialized:Boolean;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public static function get FORMAT():GenericBinaryFormatDescription
+        {
+            if ( !_initialized )
+                initialize();
+
+            return _FORMAT;
+        }
+
+        // ------------------------------------------------------------
+        //  Tags
+        // ------------------------------------------------------------
+        public static const TAG_MODEL_DATA:uint                     = 10;
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        private static function initialize():void
+        {
+            _FORMAT.addTag( 10, ModelData,                  "ModelData",                    ModelData.getIDString );
+
+            _FORMAT.addTag( 30, SceneNode,                  "SceneNode",                    SceneNode.getIDString );
+            _FORMAT.addTag( 40, SceneGraph,                 "SceneGraph",                   SceneGraph.getIDString );
+            _FORMAT.addTag( 41, SceneCamera,                "SceneCamera",                  SceneCamera.getIDString );
+            _FORMAT.addTag( 42, SceneLight,                 "SceneLight",                   SceneLight.getIDString );
+            _FORMAT.addTag( 43, SceneLightInstance,         "SceneLightInstance",           SceneLightInstance.getIDString );
+            _FORMAT.addTag( 44, SceneBone,                  "SceneBone",                    SceneBone.getIDString );
+            _FORMAT.addTag( 60, SceneMesh,                  "SceneMesh",                    SceneMesh.getIDString );
+
+            _FORMAT.addTag( 80, MeshElement,                "MeshElement",                  MeshElement.getIDString );
+            _FORMAT.addTag( 81, MeshElementTriangles,       "MeshElementTriangles",         MeshElementTriangles.getIDString );
+
+            _FORMAT.addTag( 89, MaterialBindingMap,         "MaterialBindingMap",           MaterialBindingMap.getIDString );
+            _FORMAT.addTag( 90, MaterialBinding,            "MaterialBinding",              MaterialBinding.getIDString );
+
+            _FORMAT.addTag( 91, Material,                   "Material",                     Material.getIDString );
+            _FORMAT.addTag( 92, MaterialStandard,           "MaterialStandard",             MaterialStandard.getIDString );
+
+            _FORMAT.addTag( 100, Input,                     "Input",                        Input.getIDString );
+
+            _FORMAT.addTag( 101, Source,                    "Source",                       Source.getIDString );
+
+            _FORMAT.addTag( 110, ArrayElement,              "ArrayElement",                 ArrayElement.getIDString );
+            _FORMAT.addTag( 111, ArrayElementFloat,         "ArrayElementFloat",            ArrayElementFloat.getIDString );
+            _FORMAT.addTag( 112, ArrayElementInt,           "ArrayElementInt",              ArrayElementInt.getIDString );
+            _FORMAT.addTag( 113, ArrayElementString,        "ArrayElementString",           ArrayElementString.getIDString );
+
+            _FORMAT.addTag( 130, VertexFormat,              "VertexFormat",                 VertexFormat.getIDString );
+
+            _FORMAT.addTag( 131, VertexFormatElement,       "VertexFormatElement",          VertexFormatElement.getIDString );
+
+            _FORMAT.addTag( 140, SkinController,            "SkinController",               SkinController.getIDString );
+
+            _FORMAT.addTag( 150, TextureMap,                "TextureMap",                   TextureMap.getIDString );
+
+            _FORMAT.addTag( 160, VertexBinding,             "VertexBinding",                VertexBinding.getIDString );
+
+            _FORMAT.addTag( 600, Attribute,                 "Attribute",                    Attribute.getIDString );
+            _FORMAT.addTag( 610, AttributeColor,            "AttributeColor",               AttributeColor.getIDString );
+            _FORMAT.addTag( 620, AttributeVector3D,         "AttributeVector3D",            AttributeVector3D.getIDString );
+            _FORMAT.addTag( 625, AttributeMatrix3D,         "AttributeMatrix3D",            AttributeMatrix3D.getIDString );
+            _FORMAT.addTag( 630, AttributeNumber,           "AttributeNumber",              AttributeNumber.getIDString );
+            _FORMAT.addTag( 631, AttributeNumberVector,     "AttributeNumberVector",        AttributeNumberVector.getIDString );
+            _FORMAT.addTag( 640, AttributeUInt,             "AttributeUInt",                AttributeUInt.getIDString );
+            _FORMAT.addTag( 650, AttributeXYZ,              "AttributeXYZ",                 AttributeXYZ.getIDString );
+
+            _FORMAT.addTag( 701, TransformStack,            "TransformStack",               TransformStack.getIDString );
+            _FORMAT.addTag( 710, TransformElement,          "TransformElement",             TransformElement.getIDString );
+            _FORMAT.addTag( 711, TransformElementLookAt,    "TransformElementLookAt",       TransformElementLookAt.getIDString );
+            _FORMAT.addTag( 712, TransformElementMatrix,    "TransformElementMatrix",       TransformElementMatrix.getIDString );
+            _FORMAT.addTag( 713, TransformElementRotate,    "TransformElementRotate",       TransformElementRotate.getIDString );
+            _FORMAT.addTag( 714, TransformElementScale,     "TransformElementScale",        TransformElementScale.getIDString );
+            _FORMAT.addTag( 715, TransformElementTranslate, "TransformElementTranslate",    TransformElementTranslate.getIDString );
+
+            _FORMAT.addTag( 800, Sampler,                   "Sampler",                      Sampler.getIDString );
+            _FORMAT.addTag( 805, SamplerBezierCurve,        "SamplerBezierCurve",           SamplerBezierCurve.getIDString );
+            _FORMAT.addTag( 810, SamplerColor,              "SamplerColor",                 SamplerColor.getIDString );
+            _FORMAT.addTag( 820, SamplerMatrix3D,           "SamplerMatrix3D",              SamplerMatrix3D.getIDString );
+            _FORMAT.addTag( 830, SamplerNumber,             "SamplerNumber",                SamplerNumber.getIDString );
+            _FORMAT.addTag( 835, SamplerNumberVector,       "SamplerNumberVector",          SamplerNumberVector.getIDString );
+            _FORMAT.addTag( 840, SamplerXYZ,                "SamplerXYZ",                   SamplerXYZ.getIDString );
+
+            _FORMAT.addTag( 900, AnimationController,       "AnimationController",          AnimationController.getIDString );
+            _FORMAT.addTag( 910, AnimationTrack,            "AnimationTrack",               AnimationTrack.getIDString );
+        }
+    }
 }

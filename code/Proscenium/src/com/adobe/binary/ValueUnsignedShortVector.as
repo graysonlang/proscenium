@@ -17,62 +17,62 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final internal class ValueUnsignedShortVector extends ValueObject
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TYPE_ID:uint							= TYPE_USHORT;
-		public static const CLASS_NAME:String						= "ValueUnsignedShortVector";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Vector.<uint>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get count():uint					{ return _value.length; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ValueUnsignedShortVector( id:uint, container:GenericBinaryContainer, value:Vector.<uint> )
-		{
-			super( id, TYPE_ID, container, value );
-			_value = value;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
-		{
-			return writeVector( bytes, TYPE_ID, _value, format );
-		}
-		
-		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
-		{
-			return writeVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
-		}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
 
-		override public function getUnsignedShortVector():Vector.<uint>
-		{
-			return _value;
-		}
-		
-		override public function getUnsignedIntVector():Vector.<uint>
-		{
-			return _value;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final internal class ValueUnsignedShortVector extends ValueObject
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TYPE_ID:uint                            = TYPE_USHORT;
+        public static const CLASS_NAME:String                       = "ValueUnsignedShortVector";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Vector.<uint>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get count():uint                   { return _value.length; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ValueUnsignedShortVector( id:uint, container:GenericBinaryContainer, value:Vector.<uint> )
+        {
+            super( id, TYPE_ID, container, value );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
+        {
+            return writeVector( bytes, TYPE_ID, _value, format );
+        }
+
+        override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
+        {
+            return writeVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
+        }
+
+        override public function getUnsignedShortVector():Vector.<uint>
+        {
+            return _value;
+        }
+
+        override public function getUnsignedIntVector():Vector.<uint>
+        {
+            return _value;
+        }
+    }
 }

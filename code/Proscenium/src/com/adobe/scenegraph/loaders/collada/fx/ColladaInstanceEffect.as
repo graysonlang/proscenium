@@ -17,55 +17,55 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaInstance;
-	import com.adobe.scenegraph.loaders.collada.ColladaSetparam;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaInstance;
+    import com.adobe.scenegraph.loaders.collada.ColladaSetparam;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceEffect extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_effect";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceEffect extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_effect";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var techniqueHints:Vector.<ColladaTechniqueHint>;	// <technique_hint>	0 or more
-		public var setparams:Vector.<ColladaSetparam>;				// <setparam>		0 or more
-		;															// <extra>			0 or more
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var techniqueHints:Vector.<ColladaTechniqueHint>;    // <technique_hint> 0 or more
+        public var setparams:Vector.<ColladaSetparam>;              // <setparam>       0 or more
+        ;                                                           // <extra>          0 or more
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceEffect( collada:Collada, instanceList:XMLList )
-		{
-			var instance:XML = instanceList[ 0 ];
-			super( collada, instance );
-			if ( !instance )
-				return;
-			
-			// TODO
-		}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( instance:XML ):void
-		{
-			// TODO
-			super.fillXML( instance );
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceEffect( collada:Collada, instanceList:XMLList )
+        {
+            var instance:XML = instanceList[ 0 ];
+            super( collada, instance );
+            if ( !instance )
+                return;
+
+            // TODO
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( instance:XML ):void
+        {
+            // TODO
+            super.fillXML( instance );
+        }
+    }
 }

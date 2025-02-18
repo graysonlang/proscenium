@@ -17,77 +17,77 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/** @private **/
-	final internal class GenericBinaryResources
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var index:uint;
-		public var position:uint;
-		public var size:uint;
-		public var count:uint;
-		public var offsets:Vector.<uint>;
-		public var objects:Vector.<Object>;
-	
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function GenericBinaryResources()
-		{
-		}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function fromBytes( bytes:ByteArray ):GenericBinaryResources
-		{
-			var result:GenericBinaryResources = new GenericBinaryResources();
-			result.read( bytes );
-			return result;
-		}
-		
-		protected function read( bytes:ByteArray ):void
-		{
-			position = bytes.position;
-			size = bytes.readUnsignedInt();
-			
-			if ( size & 0x80000000 )
-				throw new Error( "UNSUPPORTED: EXTENDED ADDRESSING" );
-			
-			if ( size > 0 )
-			{
-				count = bytes.readUnsignedInt();
-				offsets = new Vector.<uint>( count, true );
-				for ( var i:uint = 0; i < count; i++ )
-					offsets[ i ] = bytes.readUnsignedInt();
-				
-				objects = new Vector.<Object>( count, true );
-			}
-		}
-		
-		internal function addObject( object:Object ):uint
-		{
-			if ( index >= objects.length )
-				throw null;
-			
-			//trace( "<<Master object", index + ">>" ); 
-				
-			objects[ index ] = object;
-			return index++;
-		}
-		
-		internal function getObject( id:uint ):Object
-		{
-			return ( id < objects.length ) ? objects[ id ] : null;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /** @private **/
+    final internal class GenericBinaryResources
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var index:uint;
+        public var position:uint;
+        public var size:uint;
+        public var count:uint;
+        public var offsets:Vector.<uint>;
+        public var objects:Vector.<Object>;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function GenericBinaryResources()
+        {
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function fromBytes( bytes:ByteArray ):GenericBinaryResources
+        {
+            var result:GenericBinaryResources = new GenericBinaryResources();
+            result.read( bytes );
+            return result;
+        }
+
+        protected function read( bytes:ByteArray ):void
+        {
+            position = bytes.position;
+            size = bytes.readUnsignedInt();
+
+            if ( size & 0x80000000 )
+                throw new Error( "UNSUPPORTED: EXTENDED ADDRESSING" );
+
+            if ( size > 0 )
+            {
+                count = bytes.readUnsignedInt();
+                offsets = new Vector.<uint>( count, true );
+                for ( var i:uint = 0; i < count; i++ )
+                    offsets[ i ] = bytes.readUnsignedInt();
+
+                objects = new Vector.<Object>( count, true );
+            }
+        }
+
+        internal function addObject( object:Object ):uint
+        {
+            if ( index >= objects.length )
+                throw null;
+
+            //trace( "<<Master object", index + ">>" );
+
+            objects[ index ] = object;
+            return index++;
+        }
+
+        internal function getObject( id:uint ):Object
+        {
+            return ( id < objects.length ) ? objects[ id ] : null;
+        }
+    }
 }

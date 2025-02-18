@@ -17,53 +17,53 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaRender;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaRender;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaEvaluateScene extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// <asset>	0 or 1
-		public var renders:Vector.<ColladaRender>;					// <render>	0 or more
-		;															// <extra>	0 or more		
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaEvaluateScene extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // <asset>  0 or 1
+        public var renders:Vector.<ColladaRender>;                  // <render> 0 or more
+        ;                                                           // <extra>  0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaEvaluateScene( collada:Collada, evaluateList:XML )
-		{
-			var evaluate:XML = evaluateList[0];
-			super( evaluate );
-			if ( !evaluate )
-				return;
-			
-			renders = ColladaRender.parseRenders( collada, evaluate.render );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseEvaluateScenes( collada:Collada, evaluateScenes:XMLList ):Vector.<ColladaEvaluateScene>
-		{
-			var length:uint = evaluateScenes.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaEvaluateScene> = new Vector.<ColladaEvaluateScene>();
-			
-			for each ( var evaluateScene:XML in evaluateScenes )
-			{
-				result.push( new ColladaEvaluateScene( collada, evaluateScene ) );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaEvaluateScene( collada:Collada, evaluateList:XML )
+        {
+            var evaluate:XML = evaluateList[0];
+            super( evaluate );
+            if ( !evaluate )
+                return;
+
+            renders = ColladaRender.parseRenders( collada, evaluate.render );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseEvaluateScenes( collada:Collada, evaluateScenes:XMLList ):Vector.<ColladaEvaluateScene>
+        {
+            var length:uint = evaluateScenes.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaEvaluateScene> = new Vector.<ColladaEvaluateScene>();
+
+            for each ( var evaluateScene:XML in evaluateScenes )
+            {
+                result.push( new ColladaEvaluateScene( collada, evaluateScene ) );
+            }
+
+            return result;
+        }
+    }
 }

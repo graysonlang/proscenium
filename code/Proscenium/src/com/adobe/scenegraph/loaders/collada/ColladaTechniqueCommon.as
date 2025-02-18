@@ -17,38 +17,38 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTechniqueCommon extends ColladaElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "technique_common";
-		
-		public static const ERROR_UNSUPPORTED_TECHNIQUE:Error = new Error( "Unsupported Technique!");
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTechniqueCommon extends ColladaElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "technique_common";
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTechniqueCommon( xml:XML ) {}
+        public static const ERROR_UNSUPPORTED_TECHNIQUE:Error = new Error( "Unsupported Technique!");
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			fillXML( result );
-			return result;
-		}
-		
-		override protected function fillXML( technique:XML ):void {}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTechniqueCommon( xml:XML ) {}
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+            fillXML( result );
+            return result;
+        }
+
+        override protected function fillXML( technique:XML ):void {}
+    }
 }

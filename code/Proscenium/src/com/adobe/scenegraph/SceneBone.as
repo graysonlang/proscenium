@@ -17,100 +17,100 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
-	
-	import flash.geom.Matrix3D;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class SceneBone extends SceneNode implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "SceneBone";
-		
-		public static const IDS:Array								= [];
-		public static const ID_JOINT_ID:uint						= 610;
-		IDS[ ID_JOINT_ID ]											= "Joint ID";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var jointID:String;
-		public var jointTransform:Matrix3D;
-		
-		// ----------------------------------------------------------------------
-		protected static var _uid:uint								= 0;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
-		override protected function get uid():uint					{ return _uid++; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function SceneBone( name:String = undefined, id:String = undefined, jointID:String = undefined )
-		{
-			super( name, id );
-			
-			this.jointID = jointID;
-			jointTransform = new Matrix3D();
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function collectNodeByNameHelper( nameMap:Object, result:Object ):void
-		{
-			if ( nameMap[ _name ] )
-				result[ _name ] = this;
-			else if ( nameMap[ _id ] )
-				result[ _id ] = this;
-			else if ( nameMap[ jointID ] )
-				result[ jointID ] = this;
-			
-			super.collectNodeByNameHelper( nameMap, result );
-		}
-		
-		// --------------------------------------------------
-		//	Binary Serialization
-		// --------------------------------------------------
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setString( ID_JOINT_ID, jointID );
-		}
-		
-		public static function getIDString( id:uint ):String
-		{
-			var result:String = IDS[ id ];
-			return result ? result : SceneNode.getIDString( id );
-		}
-		
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_JOINT_ID:
-						jointID = entry.getString();
-						break;
-					
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
+
+    import flash.geom.Matrix3D;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class SceneBone extends SceneNode implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "SceneBone";
+
+        public static const IDS:Array                               = [];
+        public static const ID_JOINT_ID:uint                        = 610;
+        IDS[ ID_JOINT_ID ]                                          = "Joint ID";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var jointID:String;
+        public var jointTransform:Matrix3D;
+
+        // ----------------------------------------------------------------------
+        protected static var _uid:uint                              = 0;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
+        override protected function get uid():uint                  { return _uid++; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function SceneBone( name:String = undefined, id:String = undefined, jointID:String = undefined )
+        {
+            super( name, id );
+
+            this.jointID = jointID;
+            jointTransform = new Matrix3D();
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function collectNodeByNameHelper( nameMap:Object, result:Object ):void
+        {
+            if ( nameMap[ _name ] )
+                result[ _name ] = this;
+            else if ( nameMap[ _id ] )
+                result[ _id ] = this;
+            else if ( nameMap[ jointID ] )
+                result[ jointID ] = this;
+
+            super.collectNodeByNameHelper( nameMap, result );
+        }
+
+        // --------------------------------------------------
+        //  Binary Serialization
+        // --------------------------------------------------
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setString( ID_JOINT_ID, jointID );
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            var result:String = IDS[ id ];
+            return result ? result : SceneNode.getIDString( id );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_JOINT_ID:
+                        jointID = entry.getString();
+                        break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+    }
 }

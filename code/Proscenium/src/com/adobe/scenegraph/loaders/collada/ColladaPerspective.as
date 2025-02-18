@@ -17,69 +17,69 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaPerspective extends ColladaOpticsTechnique
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "perspective";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var xfov:Number;										// <xfov>
-		public var xfovSID:String;									// <xfov sid="...">
-		public var yfov:Number;										// <yfov>
-		public var yfovSID:String;									// <yfov sid="...">
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaPerspective extends ColladaOpticsTechnique
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "perspective";
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }; 
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaPerspective( technique:XML )
-		{
-			super( technique );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var xfov:Number;                                     // <xfov>
+        public var xfovSID:String;                                  // <xfov sid="...">
+        public var yfov:Number;                                     // <yfov>
+        public var yfovSID:String;                                  // <yfov sid="...">
 
-			if ( technique.xfov[0] )
-			{
-				xfov = technique.xfov;
-				xfovSID = technique.xfov.@sid;
-			}
-			
-			if ( technique.yfov[0] )
-			{
-				yfov = technique.yfov;
-				yfovSID = technique.yfov.@sid;
-			}
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( technique:XML ):void
-		{
-			if ( xfov )
-			{
-				technique.xfov = xfov;
-				if ( xfovSID )
-					technique.xfov.@sid = xfovSID;
-			}
-			
-			if ( yfov )
-			{
-				technique.yfov = yfov;
-				if ( yfovSID )
-					technique.yfov.@sid = yfovSID;
-			}
-			
-			super.fillXML( technique );
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaPerspective( technique:XML )
+        {
+            super( technique );
+
+            if ( technique.xfov[0] )
+            {
+                xfov = technique.xfov;
+                xfovSID = technique.xfov.@sid;
+            }
+
+            if ( technique.yfov[0] )
+            {
+                yfov = technique.yfov;
+                yfovSID = technique.yfov.@sid;
+            }
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( technique:XML ):void
+        {
+            if ( xfov )
+            {
+                technique.xfov = xfov;
+                if ( xfovSID )
+                    technique.xfov.@sid = xfovSID;
+            }
+
+            if ( yfov )
+            {
+                technique.yfov = yfov;
+                if ( yfovSID )
+                    technique.yfov.@sid = yfovSID;
+            }
+
+            super.fillXML( technique );
+        }
+    }
 }

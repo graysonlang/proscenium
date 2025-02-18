@@ -17,52 +17,52 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaControlElement extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var source:String;									// @source		xs:anyURI		Required
-		public var sources:Vector.<ColladaSource>;					// <source>		(count depends on class)
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaControlElement( element:XML )
-		{
-			super( element );
-			
-			source = element.@source;
-			sources = ColladaSource.parseSources( element.source );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + tag + "/>" );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaControlElement extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var source:String;                                   // @source      xs:anyURI       Required
+        public var sources:Vector.<ColladaSource>;                  // <source>     (count depends on class)
 
-			result.@source = source;
-			for each ( var colladaSource:ColladaSource in sources ){
-				result.appendChild( colladaSource.toXML() );
-			}
-			
-			fillXML( result )
-			return result;
-		}
-		
-		public function getSource( collada:Collada ):ColladaGeometry
-		{
-			return collada.getGeometry( source );
-		} 
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaControlElement( element:XML )
+        {
+            super( element );
+
+            source = element.@source;
+            sources = ColladaSource.parseSources( element.source );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + tag + "/>" );
+
+            result.@source = source;
+            for each ( var colladaSource:ColladaSource in sources ){
+                result.appendChild( colladaSource.toXML() );
+            }
+
+            fillXML( result )
+            return result;
+        }
+
+        public function getSource( collada:Collada ):ColladaGeometry
+        {
+            return collada.getGeometry( source );
+        }
+    }
 }

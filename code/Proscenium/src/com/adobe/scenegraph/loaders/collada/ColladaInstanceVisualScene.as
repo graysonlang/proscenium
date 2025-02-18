@@ -17,38 +17,38 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceVisualScene extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_visual_scene";
-			
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceVisualScene extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_visual_scene";
 
-		public function get visualScene():ColladaVisualScene
-		{
-			return _collada.getVisualScene( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceVisualScene( collada:Collada, instanceList:XMLList )
-		{
-			var instance:XML = instanceList[0];
-			super( collada, instance );
-			if ( !instance )
-				return;
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
 
-			if ( !url || url.length < 1 )
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-		}
-	}
+        public function get visualScene():ColladaVisualScene
+        {
+            return _collada.getVisualScene( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceVisualScene( collada:Collada, instanceList:XMLList )
+        {
+            var instance:XML = instanceList[0];
+            super( collada, instance );
+            if ( !instance )
+                return;
+
+            if ( !url || url.length < 1 )
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
+        }
+    }
 }

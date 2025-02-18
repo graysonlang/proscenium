@@ -17,83 +17,83 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class Source implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const IDS:Array								= [];
-		public static const ID_ID:uint								= 10;
-		IDS[ ID_ID ]												= "ID";
-		public static const ID_STRIDE:uint							= 20;
-		IDS[ ID_STRIDE ]											= "Stride";
-		public static const ID_ARRAY_ELEMENT:uint					= 30;
-		IDS[ ID_ARRAY_ELEMENT ]										= "Array Element";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var arrayElement:ArrayElement;
-		public var id:String;
-		public var stride:uint;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function Source( id:String = undefined, arrayElement:ArrayElement = null, stride:uint = 1 )
-		{
-			this.arrayElement	= arrayElement;
-			this.id				= id;
-			this.stride			= stride;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		/** @private **/
-		public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			dictionary.setObjectVector( ID_ARRAY_ELEMENT, arrayElement );
-			dictionary.setString( ID_ID, id );
-			dictionary.setUnsignedByte( ID_STRIDE, stride );
-		}
-		
-		public static function getIDString( id:uint ):String
-		{
-			return IDS[ id ];
-		}
-		
-		public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_ARRAY_ELEMENT:
-						arrayElement = entry.getObject() as ArrayElement;
-						break;
-					
-					case ID_ID:
-						id = entry.getString();
-						break;
-					
-					case ID_STRIDE:
-						stride = entry.getUnsignedByte();
-					
-					default:
-						trace( "Unknown entry ID:", entry.id );
-				}
-			}
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class Source implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const IDS:Array                               = [];
+        public static const ID_ID:uint                              = 10;
+        IDS[ ID_ID ]                                                = "ID";
+        public static const ID_STRIDE:uint                          = 20;
+        IDS[ ID_STRIDE ]                                            = "Stride";
+        public static const ID_ARRAY_ELEMENT:uint                   = 30;
+        IDS[ ID_ARRAY_ELEMENT ]                                     = "Array Element";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var arrayElement:ArrayElement;
+        public var id:String;
+        public var stride:uint;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function Source( id:String = undefined, arrayElement:ArrayElement = null, stride:uint = 1 )
+        {
+            this.arrayElement   = arrayElement;
+            this.id             = id;
+            this.stride         = stride;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        /** @private **/
+        public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            dictionary.setObjectVector( ID_ARRAY_ELEMENT, arrayElement );
+            dictionary.setString( ID_ID, id );
+            dictionary.setUnsignedByte( ID_STRIDE, stride );
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            return IDS[ id ];
+        }
+
+        public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_ARRAY_ELEMENT:
+                        arrayElement = entry.getObject() as ArrayElement;
+                        break;
+
+                    case ID_ID:
+                        id = entry.getString();
+                        break;
+
+                    case ID_STRIDE:
+                        stride = entry.getUnsignedByte();
+
+                    default:
+                        trace( "Unknown entry ID:", entry.id );
+                }
+            }
+        }
+    }
 }

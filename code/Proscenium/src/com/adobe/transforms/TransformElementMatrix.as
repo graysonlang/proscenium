@@ -17,148 +17,148 @@
 // ============================================================================
 package com.adobe.transforms
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.wiring.Attribute;
-	import com.adobe.wiring.AttributeMatrix3D;
-	import com.adobe.wiring.IWirable;
-	
-	import flash.geom.Matrix3D;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final public class TransformElementMatrix extends TransformElement implements IWirable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "TransformElementMatrix";
-		
-		public static const ATTRIBUTE_MATRIX:String					= "matrix";
-		
-		protected static const ATTRIBUTES:Vector.<String>			= new <String> [
-			ATTRIBUTE_MATRIX,
-			ATTRIBUTE_TRANSFORM
-		];
-		
-		// --------------------------------------------------
-		
-		protected static const IDS:Array							= [];
-		protected static const ID_MATRIX:uint						= 110;
-		IDS[ ID_MATRIX ]											= "Matrix";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _matrix:AttributeMatrix3D;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
-		override public function get attributes():Vector.<String>	{ return ATTRIBUTES; }
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.wiring.Attribute;
+    import com.adobe.wiring.AttributeMatrix3D;
+    import com.adobe.wiring.IWirable;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function TransformElementMatrix( id:String = undefined, matrix:Matrix3D = null )
-		{
-			super( id );
+    import flash.geom.Matrix3D;
 
-			_matrix = new AttributeMatrix3D( this, matrix );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function clone():TransformElement
-		{
-			var m:Matrix3D = new Matrix3D();
-			m.copyFrom( _matrix.getMatrix3D() );
-			
-			return new TransformElementMatrix( id, m );
-		}
-		
-		override public function evaluate( attribute:Attribute ):void
-		{
-			if ( !_transform.connected )
-				return;
-			
-			switch( attribute )
-			{
-				case _transform:
-					_transform.setMatrix3D( _matrix.getMatrix3D() );
-					break;
-			}
-		}
-		
-		override public function setDirty( attribute:Attribute ):void
-		{
-			switch( attribute )
-			{
-				case _matrix:
-					_transform.dirty = true;
-					break;
-				
-				case _transform:
-					break;
-			}
-		}
-		
-		override public function applyTransform( matrix:Matrix3D ):void
-		{
-			matrix.rawData = _transform.getMatrix3D().rawData;
-		}
-		
-		override public function attribute( name:String ):Attribute
-		{
-			switch( name )
-			{
-				case ATTRIBUTE_MATRIX:		return _matrix;
-				case ATTRIBUTE_TRANSFORM:	return _transform;
-			}
-			return null;
-		}
-		
-		// --------------------------------------------------
-		
-		/** @private **/
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setObject( ID_MATRIX, _matrix );
-		}
-		
-		public static function getIDString( id:uint ):String
-		{
-			var result:String = IDS[ id ];
-			return result ? result : TransformElement.getIDString( id );
-		}
-		
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_MATRIX:		_matrix = entry.getObject() as AttributeMatrix3D;	break;
-	
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final public class TransformElementMatrix extends TransformElement implements IWirable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "TransformElementMatrix";
 
-		// --------------------------------------------------
-		
-		override public function toString():String
-		{
-			return "[object TransformElementMatrix " + id + "]";
-		}
-	}
+        public static const ATTRIBUTE_MATRIX:String                 = "matrix";
+
+        protected static const ATTRIBUTES:Vector.<String>           = new <String> [
+            ATTRIBUTE_MATRIX,
+            ATTRIBUTE_TRANSFORM
+        ];
+
+        // --------------------------------------------------
+
+        protected static const IDS:Array                            = [];
+        protected static const ID_MATRIX:uint                       = 110;
+        IDS[ ID_MATRIX ]                                            = "Matrix";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _matrix:AttributeMatrix3D;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
+        override public function get attributes():Vector.<String>   { return ATTRIBUTES; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function TransformElementMatrix( id:String = undefined, matrix:Matrix3D = null )
+        {
+            super( id );
+
+            _matrix = new AttributeMatrix3D( this, matrix );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function clone():TransformElement
+        {
+            var m:Matrix3D = new Matrix3D();
+            m.copyFrom( _matrix.getMatrix3D() );
+
+            return new TransformElementMatrix( id, m );
+        }
+
+        override public function evaluate( attribute:Attribute ):void
+        {
+            if ( !_transform.connected )
+                return;
+
+            switch( attribute )
+            {
+                case _transform:
+                    _transform.setMatrix3D( _matrix.getMatrix3D() );
+                    break;
+            }
+        }
+
+        override public function setDirty( attribute:Attribute ):void
+        {
+            switch( attribute )
+            {
+                case _matrix:
+                    _transform.dirty = true;
+                    break;
+
+                case _transform:
+                    break;
+            }
+        }
+
+        override public function applyTransform( matrix:Matrix3D ):void
+        {
+            matrix.rawData = _transform.getMatrix3D().rawData;
+        }
+
+        override public function attribute( name:String ):Attribute
+        {
+            switch( name )
+            {
+                case ATTRIBUTE_MATRIX:      return _matrix;
+                case ATTRIBUTE_TRANSFORM:   return _transform;
+            }
+            return null;
+        }
+
+        // --------------------------------------------------
+
+        /** @private **/
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setObject( ID_MATRIX, _matrix );
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            var result:String = IDS[ id ];
+            return result ? result : TransformElement.getIDString( id );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_MATRIX:     _matrix = entry.getObject() as AttributeMatrix3D;   break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+
+        // --------------------------------------------------
+
+        override public function toString():String
+        {
+            return "[object TransformElementMatrix " + id + "]";
+        }
+    }
 }

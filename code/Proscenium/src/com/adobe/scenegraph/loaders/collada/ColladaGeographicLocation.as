@@ -17,72 +17,72 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaGeographicLocation
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "geographic_location";
-		public static const ALTITUDE_MODE_ABSOLUTE:String			= "absolute";
-		public static const ALTITUDE_MODE_RELATIVE:String			= "relativeToGround";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaGeographicLocation
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "geographic_location";
+        public static const ALTITUDE_MODE_ABSOLUTE:String           = "absolute";
+        public static const ALTITUDE_MODE_RELATIVE:String           = "relativeToGround";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var longitude:Number;								// <longitude>			1
-		public var latitude:Number;									// <latitude> 			1
-		public var altitude:Number;									// <altitude>			1
-		public var altitudeMode:String;								// <altitude mode="">
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var longitude:Number;                                // <longitude>          1
+        public var latitude:Number;                                 // <latitude>           1
+        public var altitude:Number;                                 // <altitude>           1
+        public var altitudeMode:String;                             // <altitude mode="">
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaGeographicLocation( geographicLocation:XML )
-		{
-			altitude		= geographicLocation.altitude.text();
-			altitudeMode	= parseAltitudeMode( geographicLocation.altitude );
-			latitude		= parseLatitude( geographicLocation.latitude );
-			longitude		= parseLongitude( geographicLocation.longitude );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		protected function parseAltitudeMode( xml:XMLList ):String
-		{
-			var mode:String = xml.@mode;
-			switch( mode )
-			{
-				case ALTITUDE_MODE_ABSOLUTE:	return mode;
-				default:						return ALTITUDE_MODE_RELATIVE;
-			}
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaGeographicLocation( geographicLocation:XML )
+        {
+            altitude        = geographicLocation.altitude.text();
+            altitudeMode    = parseAltitudeMode( geographicLocation.altitude );
+            latitude        = parseLatitude( geographicLocation.latitude );
+            longitude       = parseLongitude( geographicLocation.longitude );
+        }
 
-		protected function parseLatitude( latitude:XMLList ):Number
-		{
-			var result:Number = latitude.text();
-			return ( result < -90 ) ? -90 : ( result > 90 ) ? 90 : result;
-		}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        protected function parseAltitudeMode( xml:XMLList ):String
+        {
+            var mode:String = xml.@mode;
+            switch( mode )
+            {
+                case ALTITUDE_MODE_ABSOLUTE:    return mode;
+                default:                        return ALTITUDE_MODE_RELATIVE;
+            }
+        }
 
-		protected function parseLongitude( longitude:XMLList ):Number
-		{
-			var result:Number = longitude.text();
-			return ( result < -180 ) ? -180 : ( result > 180 ) ? 180 : result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        protected function parseLatitude( latitude:XMLList ):Number
+        {
+            var result:Number = latitude.text();
+            return ( result < -90 ) ? -90 : ( result > 90 ) ? 90 : result;
+        }
 
-			result.longitude		= longitude;
-			result.latitude			= latitude;
-			result.altitude			= altitude;
-			result.altitude.@mode	= altitudeMode;
-			
-			return result;
-		}
-	}
+        protected function parseLongitude( longitude:XMLList ):Number
+        {
+            var result:Number = longitude.text();
+            return ( result < -180 ) ? -180 : ( result > 180 ) ? 180 : result;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.longitude        = longitude;
+            result.latitude         = latitude;
+            result.altitude         = altitude;
+            result.altitude.@mode   = altitudeMode;
+
+            return result;
+        }
+    }
 }

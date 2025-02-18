@@ -17,66 +17,66 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
-	import com.adobe.scenegraph.loaders.collada.ColladaParameter;
-	import com.adobe.scenegraph.loaders.collada.ColladaTypes;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
+    import com.adobe.scenegraph.loaders.collada.ColladaParameter;
+    import com.adobe.scenegraph.loaders.collada.ColladaTypes;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileCommonNewparam extends ColladaNewparam
-	{
-		// <float>, <float2>, <float3>, <float4>, <sampler2D>, or <surface>(1.4.x)
-		;																// parameter_type		1
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileCommonNewparam extends ColladaNewparam
+    {
+        // <float>, <float2>, <float3>, <float4>, <sampler2D>, or <surface>(1.4.x)
+        ;                                                               // parameter_type       1
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileCommonNewparam( element:XML = null )
-		{
-			super( element );
-			
-			parameter = parseParameter( element.children()[0] );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseNewparams( newparams:XMLList ):Vector.<ColladaNewparam>
-		{
-			var length:uint = newparams.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaNewparam> = new Vector.<ColladaNewparam>();
-			for each ( var newparam:XML in newparams ) {
-				result.push( new ColladaProfileCommonNewparam( newparam ) );
-			}
-			
-			return result;
-		}
-		
-		public static function parseParameter( parameter:XML ):ColladaParameter
-		{
-			var type:String = parameter.localName();
-			switch( type )
-			{
-				case ColladaTypes.TYPE_FLOAT:
-				case ColladaTypes.TYPE_FLOAT2:
-				case ColladaTypes.TYPE_FLOAT3:
-				case ColladaTypes.TYPE_FLOAT4:
-					return new ColladaParameter( parameter );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileCommonNewparam( element:XML = null )
+        {
+            super( element );
 
-				case ColladaSampler2D.TAG:
-					return new ColladaSampler2D( parameter );
+            parameter = parseParameter( element.children()[0] );
+        }
 
-				case ColladaSurface.TAG:
-					return new ColladaSurface( parameter );
-			}
-			return null;
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseNewparams( newparams:XMLList ):Vector.<ColladaNewparam>
+        {
+            var length:uint = newparams.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaNewparam> = new Vector.<ColladaNewparam>();
+            for each ( var newparam:XML in newparams ) {
+                result.push( new ColladaProfileCommonNewparam( newparam ) );
+            }
+
+            return result;
+        }
+
+        public static function parseParameter( parameter:XML ):ColladaParameter
+        {
+            var type:String = parameter.localName();
+            switch( type )
+            {
+                case ColladaTypes.TYPE_FLOAT:
+                case ColladaTypes.TYPE_FLOAT2:
+                case ColladaTypes.TYPE_FLOAT3:
+                case ColladaTypes.TYPE_FLOAT4:
+                    return new ColladaParameter( parameter );
+
+                case ColladaSampler2D.TAG:
+                    return new ColladaSampler2D( parameter );
+
+                case ColladaSurface.TAG:
+                    return new ColladaSurface( parameter );
+            }
+            return null;
+        }
+    }
 }

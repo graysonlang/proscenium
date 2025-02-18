@@ -17,98 +17,98 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final public class SamplerNumber extends Sampler implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "SamplerNumber";
-		internal static const FUNCTOID:Functoid						= new FunctoidNumber();
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
 
-		// --------------------------------------------------
-		
-		protected static const IDS:Array							= [];
-		protected static const ID_VALUES:uint						= 100;
-		IDS[ ID_VALUES ]											= "Values";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _values:Vector.<Number>;
-		protected var _output:AttributeNumber;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
-		override internal function get functoid():Functoid			{ return FUNCTOID; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function SamplerNumber( times:Vector.<Number> = null, values:Vector.<Number> = null )
-		{
-			super( times );
-			
-			_values = values;
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final public class SamplerNumber extends Sampler implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "SamplerNumber";
+        internal static const FUNCTOID:Functoid                     = new FunctoidNumber();
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function createOutputAttribute( owner:IWirable ):Attribute
-		{
-			return new AttributeNumber( owner, Number.NaN, ATTRIBUTE_OUTPUT );
-		}
-		
-		override public function sampleNumber( time:Number ):Number
-		{
-			interpolate( time );
-			
-			if ( _amount_ == 0 )
-				return _values[ _index0_ ];
-		
-			return _values[ _index0_ ] * ( 1 - _amount_ ) +  _values[ _index1_ ] * _amount_;
-		}
-		
-		// --------------------------------------------------
-		//	Binary Serialization
-		// --------------------------------------------------
-		public static function getIDString( id:uint ):String
-		{
-			var result:String = IDS[ id ];
-			return result ? result : Sampler.getIDString( id );
-		}
-		
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setFloatVector(		ID_VALUES,			_values );
-		}
-		
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_VALUES:			_values = entry.getFloatVector();					break;
-					
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
-	}
+        // --------------------------------------------------
+
+        protected static const IDS:Array                            = [];
+        protected static const ID_VALUES:uint                       = 100;
+        IDS[ ID_VALUES ]                                            = "Values";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _values:Vector.<Number>;
+        protected var _output:AttributeNumber;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
+        override internal function get functoid():Functoid          { return FUNCTOID; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function SamplerNumber( times:Vector.<Number> = null, values:Vector.<Number> = null )
+        {
+            super( times );
+
+            _values = values;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function createOutputAttribute( owner:IWirable ):Attribute
+        {
+            return new AttributeNumber( owner, Number.NaN, ATTRIBUTE_OUTPUT );
+        }
+
+        override public function sampleNumber( time:Number ):Number
+        {
+            interpolate( time );
+
+            if ( _amount_ == 0 )
+                return _values[ _index0_ ];
+
+            return _values[ _index0_ ] * ( 1 - _amount_ ) +  _values[ _index1_ ] * _amount_;
+        }
+
+        // --------------------------------------------------
+        //  Binary Serialization
+        // --------------------------------------------------
+        public static function getIDString( id:uint ):String
+        {
+            var result:String = IDS[ id ];
+            return result ? result : Sampler.getIDString( id );
+        }
+
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setFloatVector(      ID_VALUES,          _values );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_VALUES:         _values = entry.getFloatVector();                   break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+    }
 }

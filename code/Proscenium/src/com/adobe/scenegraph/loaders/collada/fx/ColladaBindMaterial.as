@@ -17,64 +17,64 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
-	import com.adobe.scenegraph.loaders.collada.ColladaParam;
-	import com.adobe.scenegraph.loaders.collada.ColladaTechnique;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
+    import com.adobe.scenegraph.loaders.collada.ColladaParam;
+    import com.adobe.scenegraph.loaders.collada.ColladaTechnique;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaBindMaterial extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "bind_material";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaBindMaterial extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "bind_material";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var params:Vector.<ColladaParam>;					// <param>				0 or more
-		public var techniqueCommon:ColladaMaterialTechnique;		// <technique_common>	1
-		public var techniques:Vector.<ColladaTechnique>;			// <technique>			0 or more
-		;															// <extra>				0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaBindMaterial( collada:Collada, element:XML )
-		{
-			super( element );
-			if ( !element )
-				return;
-			
-			params			= ColladaParam.parseParams( element.param );
-			techniqueCommon	= new ColladaMaterialTechnique( collada, element.technique_common[0] );
-			techniques		= ColladaTechnique.parseTechniques( element.technique );
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var params:Vector.<ColladaParam>;                    // <param>              0 or more
+        public var techniqueCommon:ColladaMaterialTechnique;        // <technique_common>   1
+        public var techniques:Vector.<ColladaTechnique>;            // <technique>          0 or more
+        ;                                                           // <extra>              0 or more
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaBindMaterial( collada:Collada, element:XML )
+        {
+            super( element );
+            if ( !element )
+                return;
 
-			for each ( var param:ColladaParam in params ) {
-				result.appendChild( param.toXML() );
-			}
+            params          = ColladaParam.parseParams( element.param );
+            techniqueCommon = new ColladaMaterialTechnique( collada, element.technique_common[0] );
+            techniques      = ColladaTechnique.parseTechniques( element.technique );
+        }
 
-			result.appendChild( techniqueCommon.toXML() );
-			
-			for each ( var technique:ColladaTechnique in techniques ) 
-				result.appendChild( technique.toXML() );
-			
-			fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            for each ( var param:ColladaParam in params ) {
+                result.appendChild( param.toXML() );
+            }
+
+            result.appendChild( techniqueCommon.toXML() );
+
+            for each ( var technique:ColladaTechnique in techniques )
+                result.appendChild( technique.toXML() );
+
+            fillXML( result );
+            return result;
+        }
+    }
 }

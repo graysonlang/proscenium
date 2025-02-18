@@ -17,111 +17,111 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	public class ColladaParam
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "param";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    public class ColladaParam
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "param";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var name:String;										// @name		xs:token
-		public var sid:String;										// @sid			sid_type
-		public var type:String;										// @type		xs:NMTOKEN	Required
-		public var semantic:String;									// @semantic	xs:NMTOKEN
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaParam( param:XML )
-		{
-//			var param:XML = paramList[0];
-//			if ( !param )
-//				return;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var name:String;                                     // @name        xs:token
+        public var sid:String;                                      // @sid         sid_type
+        public var type:String;                                     // @type        xs:NMTOKEN  Required
+        public var semantic:String;                                 // @semantic    xs:NMTOKEN
 
-			if ( param.@name )
-				name = param.@name;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaParam( param:XML )
+        {
+//          var param:XML = paramList[0];
+//          if ( !param )
+//              return;
 
-			if ( param.@sid )
-				sid = param.@sid;
+            if ( param.@name )
+                name = param.@name;
 
-			type = parseType( param.@type );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-	
-			if ( name )
-				result.@name		= name;
-				
-			if ( sid )
-				result.@sid			= sid;
-			
-			if ( type )
-				result.@type		= type;
+            if ( param.@sid )
+                sid = param.@sid;
 
-			if ( semantic )
-				result.@semantic	= semantic;
-			
-//			super.fillXML( result );
-			return result;
-		}
-		
-		protected function parseType( type:String ):String
-		{
-			var result:String = type.toLowerCase();
-			
-			switch( result )
-			{
-				case ColladaTypes.TYPE_BOOL:
-				case ColladaTypes.TYPE_FLOAT:
-				case ColladaTypes.TYPE_IDREF:
-				case ColladaTypes.TYPE_INT:
-				case ColladaTypes.TYPE_UINT:
-				case ColladaTypes.TYPE_SIDREF:
-					return result;
+            type = parseType( param.@type );
+        }
 
-				case ColladaTypes.TYPE_idref:
-					return ColladaTypes.TYPE_IDREF;
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
 
-				case ColladaTypes.TYPE_name:
-					return ColladaTypes.TYPE_NAME;
+            if ( name )
+                result.@name        = name;
 
-				case ColladaTypes.TYPE_sidref:
-					return ColladaTypes.TYPE_SIDREF;
-					
-				// ------------------------------
-				//	Unofficially supported types:
-				// ------------------------------
-				case ColladaTypes.TYPE_FLOAT4X4:
-					return result;
-					
-				default:
-					throw( "Bad <param> type:", type );
-					return undefined;
-			}
-		}
-		
-		public static function parseParams( params:XMLList ):Vector.<ColladaParam>
-		{
-			if ( params.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaParam> = new Vector.<ColladaParam>();
-			for each ( var param:XML in params ) {
-				result.push( new ColladaParam( param ) );
-			}
-			
-			return result;
-		}
-	}
+            if ( sid )
+                result.@sid         = sid;
+
+            if ( type )
+                result.@type        = type;
+
+            if ( semantic )
+                result.@semantic    = semantic;
+
+//          super.fillXML( result );
+            return result;
+        }
+
+        protected function parseType( type:String ):String
+        {
+            var result:String = type.toLowerCase();
+
+            switch( result )
+            {
+                case ColladaTypes.TYPE_BOOL:
+                case ColladaTypes.TYPE_FLOAT:
+                case ColladaTypes.TYPE_IDREF:
+                case ColladaTypes.TYPE_INT:
+                case ColladaTypes.TYPE_UINT:
+                case ColladaTypes.TYPE_SIDREF:
+                    return result;
+
+                case ColladaTypes.TYPE_idref:
+                    return ColladaTypes.TYPE_IDREF;
+
+                case ColladaTypes.TYPE_name:
+                    return ColladaTypes.TYPE_NAME;
+
+                case ColladaTypes.TYPE_sidref:
+                    return ColladaTypes.TYPE_SIDREF;
+
+                // ------------------------------
+                //  Unofficially supported types:
+                // ------------------------------
+                case ColladaTypes.TYPE_FLOAT4X4:
+                    return result;
+
+                default:
+                    throw( "Bad <param> type:", type );
+                    return undefined;
+            }
+        }
+
+        public static function parseParams( params:XMLList ):Vector.<ColladaParam>
+        {
+            if ( params.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaParam> = new Vector.<ColladaParam>();
+            for each ( var param:XML in params ) {
+                result.push( new ColladaParam( param ) );
+            }
+
+            return result;
+        }
+    }
 }

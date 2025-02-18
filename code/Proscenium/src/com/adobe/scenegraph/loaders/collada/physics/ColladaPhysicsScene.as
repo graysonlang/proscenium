@@ -17,55 +17,55 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.physics
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaPhysicsScene extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "physics_scene";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaPhysicsScene extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "physics_scene";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;													// <asset>			0 or 1
-		// TODO
-		;													// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaPhysicsScene( collada:Collada, physicsSceneList:XML )
-		{
-			var physicsScene:XML = physicsSceneList[0];
-			super( physicsScene );
-			if ( !physicsScene )
-				return;
-			
-			// TODO
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                   // <asset>          0 or 1
+        // TODO
+        ;                                                   // <extra>          0 or more
 
-			// TODO
-			result.setChildren( Collada.COMMENT_UNIMPLEMENTED );
-			trace( Collada.COMMENT_UNIMPLEMENTED, TAG );
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaPhysicsScene( collada:Collada, physicsSceneList:XML )
+        {
+            var physicsScene:XML = physicsSceneList[0];
+            super( physicsScene );
+            if ( !physicsScene )
+                return;
+
+            // TODO
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            // TODO
+            result.setChildren( Collada.COMMENT_UNIMPLEMENTED );
+            trace( Collada.COMMENT_UNIMPLEMENTED, TAG );
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

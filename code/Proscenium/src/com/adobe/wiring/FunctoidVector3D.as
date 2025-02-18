@@ -17,21 +17,21 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * @private
-	 * Utility class to assist in fast dual dispatch of Sampler to update a wired Attribute.
-	 */
-	final internal class FunctoidVector3D extends Functoid
-	{
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function apply( sampler:Sampler, time:Number, output:Attribute ):void
-		{
-			output.setVector3D( sampler.sampleVector3D( time ) );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * @private
+     * Utility class to assist in fast dual dispatch of Sampler to update a wired Attribute.
+     */
+    final internal class FunctoidVector3D extends Functoid
+    {
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function apply( sampler:Sampler, time:Number, output:Attribute ):void
+        {
+            output.setVector3D( sampler.sampleVector3D( time ) );
+        }
+    }
 }

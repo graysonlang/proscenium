@@ -17,48 +17,48 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileGLSLNewparam extends ColladaNewparam
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		
-		//		<fx_newparam_group>
-//		bool, bool2, bool3, bool4, int, int2, int3, int4, float, float2, float3, float4, float2x2,
-//		float3x3, float4x4, sampler1D*, sampler2D*, sampler3D*, samplerCUBE*, samplerRECT*,
-//		samplerDEPTH*, enum, array*
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileGLSLNewparam( element:XML = null )
-		{
-			super( element );
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileGLSLNewparam extends ColladaNewparam
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseNewparams( newparams:XMLList ):Vector.<ColladaProfileGLSLNewparam>
-		{
-			var length:uint = newparams.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaProfileGLSLNewparam> = new Vector.<ColladaProfileGLSLNewparam>();
-			for each ( var newparam:XML in newparams ) {
-				result.push( new ColladaProfileGLSLNewparam( newparam ) );
-			}
-			
-			return result;
-		}
-	}
+        //      <fx_newparam_group>
+//      bool, bool2, bool3, bool4, int, int2, int3, int4, float, float2, float3, float4, float2x2,
+//      float3x3, float4x4, sampler1D*, sampler2D*, sampler3D*, samplerCUBE*, samplerRECT*,
+//      samplerDEPTH*, enum, array*
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileGLSLNewparam( element:XML = null )
+        {
+            super( element );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseNewparams( newparams:XMLList ):Vector.<ColladaProfileGLSLNewparam>
+        {
+            var length:uint = newparams.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaProfileGLSLNewparam> = new Vector.<ColladaProfileGLSLNewparam>();
+            for each ( var newparam:XML in newparams ) {
+                result.push( new ColladaProfileGLSLNewparam( newparam ) );
+            }
+
+            return result;
+        }
+    }
 }

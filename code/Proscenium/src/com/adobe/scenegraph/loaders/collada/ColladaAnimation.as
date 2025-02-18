@@ -17,76 +17,76 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaAnimation extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "animation";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaAnimation extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "animation";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var animations:Vector.<ColladaAnimation>;			// <animation>		0 or more
-		public var sources:Vector.<ColladaSource>;					// <source>			0 or more
-		public var samplers:Vector.<ColladaSampler>;				// <sampler>		0 or more
-		public var channels:Vector.<ColladaChannel>;				// <channel>		0 or more
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var animations:Vector.<ColladaAnimation>;            // <animation>      0 or more
+        public var sources:Vector.<ColladaSource>;                  // <source>         0 or more
+        public var samplers:Vector.<ColladaSampler>;                // <sampler>        0 or more
+        public var channels:Vector.<ColladaChannel>;                // <channel>        0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaAnimation( collada:Collada, animation:XML )
-		{
-			super( animation );
-			if ( !animation )
-				return;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaAnimation( collada:Collada, animation:XML )
+        {
+            super( animation );
+            if ( !animation )
+                return;
 
-			animations	= parseAnimations( collada, animation.animation );
-			sources		= ColladaSource.parseSources( animation.source );
-			samplers	= ColladaSampler.parseSamplers( animation.sampler );
-			channels	= ColladaChannel.parseChannels( animation.channel );
-		}
+            animations  = parseAnimations( collada, animation.animation );
+            sources     = ColladaSource.parseSources( animation.source );
+            samplers    = ColladaSampler.parseSamplers( animation.sampler );
+            channels    = ColladaChannel.parseChannels( animation.channel );
+        }
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function parseAnimations( collada:Collada, animations:XMLList ):Vector.<ColladaAnimation>
-		{
-			var length:uint = animations.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaAnimation> = new Vector.<ColladaAnimation>();
-			for each ( var animation:XML in animations ) {
-				result.push( new ColladaAnimation( collada, animation ) );
-			}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function parseAnimations( collada:Collada, animations:XMLList ):Vector.<ColladaAnimation>
+        {
+            var length:uint = animations.length();
+            if ( length == 0 )
+                return null;
 
-			return result;
-		}
+            var result:Vector.<ColladaAnimation> = new Vector.<ColladaAnimation>();
+            for each ( var animation:XML in animations ) {
+                result.push( new ColladaAnimation( collada, animation ) );
+            }
 
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-				
-			super.fillXML( result );
-			
-			for each ( var childAnimation:ColladaAnimation in animations ) {
-				result.appendChild( childAnimation.toXML() );
-			}
-			for each ( var source:ColladaSource in sources ) {
-				result.appendChild( source.toXML() );
-			}
-			for each ( var sampler:ColladaSampler in samplers ) {
-				result.appendChild( sampler.toXML() );
-			}
-			for each ( var channel:ColladaChannel in channels ) {
-				result.appendChild( channel.toXML() );
-			}
+            return result;
+        }
 
-			return result;
-		}
-	}
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            super.fillXML( result );
+
+            for each ( var childAnimation:ColladaAnimation in animations ) {
+                result.appendChild( childAnimation.toXML() );
+            }
+            for each ( var source:ColladaSource in sources ) {
+                result.appendChild( source.toXML() );
+            }
+            for each ( var sampler:ColladaSampler in samplers ) {
+                result.appendChild( sampler.toXML() );
+            }
+            for each ( var channel:ColladaChannel in channels ) {
+                result.appendChild( channel.toXML() );
+            }
+
+            return result;
+        }
+    }
 }

@@ -17,53 +17,53 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTexture extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "texture";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var texture:String;									// <texture texture="..."/>
-		public var texcoord:String;									// <texture texcoord="..."/>
-		;															// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTexture( element:XML )
-		{
-			super( element );
-			if ( !element )
-				return;
-			
-			texture = element.@texture;
-			texcoord = element.@texcoord;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" ); 
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
 
-			result.@texture = texture;
-			result.@texcoord = texcoord;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTexture extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "texture";
 
-			super.fillXML( result );
-			return result;
-		} 
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var texture:String;                                  // <texture texture="..."/>
+        public var texcoord:String;                                 // <texture texcoord="..."/>
+        ;                                                           // <extra>          0 or more
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTexture( element:XML )
+        {
+            super( element );
+            if ( !element )
+                return;
+
+            texture = element.@texture;
+            texcoord = element.@texcoord;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.@texture = texture;
+            result.@texcoord = texcoord;
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

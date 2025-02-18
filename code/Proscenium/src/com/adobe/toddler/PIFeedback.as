@@ -17,65 +17,65 @@
 // ============================================================================
 package com.adobe.toddler
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class PIFeedback 
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var mKp:Number;
-		protected var mKi:Number;
-		protected var mSetpoint:Number;
-		protected var mIntegral:Number;		
-		protected var mOutput:Number;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		/** @private **/
-		public function set setpoint( v:Number ):void
-		{
-			mSetpoint = v;
-			reset();
-		}
-		public function get setpoint():Number						{ return mSetpoint; }
-		
-		public function get output():Number							{ return mOutput; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function PIFeedback()
-		{
-			mKp = mKi = mSetpoint = 0.;
-			reset();
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function reset():void
-		{
-			mIntegral = 0.;
-			mOutput = 0.;		
-		}
-		
-		public function setGains(Kp:Number, Ki:Number):void
-		{
-			mKp = Kp;
-			mKi = Ki;
-			reset();
-		}
-		
-		public function update(actual:Number, dt:Number):Number
-		{
-			var error:Number = mSetpoint - actual;
-			mIntegral += error*dt;
-			
-			mOutput = mKp*error + mKi*mIntegral;
-			return mOutput;
-		}
-	}	
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class PIFeedback
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var mKp:Number;
+        protected var mKi:Number;
+        protected var mSetpoint:Number;
+        protected var mIntegral:Number;
+        protected var mOutput:Number;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        /** @private **/
+        public function set setpoint( v:Number ):void
+        {
+            mSetpoint = v;
+            reset();
+        }
+        public function get setpoint():Number                       { return mSetpoint; }
+
+        public function get output():Number                         { return mOutput; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function PIFeedback()
+        {
+            mKp = mKi = mSetpoint = 0.;
+            reset();
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function reset():void
+        {
+            mIntegral = 0.;
+            mOutput = 0.;
+        }
+
+        public function setGains(Kp:Number, Ki:Number):void
+        {
+            mKp = Kp;
+            mKi = Ki;
+            reset();
+        }
+
+        public function update(actual:Number, dt:Number):Number
+        {
+            var error:Number = mSetpoint - actual;
+            mIntegral += error*dt;
+
+            mOutput = mKp*error + mKi*mIntegral;
+            return mOutput;
+        }
+    }
 }

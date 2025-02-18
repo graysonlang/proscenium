@@ -17,74 +17,74 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class Program3DHandle extends ResourceHandle
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		private var _vertexProgram:ByteArray;
-		private var _fragmentProgram:ByteArray;
-		
-		// ----------------------------------------------------------------------
-		
-		protected static var _uid:uint								= 0;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override protected function get uid():uint					{ return _uid++; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function Program3DHandle( instance:Instance3D )
-		{
-			super( instance );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function upload( vertexProgram:ByteArray, fragmentProgram:ByteArray ):void
-		{
-			//_vertexProgram = new ByteArray();
-			//_vertexProgram.endian = Endian.LITTLE_ENDIAN;
-			//vertexProgram.position = 0;
-			//vertexProgram.readBytes( _vertexProgram, 0, vertexProgram.length );
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
 
-			//_fragmentProgram = new ByteArray();
-			//_fragmentProgram.endian = Endian.LITTLE_ENDIAN;
-			//fragmentProgram.position = 0;
-			//fragmentProgram.readBytes( _fragmentProgram, 0, fragmentProgram.length );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class Program3DHandle extends ResourceHandle
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        private var _vertexProgram:ByteArray;
+        private var _fragmentProgram:ByteArray;
 
-			_vertexProgram = vertexProgram;
-			_fragmentProgram = fragmentProgram;
-			
-			_instance.uploadProgram3D( this, vertexProgram, fragmentProgram );
-		}
-		
-		public function dispose():void
-		{
-			//if ( _vertexProgram )
-			//	_vertexProgram.clear();
-			_vertexProgram = null;
-			//if ( _fragmentProgram )
-			//	_fragmentProgram.clear();
-			_fragmentProgram = null;
-			_instance.disposeProgram3D( this );
-		}
-		
-		override internal function refresh():void
-		{
-			_instance.uploadProgram3D( this, _vertexProgram, _fragmentProgram );
-		}
-	}
+        // ----------------------------------------------------------------------
+
+        protected static var _uid:uint                              = 0;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override protected function get uid():uint                  { return _uid++; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function Program3DHandle( instance:Instance3D )
+        {
+            super( instance );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function upload( vertexProgram:ByteArray, fragmentProgram:ByteArray ):void
+        {
+            //_vertexProgram = new ByteArray();
+            //_vertexProgram.endian = Endian.LITTLE_ENDIAN;
+            //vertexProgram.position = 0;
+            //vertexProgram.readBytes( _vertexProgram, 0, vertexProgram.length );
+
+            //_fragmentProgram = new ByteArray();
+            //_fragmentProgram.endian = Endian.LITTLE_ENDIAN;
+            //fragmentProgram.position = 0;
+            //fragmentProgram.readBytes( _fragmentProgram, 0, fragmentProgram.length );
+
+            _vertexProgram = vertexProgram;
+            _fragmentProgram = fragmentProgram;
+
+            _instance.uploadProgram3D( this, vertexProgram, fragmentProgram );
+        }
+
+        public function dispose():void
+        {
+            //if ( _vertexProgram )
+            //  _vertexProgram.clear();
+            _vertexProgram = null;
+            //if ( _fragmentProgram )
+            //  _fragmentProgram.clear();
+            _fragmentProgram = null;
+            _instance.disposeProgram3D( this );
+        }
+
+        override internal function refresh():void
+        {
+            _instance.uploadProgram3D( this, _vertexProgram, _fragmentProgram );
+        }
+    }
 }

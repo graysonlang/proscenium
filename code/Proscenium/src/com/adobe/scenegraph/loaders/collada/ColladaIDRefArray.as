@@ -17,55 +17,55 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaIDRefArray extends ColladaArrayElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "IDREF_array";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var values:Vector.<String>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaIDRefArray( arrayList:XMLList )
-		{
-			var array:XML = arrayList[0];
-			super( array );
-			if ( !array )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( array:XML ):void
-		{
-			array.setChildren( values.join( " " ) );
-			
-			super.fillXML( array );
-		}
-		
-		override protected function parseValues( intArray:XML ):void
-		{
-			if ( intArray.hasComplexContent() )
-				throw( ColladaArrayElement.ERROR_BAD_FORMAT );
-			
-			var string:String = intArray.text().toString();
-			string = string.replace( /\s+/g, " " );
-			values = Vector.<String>( string.split( " " ) );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaIDRefArray extends ColladaArrayElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "IDREF_array";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var values:Vector.<String>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaIDRefArray( arrayList:XMLList )
+        {
+            var array:XML = arrayList[0];
+            super( array );
+            if ( !array )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( array:XML ):void
+        {
+            array.setChildren( values.join( " " ) );
+
+            super.fillXML( array );
+        }
+
+        override protected function parseValues( intArray:XML ):void
+        {
+            if ( intArray.hasComplexContent() )
+                throw( ColladaArrayElement.ERROR_BAD_FORMAT );
+
+            var string:String = intArray.text().toString();
+            string = string.replace( /\s+/g, " " );
+            values = Vector.<String>( string.split( " " ) );
+        }
+    }
 }

@@ -17,68 +17,68 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.display.Color;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.display.Color;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * backgroundColor, fog, tonemap, HDR parameters are defined on each render target.
-	 * For primary, use instance.primarySettings.
-	 * For RenderTexture, use RenderTextureBase.targetSettings.
-	 */
-	public class RenderTargetSettings
-	{
-		// ======================================================================
-		//	This class is used to store render target settings such as:
-		//		backgroundColor, fog, tonemap,
-		//		HDR scaling,
-		//		clear tracking
-		//
-		//  There are two render target types: 1. Primary and 2. RenderTextureX
-		//  So, we have RenderTargetProperties for 
-		//     1. Primary in Instance3D.primarySettings 
-		//     2. RenderTextureXXX in RenderTextureBase.targetSettings.
-		// ----------------------------------------------------------------------
-		public var  backgroundColor:Color;	// bk color == fog color
-		public var  fogMode:uint		= RenderSettings.FOG_DISABLED;
-		public var  fogStart:Number		= 0;	// GL_FOG_START   = 0 (default)
-		public var  fogEnd:Number		= 1;	// GL_FOG_END     = 1 (default)
-		public var  fogDensity:Number	= 1;	// GL_FOG_DENSITY = 1 (default)
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * backgroundColor, fog, tonemap, HDR parameters are defined on each render target.
+     * For primary, use instance.primarySettings.
+     * For RenderTexture, use RenderTextureBase.targetSettings.
+     */
+    public class RenderTargetSettings
+    {
+        // ======================================================================
+        //  This class is used to store render target settings such as:
+        //      backgroundColor, fog, tonemap,
+        //      HDR scaling,
+        //      clear tracking
+        //
+        //  There are two render target types: 1. Primary and 2. RenderTextureX
+        //  So, we have RenderTargetProperties for
+        //     1. Primary in Instance3D.primarySettings
+        //     2. RenderTextureXXX in RenderTextureBase.targetSettings.
+        // ----------------------------------------------------------------------
+        public var  backgroundColor:Color;  // bk color == fog color
+        public var  fogMode:uint        = RenderSettings.FOG_DISABLED;
+        public var  fogStart:Number     = 0;    // GL_FOG_START   = 0 (default)
+        public var  fogEnd:Number       = 1;    // GL_FOG_END     = 1 (default)
+        public var  fogDensity:Number   = 1;    // GL_FOG_DENSITY = 1 (default)
 
-		public var  useHDRMapping:Boolean = false;
-		public var  kHDRMapping:Number    = 1.;
+        public var  useHDRMapping:Boolean = false;
+        public var  kHDRMapping:Number    = 1.;
 
-		/** @private */
-		internal var  clearOncePerFrame:Boolean = false;
-		/** @private */
-		internal var  lastClearFrameID:int  = -1;	// to avoid clearing more often than necessary
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function RenderTargetSettings()
-		{
-			backgroundColor = new Color( 0, 0, 0, 0 );
-		}
+        /** @private */
+        internal var  clearOncePerFrame:Boolean = false;
+        /** @private */
+        internal var  lastClearFrameID:int  = -1;   // to avoid clearing more often than necessary
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		/** @private */
-		internal function copyRenderSettingsTo( settings:RenderSettings ):void
-		{
-			settings.fogColor			= backgroundColor;
-			settings.fogMode			= fogMode;
-			settings.fogStart			= fogStart;
-			settings.fogEnd				= fogEnd;
-			settings.fogDensity			= fogDensity;
-			
-			settings.enableHDRMapping	= useHDRMapping;
-			settings.hdrMappingK		= kHDRMapping;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function RenderTargetSettings()
+        {
+            backgroundColor = new Color( 0, 0, 0, 0 );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        /** @private */
+        internal function copyRenderSettingsTo( settings:RenderSettings ):void
+        {
+            settings.fogColor           = backgroundColor;
+            settings.fogMode            = fogMode;
+            settings.fogStart           = fogStart;
+            settings.fogEnd             = fogEnd;
+            settings.fogDensity         = fogDensity;
+
+            settings.enableHDRMapping   = useHDRMapping;
+            settings.hdrMappingK        = kHDRMapping;
+        }
+    }
 }

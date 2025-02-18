@@ -17,58 +17,58 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaSkin extends ColladaControlElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "skin";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var bindShapeMatrix:Vector.<Number>;					// <bind_shape_matrix>	0 or 1
-		;															// <source>				3 or more
-		public var joints:ColladaJoints								// <joints>				1
-		public var vertexWeights:ColladaVertexWeights;				// <vertex_weights>		1
-		;															// <extra>				0 or more
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaSkin( element:XML )
-		{ 
-			super( element );
-			
-			bindShapeMatrix	= parseNumbers( element.bind_shape_matrix[0] );
-			joints			= new ColladaJoints( element.joints[0] );
-			vertexWeights	= new ColladaVertexWeights( element.vertex_weights[0] );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			if ( bindShapeMatrix )
-			{
-				var xml:XML = <bind_shape_matrix/>;
-				xml.setChildren( bindShapeMatrix.join( " " ) );
-				element.prependChild( xml );
-			}
-			
-			element.joints			= joints.toXML();
-			element.vertex_weights	= vertexWeights.toXML();
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaSkin extends ColladaControlElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "skin";
 
-			super.fillXML( element );
-		}
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var bindShapeMatrix:Vector.<Number>;                 // <bind_shape_matrix>  0 or 1
+        ;                                                           // <source>             3 or more
+        public var joints:ColladaJoints                             // <joints>             1
+        public var vertexWeights:ColladaVertexWeights;              // <vertex_weights>     1
+        ;                                                           // <extra>              0 or more
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaSkin( element:XML )
+        {
+            super( element );
+
+            bindShapeMatrix = parseNumbers( element.bind_shape_matrix[0] );
+            joints          = new ColladaJoints( element.joints[0] );
+            vertexWeights   = new ColladaVertexWeights( element.vertex_weights[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            if ( bindShapeMatrix )
+            {
+                var xml:XML = <bind_shape_matrix/>;
+                xml.setChildren( bindShapeMatrix.join( " " ) );
+                element.prependChild( xml );
+            }
+
+            element.joints          = joints.toXML();
+            element.vertex_weights  = vertexWeights.toXML();
+
+            super.fillXML( element );
+        }
+    }
 }

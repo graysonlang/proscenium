@@ -17,47 +17,47 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaAnimationClip extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "animation_clip";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var start:Number;
-		public var end:Number;
-		
-		public var instanceAnimations:Vector.<ColladaInstanceAnimation>;
-		public var instanceFormulas:Vector.<ColladaInstanceFormula>;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaAnimationClip extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "animation_clip";
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaAnimationClip( collada:Collada, animationClip:XML )
-		{
-			super( animationClip );
-			if ( !animationClip )
-				return;
-			
-			// TODO
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var start:Number;
+        public var end:Number;
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-				
-			// TODO
+        public var instanceAnimations:Vector.<ColladaInstanceAnimation>;
+        public var instanceFormulas:Vector.<ColladaInstanceFormula>;
 
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaAnimationClip( collada:Collada, animationClip:XML )
+        {
+            super( animationClip );
+            if ( !animationClip )
+                return;
+
+            // TODO
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            // TODO
+
+            return result;
+        }
+    }
 }

@@ -17,22 +17,22 @@
 // ============================================================================
 package com.adobe.utils
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ObjectUtils
-	{
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		static public function getClass( object:Object ):Class
-		{
-			return Object( object ).constructor;
-		}
-		
-		static public function areSameClass( objectA:Object, objectB:Object ):Boolean
-		{
-			return Object( objectA ).constructor == Object( objectB ).constructor;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ObjectUtils
+    {
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        static public function getClass( object:Object ):Class
+        {
+            return Object( object ).constructor;
+        }
+
+        static public function areSameClass( objectA:Object, objectB:Object ):Boolean
+        {
+            return Object( objectA ).constructor == Object( objectB ).constructor;
+        }
+    }
 }

@@ -17,120 +17,120 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.display3D.Context3DCompareMode;
-	import flash.display3D.textures.Texture;
-	import flash.display3D.textures.TextureBase;
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**@private*/	// not done yet. bloom is currently done by using RGNodePPElelemts 
-	public class RenderGraphNodeBloom extends RenderGraphNode
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _source:TextureMapBase;
-		protected var _target:RenderTexture;
-		
-		protected var _pyramid:Vector.<Texture>;
-		
-		protected var _reduction:PB3DCompute;
-		protected var _bloom:PB3DCompute;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.display3D.Context3DCompareMode;
+    import flash.display3D.textures.Texture;
+    import flash.display3D.textures.TextureBase;
+    import flash.utils.ByteArray;
 
-		// ======================================================================
-		//	Material Kernels (No vertex kernels)
-		// ----------------------------------------------------------------------
-		[Embed (source="/../res/kernels/out/PP_Reduction2.v.pb3dasm", mimeType="application/octet-stream")]
-		protected static var Reduction2V:Class;
-		[Embed (source="/../res/kernels/out/PP_Reduction2.f.pb3dasm", mimeType="application/octet-stream")]
-		protected static var Reduction2F:Class;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**@private*/   // not done yet. bloom is currently done by using RGNodePPElelemts
+    public class RenderGraphNodeBloom extends RenderGraphNode
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _source:TextureMapBase;
+        protected var _target:RenderTexture;
 
-		[Embed (source="/../res/kernels/out/PP_HDRBloom.v.pb3dasm", mimeType="application/octet-stream")]
-		protected static var BloomV:Class;
-		[Embed (source="/../res/kernels/out/PP_HDRBloom.f.pb3dasm", mimeType="application/octet-stream")]
-		protected static var BloomF:Class;
+        protected var _pyramid:Vector.<Texture>;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function RenderGraphNodeBloom
-		(
-			source:TextureMapBase,
-			target:RenderTexture,			// target. if null, render to primary
-			name:String = "RGNodeBloom"
-		)
-		{
-			super( false, name );
-			
-			_source = source;
-			_target = target;
-			
-			//shaders
-			var vBytes:ByteArray, fBytes:ByteArray;
-			
-			// reduction
-			vBytes = new Reduction2V() as ByteArray;
-			fBytes = new Reduction2F() as ByteArray;
-			_reduction = new PB3DCompute( 
-				vBytes.readUTFBytes( vBytes.bytesAvailable ), 
-				fBytes.readUTFBytes( fBytes.bytesAvailable ) 
-			);
-			
-			// bloom
-			vBytes = new BloomV() as ByteArray;
-			fBytes = new BloomF() as ByteArray;
-			_bloom = new PB3DCompute( 
-				vBytes.readUTFBytes( vBytes.bytesAvailable ), 
-				fBytes.readUTFBytes( fBytes.bytesAvailable ) 
-			);
-		}
-		
-		override internal function render( settings:RenderSettings, style:uint = 0 ):void
-		{
-			var width:uint, height:uint;
-			var destination:TextureBase;
+        protected var _reduction:PB3DCompute;
+        protected var _bloom:PB3DCompute;
 
-			var needClear:Boolean = false;
+        // ======================================================================
+        //  Material Kernels (No vertex kernels)
+        // ----------------------------------------------------------------------
+        [Embed (source="/../res/kernels/out/PP_Reduction2.v.pb3dasm", mimeType="application/octet-stream")]
+        protected static var Reduction2V:Class;
+        [Embed (source="/../res/kernels/out/PP_Reduction2.f.pb3dasm", mimeType="application/octet-stream")]
+        protected static var Reduction2F:Class;
 
-			if ( _target )
-			{
-				width  = _target.width;
-				height = _target.height;
-				destination = _target.getWriteTexture();
+        [Embed (source="/../res/kernels/out/PP_HDRBloom.v.pb3dasm", mimeType="application/octet-stream")]
+        protected static var BloomV:Class;
+        [Embed (source="/../res/kernels/out/PP_HDRBloom.f.pb3dasm", mimeType="application/octet-stream")]
+        protected static var BloomF:Class;
 
-				// clear if necessary
-				if ( _target.targetSettings.clearOncePerFrame==false ||
-					_target.targetSettings.lastClearFrameID < settings.instance.frameID )
-				{
-					needClear = true;
-					_target.targetSettings.lastClearFrameID = settings.instance.frameID;
-				}
-			}
-			else
-			{
-				width  = settings.instance.width;
-				height = settings.instance.height;
-				destination = null;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function RenderGraphNodeBloom
+        (
+            source:TextureMapBase,
+            target:RenderTexture,           // target. if null, render to primary
+            name:String = "RGNodeBloom"
+        )
+        {
+            super( false, name );
 
-				// clear if necessary
-				if ( settings.instance.primarySettings.clearOncePerFrame==false || 
-					 settings.instance.primarySettings.lastClearFrameID < settings.instance.frameID )
-				{
-					needClear = true;
-					settings.instance.primarySettings.lastClearFrameID = settings.instance.frameID;
-				}
-			}
-			
-			_bloom.setInputBuffer( settings.instance, "sourceColor", _source.getReadTexture( settings ) );
-			_bloom.compute( settings.instance, destination, needClear, width, height );
+            _source = source;
+            _target = target;
 
-			if ( !_target )
-				settings.instance.setDepthTest( true, Context3DCompareMode.LESS );
-		}
-	}		
+            //shaders
+            var vBytes:ByteArray, fBytes:ByteArray;
+
+            // reduction
+            vBytes = new Reduction2V() as ByteArray;
+            fBytes = new Reduction2F() as ByteArray;
+            _reduction = new PB3DCompute(
+                vBytes.readUTFBytes( vBytes.bytesAvailable ),
+                fBytes.readUTFBytes( fBytes.bytesAvailable )
+            );
+
+            // bloom
+            vBytes = new BloomV() as ByteArray;
+            fBytes = new BloomF() as ByteArray;
+            _bloom = new PB3DCompute(
+                vBytes.readUTFBytes( vBytes.bytesAvailable ),
+                fBytes.readUTFBytes( fBytes.bytesAvailable )
+            );
+        }
+
+        override internal function render( settings:RenderSettings, style:uint = 0 ):void
+        {
+            var width:uint, height:uint;
+            var destination:TextureBase;
+
+            var needClear:Boolean = false;
+
+            if ( _target )
+            {
+                width  = _target.width;
+                height = _target.height;
+                destination = _target.getWriteTexture();
+
+                // clear if necessary
+                if ( _target.targetSettings.clearOncePerFrame==false ||
+                    _target.targetSettings.lastClearFrameID < settings.instance.frameID )
+                {
+                    needClear = true;
+                    _target.targetSettings.lastClearFrameID = settings.instance.frameID;
+                }
+            }
+            else
+            {
+                width  = settings.instance.width;
+                height = settings.instance.height;
+                destination = null;
+
+                // clear if necessary
+                if ( settings.instance.primarySettings.clearOncePerFrame==false ||
+                     settings.instance.primarySettings.lastClearFrameID < settings.instance.frameID )
+                {
+                    needClear = true;
+                    settings.instance.primarySettings.lastClearFrameID = settings.instance.frameID;
+                }
+            }
+
+            _bloom.setInputBuffer( settings.instance, "sourceColor", _source.getReadTexture( settings ) );
+            _bloom.compute( settings.instance, destination, needClear, width, height );
+
+            if ( !_target )
+                settings.instance.setDepthTest( true, Context3DCompareMode.LESS );
+        }
+    }
 }

@@ -17,81 +17,81 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaColor;
-	import com.adobe.scenegraph.loaders.collada.ColladaParam;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTypeColorOrTexture
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const OPACITY_A_ONE:String					= "A_ONE";
-		public static const OPACITY_RGB_ZERO:String					= "RGB_ZERO";
-		public static const OPACITY_A_ZERO:String					= "A_ZERO";
-		public static const OPACITY_RGB_ONE:String					= "RGB_ONE";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaColor;
+    import com.adobe.scenegraph.loaders.collada.ColladaParam;
 
-		public static const DEFAULT_OPACITY:String					= OPACITY_A_ONE;
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var opaque:String;									// <... @opaque="...">
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTypeColorOrTexture
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const OPACITY_A_ONE:String                    = "A_ONE";
+        public static const OPACITY_RGB_ZERO:String                 = "RGB_ZERO";
+        public static const OPACITY_A_ZERO:String                   = "A_ZERO";
+        public static const OPACITY_RGB_ONE:String                  = "RGB_ONE";
 
-		// exactly 1 of the following
-		public var color:ColladaColor;								// <color>
-		public var param:ColladaParam;								// <param>
-		public var texture:ColladaTexture;							// <texture texture="myParam" texcoord="myUVs"><extra.../></texture>
+        public static const DEFAULT_OPACITY:String                  = OPACITY_A_ONE;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTypeColorOrTexture( element:XML )
-		{
-			opaque = parseOpaque( element.@opaque );
-			
-			if ( element.color[0] )
-				color = new ColladaColor( element.color ); 
-			else if ( element.param[0] )
-				param = new ColladaParam( element.param[0] );
-			else if ( element.texture[0] )
-				texture = new ColladaTexture( element.texture[0] );
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var opaque:String;                                   // <... @opaque="...">
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		protected static function parseOpaque( opaque:String ):String
-		{
-			switch ( opaque )
-			{
-				case OPACITY_A_ONE:
-				case OPACITY_RGB_ZERO:
-				case OPACITY_A_ZERO:
-				case OPACITY_RGB_ONE:
-					return opaque;
+        // exactly 1 of the following
+        public var color:ColladaColor;                              // <color>
+        public var param:ColladaParam;                              // <param>
+        public var texture:ColladaTexture;                          // <texture texture="myParam" texcoord="myUVs"><extra.../></texture>
 
-				default:
-					return DEFAULT_OPACITY;
-			}
-		}	
-		
-		public function fillXML( element:XML ):void
-		{
-			if ( opaque && opaque != DEFAULT_OPACITY )
-				element.@opaque = opaque;
-			
-			if ( color )
-				element.color = color.toXML();
-			else if ( param )
-				element.param = param.toXML();
-			else if ( texture )
-				element.texture = texture.toXML();
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTypeColorOrTexture( element:XML )
+        {
+            opaque = parseOpaque( element.@opaque );
+
+            if ( element.color[0] )
+                color = new ColladaColor( element.color );
+            else if ( element.param[0] )
+                param = new ColladaParam( element.param[0] );
+            else if ( element.texture[0] )
+                texture = new ColladaTexture( element.texture[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        protected static function parseOpaque( opaque:String ):String
+        {
+            switch ( opaque )
+            {
+                case OPACITY_A_ONE:
+                case OPACITY_RGB_ZERO:
+                case OPACITY_A_ZERO:
+                case OPACITY_RGB_ONE:
+                    return opaque;
+
+                default:
+                    return DEFAULT_OPACITY;
+            }
+        }
+
+        public function fillXML( element:XML ):void
+        {
+            if ( opaque && opaque != DEFAULT_OPACITY )
+                element.@opaque = opaque;
+
+            if ( color )
+                element.color = color.toXML();
+            else if ( param )
+                element.param = param.toXML();
+            else if ( texture )
+                element.texture = texture.toXML();
+        }
+    }
 }

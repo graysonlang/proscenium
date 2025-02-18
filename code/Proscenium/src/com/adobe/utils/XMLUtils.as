@@ -17,76 +17,76 @@
 // ============================================================================
 package com.adobe.utils
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class XMLUtils
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		protected static const WHITESPACE:RegExp			= new RegExp( /\s+/g );
-		protected static const SPACE:String					= " ";
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseColor( xml:XML ):Vector.<Number>
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Vector.<Number>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );	
-			return null;
-		}
-		
-		public static function parseNumber( xml:XML, defaultValue:Number ):Number
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Number( xml.text().toString() );
-			return defaultValue;
-		}
-		
-		// ----------------------------------------------------------------------
-		
-		public static function parseBooleans( xml:XML ):Vector.<Boolean>
-		{
-			if ( xml && xml.hasSimpleContent() )
-			{
-				var array:Array = xml.text().toString().toLowerCase().replace( WHITESPACE, SPACE ).split( SPACE );
-				var result:Vector.<Boolean> = new Vector.<Boolean>;
-				for each ( var value:String in array ) {
-					result.push( value == "true" ? true : false );
-				}
-				return result;
-			}
-			return null;
-		}
-		
-		public static function parseIntegers( xml:XML ):Vector.<int>
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Vector.<int>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
-			return null;
-		}
-		
-		public static function parseNumbers( xml:XML ):Vector.<Number>
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Vector.<Number>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
-			return null;
-		}
-		
-		public static function parseStrings( xml:XML ):Vector.<String>
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Vector.<String>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
-			return null;
-		}
-		
-		public static function parseUnsignedIntegers( xml:XML ):Vector.<uint>
-		{
-			if ( xml && xml.hasSimpleContent() )
-				return Vector.<uint>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
-			return null;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class XMLUtils
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        protected static const WHITESPACE:RegExp            = new RegExp( /\s+/g );
+        protected static const SPACE:String                 = " ";
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseColor( xml:XML ):Vector.<Number>
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Vector.<Number>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
+            return null;
+        }
+
+        public static function parseNumber( xml:XML, defaultValue:Number ):Number
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Number( xml.text().toString() );
+            return defaultValue;
+        }
+
+        // ----------------------------------------------------------------------
+
+        public static function parseBooleans( xml:XML ):Vector.<Boolean>
+        {
+            if ( xml && xml.hasSimpleContent() )
+            {
+                var array:Array = xml.text().toString().toLowerCase().replace( WHITESPACE, SPACE ).split( SPACE );
+                var result:Vector.<Boolean> = new Vector.<Boolean>;
+                for each ( var value:String in array ) {
+                    result.push( value == "true" ? true : false );
+                }
+                return result;
+            }
+            return null;
+        }
+
+        public static function parseIntegers( xml:XML ):Vector.<int>
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Vector.<int>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
+            return null;
+        }
+
+        public static function parseNumbers( xml:XML ):Vector.<Number>
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Vector.<Number>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
+            return null;
+        }
+
+        public static function parseStrings( xml:XML ):Vector.<String>
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Vector.<String>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
+            return null;
+        }
+
+        public static function parseUnsignedIntegers( xml:XML ):Vector.<uint>
+        {
+            if ( xml && xml.hasSimpleContent() )
+                return Vector.<uint>( xml.text().toString().replace( WHITESPACE, SPACE ).split( SPACE ) );
+            return null;
+        }
+    }
 }

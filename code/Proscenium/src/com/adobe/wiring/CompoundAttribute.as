@@ -17,46 +17,46 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class CompoundAttribute extends Attribute implements IWirable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "CompoundAttribute";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _elements:Vector.<Attribute>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class CompoundAttribute extends Attribute implements IWirable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "CompoundAttribute";
 
-		public function get attributes():Vector.<String>			{ throw Attribute.ERROR_MISSING_OVERRIDE; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function CompoundAttribute( owner:IWirable = null, name:String = undefined )
-		{
-			super( owner, name );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function attribute( name:String ):Attribute			{ throw Attribute.ERROR_MISSING_OVERRIDE; }
-		
-		public function evaluate( attribute:Attribute ):void
-		{
-			// do nothing
-		}
-		
-		public function setDirty( attribute:Attribute ):void		{ throw Attribute.ERROR_MISSING_OVERRIDE; }
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _elements:Vector.<Attribute>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
+
+        public function get attributes():Vector.<String>            { throw Attribute.ERROR_MISSING_OVERRIDE; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function CompoundAttribute( owner:IWirable = null, name:String = undefined )
+        {
+            super( owner, name );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function attribute( name:String ):Attribute          { throw Attribute.ERROR_MISSING_OVERRIDE; }
+
+        public function evaluate( attribute:Attribute ):void
+        {
+            // do nothing
+        }
+
+        public function setDirty( attribute:Attribute ):void        { throw Attribute.ERROR_MISSING_OVERRIDE; }
+    }
 }

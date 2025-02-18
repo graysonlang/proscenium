@@ -17,86 +17,86 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.display.BitmapData;
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class TextureHandle extends ResourceHandle
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		private var _isCompressed:Boolean;
-		private var _datas:Vector.<TextureLevel>;
-		private var _dataCompressed:ByteArray;
-		private var _compressedOffsets:int;
-		
-		// ----------------------------------------------------------------------
-		
-		protected static var _uid:uint								= 0;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override protected function get uid():uint					{ return _uid++; }	
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function TextureHandle( instance:Instance3D )
-		{
-			super( instance );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function dispose():void
-		{
-			
-		}
-		
-		public function uploadCompressedTextureFromByteArray( data:ByteArray, byteArrayOffset:uint ):void
-		{
-			
-		}
-		
-		public function uploadFromBitmapData( source:BitmapData, miplevel:uint = 0 ):void
-		{
-			
-		}
-		
-		public function uploadFromByteArray( data:ByteArray, byteArrayOffset:uint, miplevel:uint = 0 ):void
-		{
-			
-		}
-		
-		override internal function refresh():void
-		{
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.display.BitmapData;
+    import flash.utils.ByteArray;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class TextureHandle extends ResourceHandle
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        private var _isCompressed:Boolean;
+        private var _datas:Vector.<TextureLevel>;
+        private var _dataCompressed:ByteArray;
+        private var _compressedOffsets:int;
+
+        // ----------------------------------------------------------------------
+
+        protected static var _uid:uint                              = 0;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override protected function get uid():uint                  { return _uid++; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function TextureHandle( instance:Instance3D )
+        {
+            super( instance );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function dispose():void
+        {
+
+        }
+
+        public function uploadCompressedTextureFromByteArray( data:ByteArray, byteArrayOffset:uint ):void
+        {
+
+        }
+
+        public function uploadFromBitmapData( source:BitmapData, miplevel:uint = 0 ):void
+        {
+
+        }
+
+        public function uploadFromByteArray( data:ByteArray, byteArrayOffset:uint, miplevel:uint = 0 ):void
+        {
+
+        }
+
+        override internal function refresh():void
+        {
+        }
+    }
 }
 
 // ================================================================================
-//	Helper Classes
+//  Helper Classes
 // ================================================================================
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	class TextureLevel
-	{
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    class TextureLevel
+    {
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+    }
 }

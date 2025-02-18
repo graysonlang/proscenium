@@ -17,56 +17,56 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaVertices extends ColladaElementNamed
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaVertices extends ColladaElementNamed
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var inputs:Vector.<ColladaInput>;					// <input>	1 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaVertices( verticesList:XMLList )
-		{
-			var vertices:XML = verticesList[0];
-			super( vertices );
-			if ( !vertices )
-				return;
-			
-			if ( vertices.input.length() > 0 )
-				inputs = ColladaInput.parseInputs( vertices.input );
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-			
-//			for each ( var input:ColladaInput in inputs )
-//			{
-//				if ( input.semantic == ColladaInput.SEMANTIC_POSITION )
-//					break;				
-//			}
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var inputs:Vector.<ColladaInput>;                    // <input>  1 or more
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var vertices:XML = <vertices/>;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaVertices( verticesList:XMLList )
+        {
+            var vertices:XML = verticesList[0];
+            super( vertices );
+            if ( !vertices )
+                return;
 
-			for each ( var input:ColladaInput in inputs )
-			{
-				vertices.appendChild( input.toXML() );
-			}
+            if ( vertices.input.length() > 0 )
+                inputs = ColladaInput.parseInputs( vertices.input );
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
 
-			super.fillXML( vertices );
-			return vertices;
-		}
-	}
+//          for each ( var input:ColladaInput in inputs )
+//          {
+//              if ( input.semantic == ColladaInput.SEMANTIC_POSITION )
+//                  break;
+//          }
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var vertices:XML = <vertices/>;
+
+            for each ( var input:ColladaInput in inputs )
+            {
+                vertices.appendChild( input.toXML() );
+            }
+
+            super.fillXML( vertices );
+            return vertices;
+        }
+    }
 }

@@ -17,56 +17,56 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaLightTechnique extends ColladaTechniqueCommon
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var color:Vector.<Number>;							// <color>		1
-	
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaLightTechnique( technique:XML )
-		{
-			super( technique );
-			color = parseColor( technique.color );
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaLightTechnique extends ColladaTechniqueCommon
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var color:Vector.<Number>;                           // <color>      1
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			var technique:XML = new XML( "<" + tag + "/>" );
-			element.appendChild( technique );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaLightTechnique( technique:XML )
+        {
+            super( technique );
+            color = parseColor( technique.color );
+        }
 
-			if ( color )
-				technique.color = color.join( " " );
-				
-			super.fillXML( technique );
-		}
-		
-		public static function parseLightTechnique( techniqueCommon:XML ):ColladaLightTechnique
-		{
-			var lightTechnique:XML = techniqueCommon.children()[0];
-			var type:String = lightTechnique.name().localName;
-				
-			switch( type )
-			{
-				case ColladaLightAmbient.TAG:		return new ColladaLightAmbient( lightTechnique );
-				case ColladaLightDirectional.TAG:	return new ColladaLightDirectional( lightTechnique );
-				case ColladaLightPoint.TAG:			return new ColladaLightPoint( lightTechnique );
-				case ColladaLightSpot.TAG:			return new ColladaLightSpot( lightTechnique );
-				
-				default:
-					trace( "ColladaLightTechnique: UNSUPPORTED TYPE!");
-			}
-			
-			return null;
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            var technique:XML = new XML( "<" + tag + "/>" );
+            element.appendChild( technique );
+
+            if ( color )
+                technique.color = color.join( " " );
+
+            super.fillXML( technique );
+        }
+
+        public static function parseLightTechnique( techniqueCommon:XML ):ColladaLightTechnique
+        {
+            var lightTechnique:XML = techniqueCommon.children()[0];
+            var type:String = lightTechnique.name().localName;
+
+            switch( type )
+            {
+                case ColladaLightAmbient.TAG:       return new ColladaLightAmbient( lightTechnique );
+                case ColladaLightDirectional.TAG:   return new ColladaLightDirectional( lightTechnique );
+                case ColladaLightPoint.TAG:         return new ColladaLightPoint( lightTechnique );
+                case ColladaLightSpot.TAG:          return new ColladaLightSpot( lightTechnique );
+
+                default:
+                    trace( "ColladaLightTechnique: UNSUPPORTED TYPE!");
+            }
+
+            return null;
+        }
+    }
 }

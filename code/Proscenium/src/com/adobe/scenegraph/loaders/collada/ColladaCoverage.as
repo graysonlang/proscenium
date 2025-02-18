@@ -17,43 +17,43 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaCoverage
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "coverage";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var geographicLocation:ColladaGeographicLocation;	// <geographic_location>	0 or 1
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaCoverage( coverageList:XMLList )
-		{
-			var coverage:XML = coverageList[0];
-			
-			if ( coverage )
-				geographicLocation = new ColladaGeographicLocation( coverage.geographic_location );
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaCoverage
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "coverage";
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var xml:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var geographicLocation:ColladaGeographicLocation;    // <geographic_location>    0 or 1
 
-			if ( geographicLocation )
-				xml.geographic_location = geographicLocation.toXML();
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaCoverage( coverageList:XMLList )
+        {
+            var coverage:XML = coverageList[0];
 
-			return xml;
-		}
-	}
+            if ( coverage )
+                geographicLocation = new ColladaGeographicLocation( coverage.geographic_location );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var xml:XML = new XML( "<" + TAG + "/>" );
+
+            if ( geographicLocation )
+                xml.geographic_location = geographicLocation.toXML();
+
+            return xml;
+        }
+    }
 }

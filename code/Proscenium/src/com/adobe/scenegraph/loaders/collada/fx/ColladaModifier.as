@@ -17,45 +17,45 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaModifier
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "modifier";
-		
-		public static const CONST:String							= "CONST";
-		public static const UNIFORM:String							= "UNIFORM";
-		public static const VARYING:String							= "VARYING";
-		public static const STATIC:String							= "STATIC";
-		public static const VOLATILE:String							= "VOLATILE";
-		public static const EXTERN:String							= "EXTERN";
-		public static const SHARED:String							= "SHARED";
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseModifier( modifier:XML ):String
-		{
-			if ( modifier && modifier.hasSimpleContent() )
-			{
-				switch( modifier.toString() )
-				{
-					case CONST:
-					case UNIFORM:
-					case VARYING:
-					case STATIC:
-					case VOLATILE:
-					case EXTERN:
-					case SHARED:
-						return modifier.toString();
-				}
-			}
-				
-			return undefined;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaModifier
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "modifier";
+
+        public static const CONST:String                            = "CONST";
+        public static const UNIFORM:String                          = "UNIFORM";
+        public static const VARYING:String                          = "VARYING";
+        public static const STATIC:String                           = "STATIC";
+        public static const VOLATILE:String                         = "VOLATILE";
+        public static const EXTERN:String                           = "EXTERN";
+        public static const SHARED:String                           = "SHARED";
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseModifier( modifier:XML ):String
+        {
+            if ( modifier && modifier.hasSimpleContent() )
+            {
+                switch( modifier.toString() )
+                {
+                    case CONST:
+                    case UNIFORM:
+                    case VARYING:
+                    case STATIC:
+                    case VOLATILE:
+                    case EXTERN:
+                    case SHARED:
+                        return modifier.toString();
+                }
+            }
+
+            return undefined;
+        }
+    }
 }

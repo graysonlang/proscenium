@@ -17,59 +17,59 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.physics.*;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaScene extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String									= "scene";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var instancePhysicsScene:ColladaInstancePhysicsScene;	// <instance_physics_scene>		0 or more	(Physics)
-		public var instanceVisualScene:ColladaInstanceVisualScene;		// <instance_visual_scene>		0 or 1
-		;																// <instance_kinematics_scene>	0 or 1		(Kinematics)
-		;																// <extra>						0 or more
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.physics.*;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaScene( collada:Collada, sceneList:XMLList )
-		{
-			//trace( "new ColladaScene" );
-			var scene:XML = sceneList[0];
-			super( scene );
-			if ( !scene )
-				return;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaScene extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                                  = "scene";
 
-			if ( scene.instance_physics_scene[0] )
-				instancePhysicsScene = new ColladaInstancePhysicsScene( collada, scene.instance_physics_scene );
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var instancePhysicsScene:ColladaInstancePhysicsScene;    // <instance_physics_scene>     0 or more   (Physics)
+        public var instanceVisualScene:ColladaInstanceVisualScene;      // <instance_visual_scene>      0 or 1
+        ;                                                               // <instance_kinematics_scene>  0 or 1      (Kinematics)
+        ;                                                               // <extra>                      0 or more
 
-			instanceVisualScene = new ColladaInstanceVisualScene( collada, scene.instance_visual_scene );
-			extras = new Vector.<ColladaExtra>();
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaScene( collada:Collada, sceneList:XMLList )
+        {
+            //trace( "new ColladaScene" );
+            var scene:XML = sceneList[0];
+            super( scene );
+            if ( !scene )
+                return;
 
-			if ( instancePhysicsScene )
-				result.instance_physics_scene = instancePhysicsScene.toXML();
-				
-			if ( instanceVisualScene )
-				result.instance_visual_scene = instanceVisualScene.toXML();
-				
-			super.fillXML( result );
-			return result;
-		}
-	}
+            if ( scene.instance_physics_scene[0] )
+                instancePhysicsScene = new ColladaInstancePhysicsScene( collada, scene.instance_physics_scene );
+
+            instanceVisualScene = new ColladaInstanceVisualScene( collada, scene.instance_visual_scene );
+            extras = new Vector.<ColladaExtra>();
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( instancePhysicsScene )
+                result.instance_physics_scene = instancePhysicsScene.toXML();
+
+            if ( instanceVisualScene )
+                result.instance_visual_scene = instanceVisualScene.toXML();
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

@@ -17,42 +17,42 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaElementNamed extends ColladaElement
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var id:String;										// @id			Optional
-		public var name:String;										// @name		Optional
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaElementNamed extends ColladaElement
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var id:String;                                       // @id          Optional
+        public var name:String;                                     // @name        Optional
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaElementNamed( element:XML = null )
-		{
-			super( element );
-			if ( !element )
-				return;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaElementNamed( element:XML = null )
+        {
+            super( element );
+            if ( !element )
+                return;
 
-			id		= element.@id;
-			name	= element.@name.toString();
-		}
+            id      = element.@id;
+            name    = element.@name.toString();
+        }
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			if ( id )
-				element.@id = id;
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            if ( id )
+                element.@id = id;
 
-			if ( name )
-				element.@name = name;
+            if ( name )
+                element.@name = name;
 
-			super.fillXML( element );
-		}
-	}
+            super.fillXML( element );
+        }
+    }
 }

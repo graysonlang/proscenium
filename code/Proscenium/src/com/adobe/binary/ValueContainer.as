@@ -17,75 +17,75 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final internal class ValueContainer extends GenericBinaryEntry
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TYPE_ID:uint							= TYPE_CONTAINER;
-		public static const CLASS_NAME:String						= "ValueContainer";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:GenericBinaryContainer;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ValueContainer( id:uint, value:GenericBinaryContainer )
-		{
-			super( id, TYPE_ID );
-			_value = value;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
-		{
-			// 2 bytes: id
-			bytes.writeShort( id );
-			
-			// 2 bytes: flags/type
-			bytes.writeShort( TYPE_ID );
-			
-			return _value.write( bytes ) + 4;
-		}
-		
-		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
-		{
-			// 2 bytes: id
-			bytes.writeShort( id );
-			
-			// 2 bytes: flags/type
-			bytes.writeShort( TYPE_ID );
-			
-			var xmlContainer:XML;
-			if ( xml )
-				xmlContainer = <container/>;
-			
-			var size:uint = _value.write( bytes, xmlContainer );
-			
-			var result:uint = 4 + size;
-			
-			xml.setName( CLASS_NAME );
-			xml.@name = format.getIDString( tag, id );
-			xml.@type = TYPE_ID;
-			xml.@id = id;
-			xml.@size = result;
-			xml.setChildren( xmlContainer );
-			
-			return result;
-		}
-		
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final internal class ValueContainer extends GenericBinaryEntry
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TYPE_ID:uint                            = TYPE_CONTAINER;
+        public static const CLASS_NAME:String                       = "ValueContainer";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:GenericBinaryContainer;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ValueContainer( id:uint, value:GenericBinaryContainer )
+        {
+            super( id, TYPE_ID );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
+        {
+            // 2 bytes: id
+            bytes.writeShort( id );
+
+            // 2 bytes: flags/type
+            bytes.writeShort( TYPE_ID );
+
+            return _value.write( bytes ) + 4;
+        }
+
+        override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
+        {
+            // 2 bytes: id
+            bytes.writeShort( id );
+
+            // 2 bytes: flags/type
+            bytes.writeShort( TYPE_ID );
+
+            var xmlContainer:XML;
+            if ( xml )
+                xmlContainer = <container/>;
+
+            var size:uint = _value.write( bytes, xmlContainer );
+
+            var result:uint = 4 + size;
+
+            xml.setName( CLASS_NAME );
+            xml.@name = format.getIDString( tag, id );
+            xml.@type = TYPE_ID;
+            xml.@id = id;
+            xml.@size = result;
+            xml.setChildren( xmlContainer );
+
+            return result;
+        }
+
+    }
 }

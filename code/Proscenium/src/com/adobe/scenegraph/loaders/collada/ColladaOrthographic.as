@@ -17,69 +17,69 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaOrthographic extends ColladaOpticsTechnique
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "orthographic";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaOrthographic extends ColladaOpticsTechnique
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "orthographic";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var xmag:Number;										// <xmag>
-		public var xmagSID:String;									// <xmag sid="...">
-		public var ymag:Number;										// <ymag>
-		public var ymagSID:String;									// <tmag sid="...">
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var xmag:Number;                                     // <xmag>
+        public var xmagSID:String;                                  // <xmag sid="...">
+        public var ymag:Number;                                     // <ymag>
+        public var ymagSID:String;                                  // <tmag sid="...">
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaOrthographic( technique:XML )
-		{
-			super( technique );
-			
-			if ( technique.xmag[0] )
-			{
-				xmag = technique.xmag;
-				xmagSID = technique.xmag.@sid;
-			}
-			
-			if ( technique.ymag[0] )
-			{
-				ymag = technique.ymag;
-				ymagSID = technique.ymag.@sid;
-			}
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( technique:XML ):void
-		{
-			if ( xmag )
-			{
-				technique.xmag = xmag;
-				if ( xmagSID )
-					technique.xmag.@sid = xmagSID;
-			}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaOrthographic( technique:XML )
+        {
+            super( technique );
 
-			if ( ymag )
-			{
-				technique.ymag = ymag;
-				if ( ymagSID )
-					technique.ymag.@sid = ymagSID;
-			}
-			
-			super.fillXML( technique );
-		}
-	}
+            if ( technique.xmag[0] )
+            {
+                xmag = technique.xmag;
+                xmagSID = technique.xmag.@sid;
+            }
+
+            if ( technique.ymag[0] )
+            {
+                ymag = technique.ymag;
+                ymagSID = technique.ymag.@sid;
+            }
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( technique:XML ):void
+        {
+            if ( xmag )
+            {
+                technique.xmag = xmag;
+                if ( xmagSID )
+                    technique.xmag.@sid = xmagSID;
+            }
+
+            if ( ymag )
+            {
+                technique.ymag = ymag;
+                if ( ymagSID )
+                    technique.ymag.@sid = ymagSID;
+            }
+
+            super.fillXML( technique );
+        }
+    }
 }

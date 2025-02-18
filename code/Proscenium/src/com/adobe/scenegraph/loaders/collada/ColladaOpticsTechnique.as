@@ -17,86 +17,86 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaOpticsTechnique extends ColladaTechniqueCommon
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var aspectRatio:Number;								// <aspect_ratio>
-		public var aspectRatioSID:String;							// <aspect_ratio sid="...">
-		public var znear:Number;									// <znear>				1
-		public var znearSID:String;									// <znear sid="...">
-		public var zfar:Number;										// <zfar>				1
-		public var zfarSID:String;									// <zfar sid="...">
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaOpticsTechnique extends ColladaTechniqueCommon
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var aspectRatio:Number;                              // <aspect_ratio>
+        public var aspectRatioSID:String;                           // <aspect_ratio sid="...">
+        public var znear:Number;                                    // <znear>              1
+        public var znearSID:String;                                 // <znear sid="...">
+        public var zfar:Number;                                     // <zfar>               1
+        public var zfarSID:String;                                  // <zfar sid="...">
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaOpticsTechnique( technique:XML )
-		{
-			super( technique );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaOpticsTechnique( technique:XML )
+        {
+            super( technique );
 
-			if ( technique.aspect_ratio[0] )
-			{
-				aspectRatio = technique.aspect_ratio;
-				aspectRatioSID = technique.aspect_ratio.@sid;
-			}
-			
-			if ( technique.znear[0] )
-			{
-				znear = technique.znear;
-				znearSID = technique.znear.@sid;
-			}
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT, "znear" );
+            if ( technique.aspect_ratio[0] )
+            {
+                aspectRatio = technique.aspect_ratio;
+                aspectRatioSID = technique.aspect_ratio.@sid;
+            }
 
-			if ( technique.zfar[0] )
-			{
-				zfar = technique.zfar;
-				zfarSID = technique.zfar.@sid;
-			}
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT, "zfar" );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function toXML():XML
-		{
-			var result:XML = new XML( "<" + tag + "/>" );
+            if ( technique.znear[0] )
+            {
+                znear = technique.znear;
+                znearSID = technique.znear.@sid;
+            }
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT, "znear" );
 
-			fillXML( result );
-			
-			if ( aspectRatio )
-			{
-				result.aspect_ratio = aspectRatio;
-				if ( znearSID )
-					result.aspect_ratio.@sid = znearSID;
-			}
-			
-			if ( znear )
-			{
-				result.znear = znear;
-				if ( znearSID )
-					result.znear.@sid = znearSID;
-			}
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-			
-			if ( zfar )
-			{
-				result.zfar = zfar;
-				if ( zfarSID )
-					result.zfar.@sid = zfarSID;
-			}
-			else
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
-			
-			return result;
-		}
-	}
+            if ( technique.zfar[0] )
+            {
+                zfar = technique.zfar;
+                zfarSID = technique.zfar.@sid;
+            }
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT, "zfar" );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function toXML():XML
+        {
+            var result:XML = new XML( "<" + tag + "/>" );
+
+            fillXML( result );
+
+            if ( aspectRatio )
+            {
+                result.aspect_ratio = aspectRatio;
+                if ( znearSID )
+                    result.aspect_ratio.@sid = znearSID;
+            }
+
+            if ( znear )
+            {
+                result.znear = znear;
+                if ( znearSID )
+                    result.znear.@sid = znearSID;
+            }
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
+
+            if ( zfar )
+            {
+                result.zfar = zfar;
+                if ( zfarSID )
+                    result.zfar.@sid = zfarSID;
+            }
+            else
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT );
+
+            return result;
+        }
+    }
 }

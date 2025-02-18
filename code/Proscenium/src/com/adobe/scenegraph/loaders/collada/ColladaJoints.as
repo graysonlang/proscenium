@@ -17,45 +17,45 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaJoints extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "joints";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaJoints extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "joints";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var inputs:Vector.<ColladaInput>;					// <input>	2 or more
-		;															// <extra>	0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaJoints( joints:XML )
-		{
-			super( joints );
-			
-			inputs = ColladaInput.parseInputs( joints.input );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			for each ( var input:ColladaInput in inputs ) {
-				result.appendChild( input.toXML() );
-			}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var inputs:Vector.<ColladaInput>;                    // <input>  2 or more
+        ;                                                           // <extra>  0 or more
 
-			super.fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaJoints( joints:XML )
+        {
+            super( joints );
+
+            inputs = ColladaInput.parseInputs( joints.input );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            for each ( var input:ColladaInput in inputs ) {
+                result.appendChild( input.toXML() );
+            }
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

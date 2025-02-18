@@ -17,15 +17,15 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Interface
-	// ---------------------------------------------------------------------------
-	public interface IBinarySerializable
-	{
-		// ===========================================================================
-		//	Methods
-		// ---------------------------------------------------------------------------
-		function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void;
-		function readBinaryEntry( entry:GenericBinaryEntry = null ):void;
-	}
+    // ===========================================================================
+    //  Interface
+    // ---------------------------------------------------------------------------
+    public interface IBinarySerializable
+    {
+        // ===========================================================================
+        //  Methods
+        // ---------------------------------------------------------------------------
+        function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void;
+        function readBinaryEntry( entry:GenericBinaryEntry = null ):void;
+    }
 }

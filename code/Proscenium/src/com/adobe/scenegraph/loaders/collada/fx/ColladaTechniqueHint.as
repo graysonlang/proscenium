@@ -17,49 +17,49 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTechniqueHint
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "technique_hint";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var platform:String;									// xs:Name		Required
-		public var ref:String;										// xs:NCName	Required
-		public var profile:String;									// xs:NCName
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTechniqueHint
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "technique_hint";
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTechniqueHint( xml:XML )
-		{
-			platform = xml.@platform;
-			ref = xml.@ref;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var platform:String;                                 // xs:Name      Required
+        public var ref:String;                                      // xs:NCName    Required
+        public var profile:String;                                  // xs:NCName
 
-			if ( xml.@profile )
-				profile = xml.@profile;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTechniqueHint( xml:XML )
+        {
+            platform = xml.@platform;
+            ref = xml.@ref;
 
-			result.@platform = platform;
-			result.@ref = ref;
-			
-			if ( profile )
-				result.@profile = profile;
-			
-			return result;
-		}
-	}
+            if ( xml.@profile )
+                profile = xml.@profile;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.@platform = platform;
+            result.@ref = ref;
+
+            if ( profile )
+                result.@profile = profile;
+
+            return result;
+        }
+    }
 }

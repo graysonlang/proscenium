@@ -17,57 +17,57 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaLightSpot extends ColladaLightPoint
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "spot"; 
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaLightSpot extends ColladaLightPoint
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "spot";
 
-		public static const DEFAULT_FALLOFF_ANGLE:Number			= 180.0;
-		public static const DEFAULT_FALLOFF_EXPONENT:Number			= 0.0;
+        public static const DEFAULT_FALLOFF_ANGLE:Number            = 180.0;
+        public static const DEFAULT_FALLOFF_EXPONENT:Number         = 0.0;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// <color>						1
-		;															// <constant_attenuation>		0 or 1		1.0
-		;															// <linear_attenuation>			0 or 1		0.0
-		;															// <quadratic_attenuation>		0 or 1		0.0
-		public var falloffAngle:Number;								// <falloff_angle>				0 or 1		180.0
-		public var falloffExponent:Number;							// <falloff_exponent>			0 or 1		0.0
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // <color>                      1
+        ;                                                           // <constant_attenuation>       0 or 1      1.0
+        ;                                                           // <linear_attenuation>         0 or 1      0.0
+        ;                                                           // <quadratic_attenuation>      0 or 1      0.0
+        public var falloffAngle:Number;                             // <falloff_angle>              0 or 1      180.0
+        public var falloffExponent:Number;                          // <falloff_exponent>           0 or 1      0.0
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaLightSpot( spot:XML )
-		{
-			super( spot );
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
 
-			falloffAngle			= parseValue( spot.falloff_angle[0],			DEFAULT_FALLOFF_ANGLE );
-			falloffExponent			= parseValue( spot.falloff_exponent[0],			DEFAULT_FALLOFF_EXPONENT );
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaLightSpot( spot:XML )
+        {
+            super( spot );
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( light:XML ):void
-		{
-			super.fillXML( light );
+            falloffAngle            = parseValue( spot.falloff_angle[0],            DEFAULT_FALLOFF_ANGLE );
+            falloffExponent         = parseValue( spot.falloff_exponent[0],         DEFAULT_FALLOFF_EXPONENT );
+        }
 
-			if ( falloffAngle && falloffAngle != DEFAULT_FALLOFF_ANGLE )
-				light.falloff_angle = falloffAngle;
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( light:XML ):void
+        {
+            super.fillXML( light );
 
-			if ( falloffExponent && falloffExponent != DEFAULT_FALLOFF_EXPONENT )
-				light.falloff_exponent = falloffExponent;
-		}
-	}
+            if ( falloffAngle && falloffAngle != DEFAULT_FALLOFF_ANGLE )
+                light.falloff_angle = falloffAngle;
+
+            if ( falloffExponent && falloffExponent != DEFAULT_FALLOFF_EXPONENT )
+                light.falloff_exponent = falloffExponent;
+        }
+    }
 }

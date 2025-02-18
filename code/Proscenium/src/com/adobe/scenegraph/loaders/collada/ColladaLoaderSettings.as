@@ -17,21 +17,21 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaLoaderSettings
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var useEmissiveMapsAsAmbient:Boolean;
-		public var forceDiffuseMapsLinear:Boolean;
-		public var forceAmbientMapsLinear:Boolean;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaLoaderSettings() {}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaLoaderSettings
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var useEmissiveMapsAsAmbient:Boolean;
+        public var forceDiffuseMapsLinear:Boolean;
+        public var forceAmbientMapsLinear:Boolean;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaLoaderSettings() {}
+    }
 }

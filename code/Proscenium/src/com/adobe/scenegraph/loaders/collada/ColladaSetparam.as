@@ -17,61 +17,61 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaSetparam extends ColladaElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "setparam";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaSetparam extends ColladaElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "setparam";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var ref:String;										// @ref				xs:token	Required
-		public var program:String;									// @program			xs:NCName
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var ref:String;                                      // @ref             xs:token    Required
+        public var program:String;                                  // @program         xs:NCName
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaSetparam( element:XML = null )
-		{
-			super( element );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaSetparam( element:XML = null )
+        {
+            super( element );
 
-			ref = element.@ref;
-			program = element.@program
-		}
+            ref = element.@ref;
+            program = element.@program
+        }
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			result.@ref = ref;
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
 
-			if ( program )
-				result.@program = program;
-			
-			return result;
-		}
-		
-		public static function parseSetparams( setparams:XMLList ):Vector.<ColladaSetparam>
-		{
-			var length:uint = setparams.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaSetparam> = new Vector.<ColladaSetparam>();
-			for each ( var setparam:XML in setparams )
-			{
-				result.push( new ColladaSetparam( setparam ) );
-			}
-			
-			return result;
-		}
-	}
+            result.@ref = ref;
+
+            if ( program )
+                result.@program = program;
+
+            return result;
+        }
+
+        public static function parseSetparams( setparams:XMLList ):Vector.<ColladaSetparam>
+        {
+            var length:uint = setparams.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaSetparam> = new Vector.<ColladaSetparam>();
+            for each ( var setparam:XML in setparams )
+            {
+                result.push( new ColladaSetparam( setparam ) );
+            }
+
+            return result;
+        }
+    }
 }

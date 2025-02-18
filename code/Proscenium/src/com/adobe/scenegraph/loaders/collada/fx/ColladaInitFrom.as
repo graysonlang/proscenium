@@ -17,56 +17,56 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInitFrom
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "init_from";
-		public static const DEFAULT_MIPS_GENERATE:Boolean			= true;
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var mipsGenerate:Boolean;							// @mips_generate	xs:boolean		Optional	true
-		
-		// Exactly one of the following child elements must occur:
-		public var ref:String;										// <ref>			xs:anyURI		0 or 1
-//		public var hexData:ByteArray;								// <hex				binary octets	0 or 1
-//		public var hexFormat:String;								//  format=... >	xs:token		Required
-			
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInitFrom( initFromList:XMLList )
-		{
-			var initFrom:XML = initFromList[0];
-			if ( !initFrom )
-				return;
-			
-			mipsGenerate = "@mips_generate" in initFrom ? initFrom.@mips_generate : DEFAULT_MIPS_GENERATE; 
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInitFrom
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "init_from";
+        public static const DEFAULT_MIPS_GENERATE:Boolean           = true;
 
-			if ( initFrom.hasSimpleContent() )
-				ref = initFrom.text();
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			if ( mipsGenerate != DEFAULT_MIPS_GENERATE )
-				result.@mips_generate = mipsGenerate
-				
-			if ( ref )
-				result.setChildren( ref );
-				
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var mipsGenerate:Boolean;                            // @mips_generate   xs:boolean      Optional    true
+
+        // Exactly one of the following child elements must occur:
+        public var ref:String;                                      // <ref>            xs:anyURI       0 or 1
+//      public var hexData:ByteArray;                               // <hex             binary octets   0 or 1
+//      public var hexFormat:String;                                //  format=... >    xs:token        Required
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInitFrom( initFromList:XMLList )
+        {
+            var initFrom:XML = initFromList[0];
+            if ( !initFrom )
+                return;
+
+            mipsGenerate = "@mips_generate" in initFrom ? initFrom.@mips_generate : DEFAULT_MIPS_GENERATE;
+
+            if ( initFrom.hasSimpleContent() )
+                ref = initFrom.text();
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( mipsGenerate != DEFAULT_MIPS_GENERATE )
+                result.@mips_generate = mipsGenerate
+
+            if ( ref )
+                result.setChildren( ref );
+
+            return result;
+        }
+    }
 }

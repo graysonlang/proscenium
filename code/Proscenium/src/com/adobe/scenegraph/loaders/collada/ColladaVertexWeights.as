@@ -17,84 +17,84 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaVertexWeights extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "vertex_weights";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var count:uint;										// @count				Required
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaVertexWeights extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "vertex_weights";
 
-		public var inputs:Vector.<ColladaInputShared>;				// <input>(shared)		2 or more 
-		public var vcount:Vector.<uint>;							// <vcount>				0 or 1
-		public var v:Vector.<int>;									// <v>					0 or 1
-		;															// <extra>				0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaVertexWeights( vertexWeights:XML )
-		{ 
-			super( vertexWeights )
-			
-			count	= vertexWeights.@count;
-			inputs	= ColladaInputShared.parseInputs( vertexWeights.input );
-			vcount	= parseUintArray( vertexWeights.vcount );
-			v		= parseIntArray( vertexWeights.v );
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var count:uint;                                      // @count               Required
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        public var inputs:Vector.<ColladaInputShared>;              // <input>(shared)      2 or more
+        public var vcount:Vector.<uint>;                            // <vcount>             0 or 1
+        public var v:Vector.<int>;                                  // <v>                  0 or 1
+        ;                                                           // <extra>              0 or more
 
-			result.@count = count;
-			
-			for each ( var input:ColladaInputShared in inputs ) {
-				result.appendChild( input.toXML() );
-			}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaVertexWeights( vertexWeights:XML )
+        {
+            super( vertexWeights )
 
-			if ( vcount )
-				result.vcount = vcount.join( " " );
-			
-			if ( v )
-				result.v = v.join( " " );
-				
-			super.fillXML( result );
-			return result;
-		}
-		
-		public static function parseIntArray( list:XMLList ):Vector.<int>
-		{
-			if ( list.length() == 0 )
-				return null
-			
-			var element:XML = list[0];
-			if ( element.hasComplexContent() )
-				return null;
+            count   = vertexWeights.@count;
+            inputs  = ColladaInputShared.parseInputs( vertexWeights.input );
+            vcount  = parseUintArray( vertexWeights.vcount );
+            v       = parseIntArray( vertexWeights.v );
+        }
 
-			return Vector.<int>( element.text().toString().split( /\s+/ ) );
-		}
-		
-		public static function parseUintArray( list:XMLList ):Vector.<uint>
-		{
-			if ( list.length() == 0 )
-				return null
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
 
-			var element:XML = list[0];
-			if ( element.hasComplexContent() )
-				return null;
+            result.@count = count;
 
-			return Vector.<uint>( element.text().toString().split( /\s+/ ) );
-		}
-	}
+            for each ( var input:ColladaInputShared in inputs ) {
+                result.appendChild( input.toXML() );
+            }
+
+            if ( vcount )
+                result.vcount = vcount.join( " " );
+
+            if ( v )
+                result.v = v.join( " " );
+
+            super.fillXML( result );
+            return result;
+        }
+
+        public static function parseIntArray( list:XMLList ):Vector.<int>
+        {
+            if ( list.length() == 0 )
+                return null
+
+            var element:XML = list[0];
+            if ( element.hasComplexContent() )
+                return null;
+
+            return Vector.<int>( element.text().toString().split( /\s+/ ) );
+        }
+
+        public static function parseUintArray( list:XMLList ):Vector.<uint>
+        {
+            if ( list.length() == 0 )
+                return null
+
+            var element:XML = list[0];
+            if ( element.hasComplexContent() )
+                return null;
+
+            return Vector.<uint>( element.text().toString().split( /\s+/ ) );
+        }
+    }
 }

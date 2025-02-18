@@ -17,24 +17,24 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class VertexBufferAssignment
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public var offset:uint;
-		public var format:String;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class VertexBufferAssignment
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public var offset:uint;
+        public var format:String;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function VertexBufferAssignment( offset:uint, format:String = undefined )
-		{
-			this.offset = offset;
-			this.format = format ? format : VertexFormatElement.FLOAT_3;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function VertexBufferAssignment( offset:uint, format:String = undefined )
+        {
+            this.offset = offset;
+            this.format = format ? format : VertexFormatElement.FLOAT_3;
+        }
+    }
 }

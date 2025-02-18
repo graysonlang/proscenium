@@ -17,30 +17,30 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	///** Helper class that holds the resulting program and related information from the MaterialStandardShaderFactory **/
-	/**@private*/
-	internal class MaterialStandardShader
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var program:Program3DHandle;
-		public var materialInfo:uint
-		public var lightingInfo:uint;
-		public var format:VertexFormat;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function MaterialStandardShader( program:Program3DHandle, format:VertexFormat, materialInfo:uint, lightingInfo:uint )
-		{
-			this.program = program;
-			this.materialInfo = materialInfo;
-			this.lightingInfo = lightingInfo;
-			this.format = format;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    ///** Helper class that holds the resulting program and related information from the MaterialStandardShaderFactory **/
+    /**@private*/
+    internal class MaterialStandardShader
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var program:Program3DHandle;
+        public var materialInfo:uint
+        public var lightingInfo:uint;
+        public var format:VertexFormat;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function MaterialStandardShader( program:Program3DHandle, format:VertexFormat, materialInfo:uint, lightingInfo:uint )
+        {
+            this.program = program;
+            this.materialInfo = materialInfo;
+            this.lightingInfo = lightingInfo;
+            this.format = format;
+        }
+    }
 }

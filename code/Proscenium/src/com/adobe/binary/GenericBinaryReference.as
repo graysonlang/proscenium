@@ -17,57 +17,57 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/** @private **/
-	final internal class GenericBinaryReference
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected static const REGEXP_REMOVE_SPACING:RegExp			= /(?:[\r\n\t])+/g;
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var source:Object;
-		public var target:Object;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /** @private **/
+    final internal class GenericBinaryReference
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected static const REGEXP_REMOVE_SPACING:RegExp         = /(?:[\r\n\t])+/g;
 
-		protected var _refCount:uint;
-		protected var _id:int = -1;
-		public var position:uint;
-		public var written:Boolean;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		/** @private **/
-		public function set id( v:int ):void						{ _id = v; }
-		public function get id():int								{ return _id; }
-		
-		public function get refCount():uint							{ return _refCount; }
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var source:Object;
+        public var target:Object;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function GenericBinaryReference( source:Object, target:Object = null )
-		{
-			this.source = source;
-			this.target = target;
-			_refCount = 1;
-		}
-		
-		public function toString():String
-		{
-			var sourceString:String = source.toString().replace( REGEXP_REMOVE_SPACING, " " );
-			return "[GenericBinaryReference id=" + id + " refCount=" + _refCount + " source=" + sourceString + "]";
-		}
-		
-		public function addRef():void
-		{
-			//trace( "bumping ref count" );
-			_refCount++;
-		}
-	}
+        protected var _refCount:uint;
+        protected var _id:int = -1;
+        public var position:uint;
+        public var written:Boolean;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        /** @private **/
+        public function set id( v:int ):void                        { _id = v; }
+        public function get id():int                                { return _id; }
+
+        public function get refCount():uint                         { return _refCount; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function GenericBinaryReference( source:Object, target:Object = null )
+        {
+            this.source = source;
+            this.target = target;
+            _refCount = 1;
+        }
+
+        public function toString():String
+        {
+            var sourceString:String = source.toString().replace( REGEXP_REMOVE_SPACING, " " );
+            return "[GenericBinaryReference id=" + id + " refCount=" + _refCount + " source=" + sourceString + "]";
+        }
+
+        public function addRef():void
+        {
+            //trace( "bumping ref count" );
+            _refCount++;
+        }
+    }
 }

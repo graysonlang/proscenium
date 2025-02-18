@@ -17,47 +17,47 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaProfileCG extends ColladaProfileGLES
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "profile_CG";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		;															// @platform		xs:NCName
-		;															// <asset>			0 or 1
-		public var codes:Vector.<ColladaCode>;						// <code>			0 or more
-		public var includes:Vector.<ColladaInclude>;				// <include>		0 or more
-		;															// <newparam>		0 or more
-		;															// <technique>(FX)	1 or more
-		;															// <extra>			0 or more
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaProfileCG( profile:XML )
-		{
-			super( profile );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( profile:XML ):void
-		{
-			
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaProfileCG extends ColladaProfileGLES
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "profile_CG";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        ;                                                           // @platform        xs:NCName
+        ;                                                           // <asset>          0 or 1
+        public var codes:Vector.<ColladaCode>;                      // <code>           0 or more
+        public var includes:Vector.<ColladaInclude>;                // <include>        0 or more
+        ;                                                           // <newparam>       0 or more
+        ;                                                           // <technique>(FX)  1 or more
+        ;                                                           // <extra>          0 or more
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaProfileCG( profile:XML )
+        {
+            super( profile );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( profile:XML ):void
+        {
+
+        }
+    }
 }

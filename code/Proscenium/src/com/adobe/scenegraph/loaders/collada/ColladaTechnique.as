@@ -17,65 +17,65 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTechnique
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "technique";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTechnique
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "technique";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var contents:XML;
-		public var profile:String;
-		public var xmlns:String;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var contents:XML;
+        public var profile:String;
+        public var xmlns:String;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTechnique( technique:XML )
-		{
-			contents = technique;
-			profile = technique.@profile;
-			xmlns = technique.@xmlns;
-		}
-		
-		public static function parseTechniques( techniques:XMLList ):Vector.<ColladaTechnique>
-		{
-			if ( techniques.length() == 0 )
-				return null; 
-			
-			var result:Vector.<ColladaTechnique> = new Vector.<ColladaTechnique>();
-			
-			for each ( var technique:XML in techniques )
-			{
-				result.push( new ColladaTechnique( technique ) );
-			}
-			
-			return result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-				
-			if ( profile )
-				result.@profile = profile;
-			else
-			{
-				throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT )
-				trace( "<technique> missing profile." );
-			}
-			
-			if ( xmlns )
-				result.@xmlns = xmlns;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTechnique( technique:XML )
+        {
+            contents = technique;
+            profile = technique.@profile;
+            xmlns = technique.@xmlns;
+        }
 
-			result.setChildren( contents );
-			return result;
-		}
-	}
+        public static function parseTechniques( techniques:XMLList ):Vector.<ColladaTechnique>
+        {
+            if ( techniques.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaTechnique> = new Vector.<ColladaTechnique>();
+
+            for each ( var technique:XML in techniques )
+            {
+                result.push( new ColladaTechnique( technique ) );
+            }
+
+            return result;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( profile )
+                result.@profile = profile;
+            else
+            {
+                throw( Collada.ERROR_MISSING_REQUIRED_ELEMENT )
+                trace( "<technique> missing profile." );
+            }
+
+            if ( xmlns )
+                result.@xmlns = xmlns;
+
+            result.setChildren( contents );
+            return result;
+        }
+    }
 }

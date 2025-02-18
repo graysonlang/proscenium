@@ -17,86 +17,86 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaRender extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "render";
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementExtra;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var cameraNode:String;
-		public var layers:Vector.<String>;							// <layer>				0 or more
-		public var instanceMaterial:ColladaInstanceMaterial;		// <instance_material>	0 or 1
-		;															// <extra>				1 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaRender( collada:Collada, render:XML )
-		{
-			super( render );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaRender extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "render";
 
-			cameraNode = render.@cameraNode;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var cameraNode:String;
+        public var layers:Vector.<String>;                          // <layer>              0 or more
+        public var instanceMaterial:ColladaInstanceMaterial;        // <instance_material>  0 or 1
+        ;                                                           // <extra>              1 or more
 
-			if ( render.layer.length() > 0 )
-				layers = parseLayer( render.layer );
-			
-			if ( render.instance_material.length() > 0 )
-				instanceMaterial = new ColladaInstanceMaterial( collada, render.instance_material );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaRender( collada:Collada, render:XML )
+        {
+            super( render );
 
-			if ( cameraNode )
-				result.@cameraNode = cameraNode;
-			
-			if ( layers )
-				result.layer = layers.join(" " );
+            cameraNode = render.@cameraNode;
 
-			super.fillXML( result );
-			return result;
-		}
-		
-		public static function parseRenders( collada:Collada, renders:XMLList ):Vector.<ColladaRender>
-		{
-			var length:uint = renders.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaRender> = new Vector.<ColladaRender>();
-			
-			for each ( var render:XML in renders )
-			{
-				result.push( new ColladaRender( collada, render ) );
-			}
-			
-			return result;			
-		}
-		
-		protected static function parseLayer( layerList:XMLList ):Vector.<String>
-		{
-			var layer:XML = layerList[0];
-			if ( !layer || layer.hasComplexContent() )
-				return null;
-			
-			return Vector.<String>( layer.text().toString().split( /\s+/ ) );
-		}
-	}
+            if ( render.layer.length() > 0 )
+                layers = parseLayer( render.layer );
+
+            if ( render.instance_material.length() > 0 )
+                instanceMaterial = new ColladaInstanceMaterial( collada, render.instance_material );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( cameraNode )
+                result.@cameraNode = cameraNode;
+
+            if ( layers )
+                result.layer = layers.join(" " );
+
+            super.fillXML( result );
+            return result;
+        }
+
+        public static function parseRenders( collada:Collada, renders:XMLList ):Vector.<ColladaRender>
+        {
+            var length:uint = renders.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaRender> = new Vector.<ColladaRender>();
+
+            for each ( var render:XML in renders )
+            {
+                result.push( new ColladaRender( collada, render ) );
+            }
+
+            return result;
+        }
+
+        protected static function parseLayer( layerList:XMLList ):Vector.<String>
+        {
+            var layer:XML = layerList[0];
+            if ( !layer || layer.hasComplexContent() )
+                return null;
+
+            return Vector.<String>( layer.text().toString().split( /\s+/ ) );
+        }
+    }
 }

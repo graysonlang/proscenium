@@ -17,69 +17,69 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaExtra extends ColladaElementNamed
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "extra";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaExtra extends ColladaElementNamed
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "extra";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var asset:ColladaAsset;								// <asset>			0 or 1
-		public var techniques:Vector.<ColladaTechnique>;			// <technique>		1 or more	
-		
-		public var type:String;										// @type			Optional
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var asset:ColladaAsset;                              // <asset>          0 or 1
+        public var techniques:Vector.<ColladaTechnique>;            // <technique>      1 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaExtra( extra:XML )
-		{
-			super( extra );
+        public var type:String;                                     // @type            Optional
 
-			type = extra.@type;
-			
-			if ( extra.asset.length > 0 )
-				asset = new ColladaAsset( extra.asset );
-			techniques = ColladaTechnique.parseTechniques( extra.technique );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseExtras( extras:XMLList ):Vector.<ColladaExtra>
-		{
-			var length:uint = extras.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaExtra> = new Vector.<ColladaExtra>();
-			
-			for each ( var extra:XML in extras )
-			{
-				result.push( new ColladaExtra( extra ) );
-			}
-			
-			return result;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			if ( asset )
-				result.asset = asset.toXML();
-				
-			for each ( var technique:ColladaTechnique in techniques ) {
-				result.appendChild( technique.toXML() );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaExtra( extra:XML )
+        {
+            super( extra );
+
+            type = extra.@type;
+
+            if ( extra.asset.length > 0 )
+                asset = new ColladaAsset( extra.asset );
+            techniques = ColladaTechnique.parseTechniques( extra.technique );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseExtras( extras:XMLList ):Vector.<ColladaExtra>
+        {
+            var length:uint = extras.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaExtra> = new Vector.<ColladaExtra>();
+
+            for each ( var extra:XML in extras )
+            {
+                result.push( new ColladaExtra( extra ) );
+            }
+
+            return result;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( asset )
+                result.asset = asset.toXML();
+
+            for each ( var technique:ColladaTechnique in techniques ) {
+                result.appendChild( technique.toXML() );
+            }
+
+            return result;
+        }
+    }
 }

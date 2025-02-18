@@ -17,54 +17,54 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTechniqueFXCommon extends ColladaTechniqueFX
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		;															// @sid				sid_type		Required
-		;															// <asset>			0 or 1
-		public var commonShader:ColladaConstant;					// <blinn>, <constant>, <lambert>, or <phong>	1
-		;															// <extra>			0 or more
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTechniqueFXCommon extends ColladaTechniqueFX
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        ;                                                           // @sid             sid_type        Required
+        ;                                                           // <asset>          0 or 1
+        public var commonShader:ColladaConstant;                    // <blinn>, <constant>, <lambert>, or <phong>   1
+        ;                                                           // <extra>          0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTechniqueFXCommon( technique:XML )
-		{
-			super( technique );
-			if ( !technique )
-				return;
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTechniqueFXCommon( technique:XML )
+        {
+            super( technique );
+            if ( !technique )
+                return;
 
-			commonShader = parseCommonShader( technique );
-		}
+            commonShader = parseCommonShader( technique );
+        }
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			element.appendChild( commonShader.toXML() );
-			
-			super.fillXML( element );
-		}
-	
-		protected static function parseCommonShader( technique:XML ):ColladaConstant
-		{
-			if ( technique.hasOwnProperty( ColladaBlinn.TAG ) )
-				return new ColladaBlinn( technique.blinn[0] );
-			else if ( technique.hasOwnProperty( ColladaConstant.TAG ) )
-				return new ColladaConstant( technique.constant[0] );
-			else if ( technique.hasOwnProperty( ColladaPhong.TAG ) )
-				return new ColladaPhong( technique.phong[0] );
-			else if ( technique.hasOwnProperty( ColladaLambert.TAG ) )
-				return new ColladaLambert( technique.lambert[0] );
-			
-			return null;
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            element.appendChild( commonShader.toXML() );
+
+            super.fillXML( element );
+        }
+
+        protected static function parseCommonShader( technique:XML ):ColladaConstant
+        {
+            if ( technique.hasOwnProperty( ColladaBlinn.TAG ) )
+                return new ColladaBlinn( technique.blinn[0] );
+            else if ( technique.hasOwnProperty( ColladaConstant.TAG ) )
+                return new ColladaConstant( technique.constant[0] );
+            else if ( technique.hasOwnProperty( ColladaPhong.TAG ) )
+                return new ColladaPhong( technique.phong[0] );
+            else if ( technique.hasOwnProperty( ColladaLambert.TAG ) )
+                return new ColladaLambert( technique.lambert[0] );
+
+            return null;
+        }
+    }
 }

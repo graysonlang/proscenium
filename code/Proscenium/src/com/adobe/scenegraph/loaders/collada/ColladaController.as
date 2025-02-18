@@ -17,49 +17,49 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaController extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "controller";
-		
-		protected static const ERROR_UNSUPPORTED_ELEMENT_TYPE:Error = new Error( "Unsupported control element type!" );
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;														// <asset>				0 or 1
-		public var controlElement:ColladaControlElement;		// <skin> or <morph>	1
-		;														// <extra>				0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaController( controller:XML )	
-		{
-			super( controller );
-			
-			if ( controller.skin.length() > 0 )
-				controlElement = new ColladaSkin( controller.skin[0] );
-			else if ( controller.morph.length() > 0 )
-				controlElement = new ColladaMorph( controller.morph[0] );
-		}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaController extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "controller";
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			result.appendChild( controlElement.toXML() ); 
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+        protected static const ERROR_UNSUPPORTED_ELEMENT_TYPE:Error = new Error( "Unsupported control element type!" );
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                       // <asset>              0 or 1
+        public var controlElement:ColladaControlElement;        // <skin> or <morph>    1
+        ;                                                       // <extra>              0 or more
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaController( controller:XML )
+        {
+            super( controller );
+
+            if ( controller.skin.length() > 0 )
+                controlElement = new ColladaSkin( controller.skin[0] );
+            else if ( controller.morph.length() > 0 )
+                controlElement = new ColladaMorph( controller.morph[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.appendChild( controlElement.toXML() );
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

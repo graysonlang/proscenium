@@ -17,57 +17,57 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.obj
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.ModelData;
-	import com.adobe.scenegraph.loaders.ModelAsset;
-	import com.adobe.scenegraph.loaders.ModelEncoder;
-	import com.adobe.scenegraph.loaders.ModelEncoderSettings;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class OBJEncoder extends ModelEncoder
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.ModelData;
+    import com.adobe.scenegraph.loaders.ModelAsset;
+    import com.adobe.scenegraph.loaders.ModelEncoder;
+    import com.adobe.scenegraph.loaders.ModelEncoderSettings;
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class OBJEncoder extends ModelEncoder
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
 
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function OBJEncoder()
-		{
-			super();
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function encode( model:ModelData, settings:ModelEncoderSettings ):Vector.<ModelAsset>
-		{
-			var result:Vector.<ModelAsset> = new Vector.<ModelAsset>();
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
 
-			trace( "scale", model.scale );
-			trace( "upAxis", model.upAxis );
-			trace( "flags", model.flags );
-			trace( "name", model.name );
-			trace( "filename", model.filename );
-			trace( "activeScene", model.activeScene );
-			
-			model.meshDict;
-			model.meshes;
-			
-			model.materials;
-			model.materialDict;
-			
-			return result;
-		}
-	}
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function OBJEncoder()
+        {
+            super();
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function encode( model:ModelData, settings:ModelEncoderSettings ):Vector.<ModelAsset>
+        {
+            var result:Vector.<ModelAsset> = new Vector.<ModelAsset>();
+
+            trace( "scale", model.scale );
+            trace( "upAxis", model.upAxis );
+            trace( "flags", model.flags );
+            trace( "name", model.name );
+            trace( "filename", model.filename );
+            trace( "activeScene", model.activeScene );
+
+            model.meshDict;
+            model.meshes;
+
+            model.materials;
+            model.materialDict;
+
+            return result;
+        }
+    }
 }

@@ -17,21 +17,21 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * @private
-	 * Utility class to assist in fast dual dispatch of Sampler to update a wired Attribute.
-	 */
-	public class Functoid
-	{
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function apply( sampler:Sampler, time:Number, output:Attribute ):void
-		{
-			throw( Attribute.ERROR_MISSING_OVERRIDE );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * @private
+     * Utility class to assist in fast dual dispatch of Sampler to update a wired Attribute.
+     */
+    public class Functoid
+    {
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function apply( sampler:Sampler, time:Number, output:Attribute ):void
+        {
+            throw( Attribute.ERROR_MISSING_OVERRIDE );
+        }
+    }
 }

@@ -17,32 +17,32 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ModelAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var targetObject:*;
-		public var sourceFilename:String;
-		//public var parentFilename:String;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ModelAsset( targetObject:*, sourceFilename:String
-									//, parentFilename:String
-		)
-		{
-			this.targetObject = targetObject
-			this.sourceFilename = sourceFilename;
-		//	this.parentFilename = parentFilename;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ModelAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var targetObject:*;
+        public var sourceFilename:String;
+        //public var parentFilename:String;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ModelAsset( targetObject:*, sourceFilename:String
+                                    //, parentFilename:String
+        )
+        {
+            this.targetObject = targetObject
+            this.sourceFilename = sourceFilename;
+        //  this.parentFilename = parentFilename;
+        }
+    }
 }

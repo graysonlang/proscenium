@@ -17,68 +17,68 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaBindVertexInput
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "bind_vertex_input";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------	
-		public var semantic:String;									// @semantic		xs:NCName		Required
-		public var inputSemantic:String;							// @input_semantic	xs:NCName		Required
-		public var inputSet:int = -1;								// @input_set		uint_type
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------	
-		public function ColladaBindVertexInput( element:XML )
-		{
-			if ( !element )
-				return;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaBindVertexInput
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "bind_vertex_input";
 
-//			semantic		= ColladaInput.parseSemantic( element.@semantic );
-//			inputSemantic	= ColladaInput.parseSemantic( element.@input_semantic );
-			semantic		= element.@semantic;
-			inputSemantic	= element.@input_semantic;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var semantic:String;                                 // @semantic        xs:NCName       Required
+        public var inputSemantic:String;                            // @input_semantic  xs:NCName       Required
+        public var inputSet:int = -1;                               // @input_set       uint_type
 
-			if ( element.input_set )
-				inputSet = element.@input_set[0];
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			result.@semantic		= semantic;
-			result.@input_semantic	= inputSemantic;
-			
-			if ( inputSet != -1 )
-				result.@input_set = inputSet;
-			
-			return result;
-		}
-		
-		public static function parseInputs( inputs:XMLList ):Vector.<ColladaBindVertexInput>
-		{
-			var length:uint = inputs.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaBindVertexInput> = new Vector.<ColladaBindVertexInput>();
-			for each ( var input:XML in inputs ) {
-				result.push( new ColladaBindVertexInput( input ) );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaBindVertexInput( element:XML )
+        {
+            if ( !element )
+                return;
+
+//          semantic        = ColladaInput.parseSemantic( element.@semantic );
+//          inputSemantic   = ColladaInput.parseSemantic( element.@input_semantic );
+            semantic        = element.@semantic;
+            inputSemantic   = element.@input_semantic;
+
+            if ( element.input_set )
+                inputSet = element.@input_set[0];
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.@semantic        = semantic;
+            result.@input_semantic  = inputSemantic;
+
+            if ( inputSet != -1 )
+                result.@input_set = inputSet;
+
+            return result;
+        }
+
+        public static function parseInputs( inputs:XMLList ):Vector.<ColladaBindVertexInput>
+        {
+            var length:uint = inputs.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaBindVertexInput> = new Vector.<ColladaBindVertexInput>();
+            for each ( var input:XML in inputs ) {
+                result.push( new ColladaBindVertexInput( input ) );
+            }
+
+            return result;
+        }
+    }
 }

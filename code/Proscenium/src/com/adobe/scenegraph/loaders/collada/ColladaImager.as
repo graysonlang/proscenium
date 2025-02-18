@@ -17,43 +17,43 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaImager extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "imager";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaImager extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "imager";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var techniques:Vector.<ColladaTechnique>;			// <technique>				1 or more
-		;															// <extra>					0 or more
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var techniques:Vector.<ColladaTechnique>;            // <technique>              1 or more
+        ;                                                           // <extra>                  0 or more
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaImager( imagerList:XMLList )
-		{
-			var imager:XML = imagerList[0];
-			super( imager );
-			if ( !imager )
-				return;
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			for each ( var technique:ColladaTechnique in techniques ) {
-				result.appendChild( technique.toXML() );
-			}
-				
-			super.fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaImager( imagerList:XMLList )
+        {
+            var imager:XML = imagerList[0];
+            super( imager );
+            if ( !imager )
+                return;
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            for each ( var technique:ColladaTechnique in techniques ) {
+                result.appendChild( technique.toXML() );
+            }
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

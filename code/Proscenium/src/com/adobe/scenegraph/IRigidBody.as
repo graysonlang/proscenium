@@ -17,51 +17,51 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.geom.Matrix3D;
-	import flash.geom.Vector3D;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.geom.Matrix3D;
+    import flash.geom.Vector3D;
 
-	// ===========================================================================
-	//	Interface
-	// ---------------------------------------------------------------------------
-	public interface IRigidBody
-	{
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		function set transform( value:Vector.<Number> ):void;
-		
-		/** @private **/
-		function set collisionFlags( v:int ):void;
-		function get collisionFlags():int;
-		
-		/** @private **/
-		function set friction( v:Number ):void;
-		function get friction():Number;
-		
-		/** @private **/
-		function set restitution( v:Number ):void;		
-		function get restitution():Number;
-		
-		function set mass( v:Number ):void;
-		function get mass():Number;
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		function doActivate( forceActivation:Boolean = false ):void;
-		
-		function setVelocityAngular( x:Number = 0, y:Number = 0, z:Number = 0 ):void;
-			
-		function setVelocityLinear( x:Number = 0, y:Number = 0, z:Number = 0 ):void;
-		function getVelocityLinear( result:Vector3D = null ):Vector3D;
-		
-		//function updateTransform():void;
-		
-		function applyImpulseToCenter( x:Number, y:Number, z:Number ):void
-			
-		function setWorldTransformBasis( matrix:Matrix3D ):void
-	}
+    // ===========================================================================
+    //  Interface
+    // ---------------------------------------------------------------------------
+    public interface IRigidBody
+    {
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        function set transform( value:Vector.<Number> ):void;
+
+        /** @private **/
+        function set collisionFlags( v:int ):void;
+        function get collisionFlags():int;
+
+        /** @private **/
+        function set friction( v:Number ):void;
+        function get friction():Number;
+
+        /** @private **/
+        function set restitution( v:Number ):void;
+        function get restitution():Number;
+
+        function set mass( v:Number ):void;
+        function get mass():Number;
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        function doActivate( forceActivation:Boolean = false ):void;
+
+        function setVelocityAngular( x:Number = 0, y:Number = 0, z:Number = 0 ):void;
+
+        function setVelocityLinear( x:Number = 0, y:Number = 0, z:Number = 0 ):void;
+        function getVelocityLinear( result:Vector3D = null ):Vector3D;
+
+        //function updateTransform():void;
+
+        function applyImpulseToCenter( x:Number, y:Number, z:Number ):void
+
+        function setWorldTransformBasis( matrix:Matrix3D ):void
+    }
 }

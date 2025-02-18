@@ -17,74 +17,74 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final internal class ValueFloat extends GenericBinaryEntry
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TYPE_ID:uint							= TYPE_FLOAT;
-		public static const CLASS_NAME:String						= "ValueFloat";
-		public static const SIZE:uint								= 8;
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Number;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ValueFloat( id:uint, value:Number )
-		{
-			super( id, TYPE_ID );
-			_value = value;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
-		{
-			// 2 bytes: id
-			bytes.writeShort( id );
-			
-			// 2 bytes: flags/type
-			bytes.writeShort( TYPE_ID );
-			
-			// 4 bytes: value
-			bytes.writeFloat( _value );
-			
-			return SIZE;
-		}
-		
-		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
-		{
-			xml.setName( CLASS_NAME );
-			xml.@name = format.getIDString( tag, id );
-			xml.@type = TYPE_ID;
-			xml.@id = id;
-			xml.@size = SIZE;
-			xml.setChildren( _value );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final internal class ValueFloat extends GenericBinaryEntry
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TYPE_ID:uint                            = TYPE_FLOAT;
+        public static const CLASS_NAME:String                       = "ValueFloat";
+        public static const SIZE:uint                               = 8;
 
-			return write( bytes, referenceTable, format );
-		}
-		
-		override public function getFloat():Number
-		{
-			return _value;
-		}
-		
-		override public function getDouble():Number
-		{
-			return _value;
-		}
-	}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Number;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ValueFloat( id:uint, value:Number )
+        {
+            super( id, TYPE_ID );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
+        {
+            // 2 bytes: id
+            bytes.writeShort( id );
+
+            // 2 bytes: flags/type
+            bytes.writeShort( TYPE_ID );
+
+            // 4 bytes: value
+            bytes.writeFloat( _value );
+
+            return SIZE;
+        }
+
+        override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
+        {
+            xml.setName( CLASS_NAME );
+            xml.@name = format.getIDString( tag, id );
+            xml.@type = TYPE_ID;
+            xml.@id = id;
+            xml.@size = SIZE;
+            xml.setChildren( _value );
+
+            return write( bytes, referenceTable, format );
+        }
+
+        override public function getFloat():Number
+        {
+            return _value;
+        }
+
+        override public function getDouble():Number
+        {
+            return _value;
+        }
+    }
 }

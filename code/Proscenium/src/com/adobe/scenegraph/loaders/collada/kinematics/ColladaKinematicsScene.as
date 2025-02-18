@@ -17,55 +17,55 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.kinematics
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.Collada;
-	import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaKinematicsScene extends ColladaElementAsset
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String = "kinematics_scene";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;													// <asset>			0 or 1
-		// TODO
-		;													// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaKinematicsScene( collada:Collada, kinematicsSceneList:XML )
-		{
-			var kinematicsScene:XML = kinematicsSceneList[0];
-			super( kinematicsScene );
-			if ( !kinematicsScene )
-				return;
-			
-			// TODO
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			// TODO
-			trace( Collada.COMMENT_UNIMPLEMENTED, TAG );
-			result.setChildren( Collada.COMMENT_UNIMPLEMENTED );
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.Collada;
+    import com.adobe.scenegraph.loaders.collada.ColladaElementAsset;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaKinematicsScene extends ColladaElementAsset
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String = "kinematics_scene";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                   // <asset>          0 or 1
+        // TODO
+        ;                                                   // <extra>          0 or more
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaKinematicsScene( collada:Collada, kinematicsSceneList:XML )
+        {
+            var kinematicsScene:XML = kinematicsSceneList[0];
+            super( kinematicsScene );
+            if ( !kinematicsScene )
+                return;
+
+            // TODO
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            // TODO
+            trace( Collada.COMMENT_UNIMPLEMENTED, TAG );
+            result.setChildren( Collada.COMMENT_UNIMPLEMENTED );
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

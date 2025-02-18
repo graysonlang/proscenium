@@ -17,109 +17,109 @@
 // ============================================================================
 package com.adobe.wiring
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final public class AttributeNumber extends Attribute implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const CLASS_NAME:String						= "AttributeNumber";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final public class AttributeNumber extends Attribute implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const CLASS_NAME:String                       = "AttributeNumber";
 
-		// --------------------------------------------------
-		protected static const IDS:Array							= [];
-		protected static const ID_VALUE:uint						= 110;
-		IDS[ ID_VALUE ]												= "Value";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Number;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get className():String				{ return CLASS_NAME; }
+        // --------------------------------------------------
+        protected static const IDS:Array                            = [];
+        protected static const ID_VALUE:uint                        = 110;
+        IDS[ ID_VALUE ]                                             = "Value";
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function AttributeNumber( owner:IWirable = null, value:Number = undefined, name:String = undefined )
-		{
-			super( owner, name );
-			_value = value;
-		}
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Number;
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override public function getNumber():Number
-		{
-			if ( _source )
-				_value = _source.getNumber();
-			else if ( _owner && dirty )
-				_owner.evaluate( this );
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get className():String             { return CLASS_NAME; }
 
-			_dirty = false;
-			return _value;
-		}
-		
-		override public function getNumberCached():Number
-		{
-			return _value;
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function AttributeNumber( owner:IWirable = null, value:Number = undefined, name:String = undefined )
+        {
+            super( owner, name );
+            _value = value;
+        }
 
-		override public function setNumber( value:Number ):void
-		{
-			if ( _source )
-				throw( Attribute.ERROR_CANNOT_SET );
-			
-			_value = value;
-			_dirty = false;
-			
-			if ( _owner )
-				_owner.setDirty( this );
-			
-			for each ( var attribute:Attribute in _targets ) {
-				attribute.dirty = true;
-			}
-		}
-		
-		// --------------------------------------------------
-		
-		public static function getIDString( id:uint ):String
-		{
-			var result:String = IDS[ id ];
-			return result ? result : Attribute.getIDString( id );
-		}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override public function getNumber():Number
+        {
+            if ( _source )
+                _value = _source.getNumber();
+            else if ( _owner && dirty )
+                _owner.evaluate( this );
 
-		override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			super.toBinaryDictionary( dictionary );
-			
-			dictionary.setFloat( ID_VALUE, _value );
-		}
-		
-		override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_VALUE:	_value = entry.getFloat();		break;
-					
-					default:
-						super.readBinaryEntry( entry );
-				}
-			}
-		}
-	}
+            _dirty = false;
+            return _value;
+        }
+
+        override public function getNumberCached():Number
+        {
+            return _value;
+        }
+
+        override public function setNumber( value:Number ):void
+        {
+            if ( _source )
+                throw( Attribute.ERROR_CANNOT_SET );
+
+            _value = value;
+            _dirty = false;
+
+            if ( _owner )
+                _owner.setDirty( this );
+
+            for each ( var attribute:Attribute in _targets ) {
+                attribute.dirty = true;
+            }
+        }
+
+        // --------------------------------------------------
+
+        public static function getIDString( id:uint ):String
+        {
+            var result:String = IDS[ id ];
+            return result ? result : Attribute.getIDString( id );
+        }
+
+        override public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            super.toBinaryDictionary( dictionary );
+
+            dictionary.setFloat( ID_VALUE, _value );
+        }
+
+        override public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_VALUE:  _value = entry.getFloat();      break;
+
+                    default:
+                        super.readBinaryEntry( entry );
+                }
+            }
+        }
+    }
 }

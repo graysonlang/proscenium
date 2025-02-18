@@ -17,74 +17,74 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaBindMaterial;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaBindMaterial;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceGeometry extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "instance_geometry";
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceGeometry extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "instance_geometry";
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @sid					sid_type
-		;															// @name				xs:token
-		;															// @url					xs:anyURI	Required
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @sid                 sid_type
+        ;                                                           // @name                xs:token
+        ;                                                           // @url                 xs:anyURI   Required
 
-		public var bindMaterial:ColladaBindMaterial;				// <bind_material>		0 or 1
-		;															// <extra>				0 or more
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
+        public var bindMaterial:ColladaBindMaterial;                // <bind_material>      0 or 1
+        ;                                                           // <extra>              0 or more
 
-		public function get geometry():ColladaGeometry { return _collada.getGeometry( url ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceGeometry( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-			
-			if ( instance.bind_material[0] )
-				bindMaterial = new ColladaBindMaterial( collada, instance.bind_material[0] );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( instance:XML ):void
-		{
-			if ( bindMaterial )
-				instance.bindMaterial = bindMaterial.toXML();
-			
-			super.fillXML( instance );
-		}	
-		
-		public static function parseInstanceGeometries( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceGeometry>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceGeometry> = new Vector.<ColladaInstanceGeometry>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceGeometry( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get geometry():ColladaGeometry { return _collada.getGeometry( url ); }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceGeometry( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+
+            if ( instance.bind_material[0] )
+                bindMaterial = new ColladaBindMaterial( collada, instance.bind_material[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( instance:XML ):void
+        {
+            if ( bindMaterial )
+                instance.bindMaterial = bindMaterial.toXML();
+
+            super.fillXML( instance );
+        }
+
+        public static function parseInstanceGeometries( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceGeometry>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceGeometry> = new Vector.<ColladaInstanceGeometry>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceGeometry( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

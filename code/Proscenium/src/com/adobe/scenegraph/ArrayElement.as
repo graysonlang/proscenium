@@ -17,69 +17,69 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.binary.GenericBinaryDictionary;
-	import com.adobe.binary.GenericBinaryEntry;
-	import com.adobe.binary.IBinarySerializable;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ArrayElement implements IBinarySerializable
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const IDS:Array								= [];
-		public static const ID_NAME:uint							= 1;
-		IDS[ ID_NAME ]												= "Name";
-		public static const ID_COUNT:uint							= 10;
-		IDS[ ID_COUNT ]												= "Count";
-		public static const ID_VALUES:uint							= 20;
-		IDS[ ID_VALUES ]											= "Values";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var count:uint;
-		public var name:String;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ArrayElement( count:uint = 0, name:String = undefined )
-		{
-			this.count = count;
-			this.name = name;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
-		{
-			dictionary.setString( ID_NAME, name );
-		}
-		
-		public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
-		{
-			if ( entry )
-			{
-				switch( entry.id )
-				{
-					case ID_NAME:				name = entry.getString();				break;
-					
-					default:
-						trace( "Unknown entry ID:", entry.id );
-				}
-			}
-		}
-		
-		public static function getIDString( id:uint ):String
-		{
-			return IDS[ id ];
-		}
-	}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.binary.GenericBinaryDictionary;
+    import com.adobe.binary.GenericBinaryEntry;
+    import com.adobe.binary.IBinarySerializable;
+
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ArrayElement implements IBinarySerializable
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const IDS:Array                               = [];
+        public static const ID_NAME:uint                            = 1;
+        IDS[ ID_NAME ]                                              = "Name";
+        public static const ID_COUNT:uint                           = 10;
+        IDS[ ID_COUNT ]                                             = "Count";
+        public static const ID_VALUES:uint                          = 20;
+        IDS[ ID_VALUES ]                                            = "Values";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var count:uint;
+        public var name:String;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ArrayElement( count:uint = 0, name:String = undefined )
+        {
+            this.count = count;
+            this.name = name;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toBinaryDictionary( dictionary:GenericBinaryDictionary ):void
+        {
+            dictionary.setString( ID_NAME, name );
+        }
+
+        public function readBinaryEntry( entry:GenericBinaryEntry = null ):void
+        {
+            if ( entry )
+            {
+                switch( entry.id )
+                {
+                    case ID_NAME:               name = entry.getString();               break;
+
+                    default:
+                        trace( "Unknown entry ID:", entry.id );
+                }
+            }
+        }
+
+        public static function getIDString( id:uint ):String
+        {
+            return IDS[ id ];
+        }
+    }
 }

@@ -17,64 +17,64 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaAnnotate;
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaModifier;
-	import com.adobe.scenegraph.loaders.collada.fx.ColladaSemantic;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaNewparam extends ColladaElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "newparam";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var annotates:Vector.<ColladaAnnotate>;				// <annotate>					0 or more
-		public var semantic:String;									// <semantic>					0 or 1
-		public var modifier:String;									// <modifier>					0 or 1
-		public var parameter:ColladaParameter;						// "parameter_type_element"		1
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaAnnotate;
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaModifier;
+    import com.adobe.scenegraph.loaders.collada.fx.ColladaSemantic;
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaNewparam( element:XML = null )
-		{
-			super( element );
-			
-			annotates = ColladaAnnotate.parseAnnotates( element.annotate );
-			semantic = ColladaSemantic.parseSemantic( element.semantic[0] );
-			modifier = ColladaModifier.parseModifier( element.modifier[0] );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaNewparam extends ColladaElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "newparam";
 
-			for each ( var annotate:ColladaAnnotate in annotates ) {
-				result.appendChild( annotate.toXML );
-			}
-			if ( semantic )
-				result.semantic = semantic;
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var annotates:Vector.<ColladaAnnotate>;              // <annotate>                   0 or more
+        public var semantic:String;                                 // <semantic>                   0 or 1
+        public var modifier:String;                                 // <modifier>                   0 or 1
+        public var parameter:ColladaParameter;                      // "parameter_type_element"     1
 
-			if ( modifier )
-				result.modifier = modifier;
-			
-			if ( parameter )
-				result.appendChild( parameter.toXML() );
-			
-			super.fillXML( result );
-			return result;
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaNewparam( element:XML = null )
+        {
+            super( element );
+
+            annotates = ColladaAnnotate.parseAnnotates( element.annotate );
+            semantic = ColladaSemantic.parseSemantic( element.semantic[0] );
+            modifier = ColladaModifier.parseModifier( element.modifier[0] );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            for each ( var annotate:ColladaAnnotate in annotates ) {
+                result.appendChild( annotate.toXML );
+            }
+            if ( semantic )
+                result.semantic = semantic;
+
+            if ( modifier )
+                result.modifier = modifier;
+
+            if ( parameter )
+                result.appendChild( parameter.toXML() );
+
+            super.fillXML( result );
+            return result;
+        }
+    }
 }

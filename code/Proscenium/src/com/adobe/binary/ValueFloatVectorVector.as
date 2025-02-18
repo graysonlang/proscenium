@@ -17,62 +17,62 @@
 // ============================================================================
 package com.adobe.binary
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.utils.ByteArray;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	final internal class ValueFloatVectorVector extends ValueObject
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TYPE_ID:uint							= TYPE_FLOAT;
-		public static const CLASS_NAME:String						= "ValueFloatVectorVector";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _value:Vector.<Vector.<Number>>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get count():uint					{ return _value.length; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ValueFloatVectorVector( id:uint, container:GenericBinaryContainer, value:Vector.<Vector.<Number>> )
-		{
-			super( id, TYPE_ID, container, value );
-			_value = value;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
-		{
-			return writeVectorVector( bytes, TYPE_ID,  _value, format );
-		}
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.utils.ByteArray;
 
-		override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
-		{
-			return writeVectorVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
-		}
-		
-		override public function getFloatVectorVector():Vector.<Vector.<Number>>
-		{
-			return _value;
-		}
-		
-		override public function getDoubleVectorVector():Vector.<Vector.<Number>>
-		{
-			return _value;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    final internal class ValueFloatVectorVector extends ValueObject
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TYPE_ID:uint                            = TYPE_FLOAT;
+        public static const CLASS_NAME:String                       = "ValueFloatVectorVector";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _value:Vector.<Vector.<Number>>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get count():uint                   { return _value.length; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ValueFloatVectorVector( id:uint, container:GenericBinaryContainer, value:Vector.<Vector.<Number>> )
+        {
+            super( id, TYPE_ID, container, value );
+            _value = value;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override internal function write( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription ):uint
+        {
+            return writeVectorVector( bytes, TYPE_ID,  _value, format );
+        }
+
+        override internal function writeXML( bytes:ByteArray, referenceTable:GenericBinaryReferenceTable, format:GenericBinaryFormatDescription, xml:XML, tag:uint ):uint
+        {
+            return writeVectorVectorXML( bytes, TYPE_ID, _value, format, CLASS_NAME, xml, tag );
+        }
+
+        override public function getFloatVectorVector():Vector.<Vector.<Number>>
+        {
+            return _value;
+        }
+
+        override public function getDoubleVectorVector():Vector.<Vector.<Number>>
+        {
+            return _value;
+        }
+    }
 }

@@ -17,56 +17,56 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaArrayElement extends ColladaElementNamed
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const ERROR_BAD_FORMAT:Error = new Error( "BAD ARRAY ELEMENT!" );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaArrayElement extends ColladaElementNamed
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const ERROR_BAD_FORMAT:Error = new Error( "BAD ARRAY ELEMENT!" );
 
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var count:uint;										// @count	Required
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var count:uint;                                      // @count   Required
 
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaArrayElement( element:XML = null )
-		{
-			super( element );
-			
-			count = element.@count;
-			parseValues( element );
-		}
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get tag():String { throw( Collada.ERROR_MISSING_OVERRIDE ); }
 
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + tag + "/>" );
-			fillXML( result );
-			return result;
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaArrayElement( element:XML = null )
+        {
+            super( element );
 
-		override protected function fillXML( arrayElement:XML ):void
-		{
-			arrayElement.@count = count;
-			super.fillXML( arrayElement );
-		}
+            count = element.@count;
+            parseValues( element );
+        }
 
-		protected function parseValues( arrayElement:XML ):void
-		{
-			throw( Collada.ERROR_MISSING_OVERRIDE );
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + tag + "/>" );
+            fillXML( result );
+            return result;
+        }
+
+        override protected function fillXML( arrayElement:XML ):void
+        {
+            arrayElement.@count = count;
+            super.fillXML( arrayElement );
+        }
+
+        protected function parseValues( arrayElement:XML ):void
+        {
+            throw( Collada.ERROR_MISSING_OVERRIDE );
+        }
+    }
 }

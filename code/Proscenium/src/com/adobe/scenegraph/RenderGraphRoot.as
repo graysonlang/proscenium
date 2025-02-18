@@ -17,101 +17,101 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// This algorithm is covered by AdobePatentID="B1410"
+    // This algorithm is covered by AdobePatentID="B1410"
 
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import flash.geom.Vector3D;
-	
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * RGRoot is the root node of render graph, which is used to automatically order rendering jobs.
-	 */
-	public class RenderGraphRoot extends RenderGraphNode
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		protected var _orderedRenderGraphNodes:Vector.<RenderGraphNode>;		// rendering order. this must used only by the RenderGraph root node
-		protected var _stackSCC:Vector.<RenderGraphNode>;					// list of RGNode's that are not done 
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import flash.geom.Vector3D;
 
-		// ----------------------------------------------------------------------
-		// additional things we need for rendergraph goes here
-		public    var  sceneCameraPosition:Vector3D;		// billboard texture update (that needs rendering) need this
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get orderedRenderGraphNodes():Vector.<RenderGraphNode> {return _orderedRenderGraphNodes;}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function RenderGraphRoot( primary:Boolean=false, name:String = null )
-		{
-			super(primary, name);
-			
-			_orderedRenderGraphNodes = new Vector.<RenderGraphNode>;
-			_stackSCC                = new Vector.<RenderGraphNode>;
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * RGRoot is the root node of render graph, which is used to automatically order rendering jobs.
+     */
+    public class RenderGraphRoot extends RenderGraphNode
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        protected var _orderedRenderGraphNodes:Vector.<RenderGraphNode>;        // rendering order. this must used only by the RenderGraph root node
+        protected var _stackSCC:Vector.<RenderGraphNode>;                   // list of RGNode's that are not done
 
-			sceneCameraPosition = new Vector3D; 
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function buildDependencyGraph( ):void
-		{
-			setAllUnvisited(); // create a new traversal ID 
-			traverseToBuildDependencyGraph( this );
-		}
-		
-		public function orderRenderGraphNodes():void
-		{
-			// 1. compute strongly connected components  
-			//      Tarjan and Gabow both have O(V+E) => use Tarjan, which needs only one stack. 
-			// 2. topological ordering: use DFS built in step 1.
+        // ----------------------------------------------------------------------
+        // additional things we need for rendergraph goes here
+        public    var  sceneCameraPosition:Vector3D;        // billboard texture update (that needs rendering) need this
 
-			setAllUnvisited(); 
-			_indexCounter  					= 0;
-			_orderedRenderGraphNodes.length = 0;
-			_stackSCC.length				= 0;
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get orderedRenderGraphNodes():Vector.<RenderGraphNode> {return _orderedRenderGraphNodes;}
 
-			traverseToOrderRenderGraphNodes( _orderedRenderGraphNodes, _stackSCC );
-		}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function RenderGraphRoot( primary:Boolean=false, name:String = null )
+        {
+            super(primary, name);
 
-		override public function dumpRenderGraph():void
-		{
-			setAllUnvisited();
-			trace( "==== RenderGraph: prerequsite lists ====" );
-			super.dumpRenderGraph();
-		}
+            _orderedRenderGraphNodes = new Vector.<RenderGraphNode>;
+            _stackSCC                = new Vector.<RenderGraphNode>;
 
-		public function dumpOrderedRenderGraphNodes():void
-		{
-			if ( !_orderedRenderGraphNodes )
-				return;
+            sceneCameraPosition = new Vector3D;
+        }
 
-			trace( "==== ordered RenderGraphNodes ====" );
-			var order:uint = 0;
-			for each ( var r:RenderGraphNode in _orderedRenderGraphNodes )
-			{
-				trace( "\t#" + order + ". " + r.name + ", shadow=" + r.isShadowEnabledTarget + ", swap=" + r.swappingEnabled );
-				order++;
-			}
-		}
-		
-		public function renderOrdered( settings:RenderSettings, style:uint = 0 ):void
-		{
-			for each ( var r:RenderGraphNode in _orderedRenderGraphNodes ) 
-			{
-				trace("Rendering RGNode" + r.name);
-				settings.renderNode = r;
-				r.render( settings, style );
-			}
-		}
-	}
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function buildDependencyGraph( ):void
+        {
+            setAllUnvisited(); // create a new traversal ID
+            traverseToBuildDependencyGraph( this );
+        }
+
+        public function orderRenderGraphNodes():void
+        {
+            // 1. compute strongly connected components
+            //      Tarjan and Gabow both have O(V+E) => use Tarjan, which needs only one stack.
+            // 2. topological ordering: use DFS built in step 1.
+
+            setAllUnvisited();
+            _indexCounter                   = 0;
+            _orderedRenderGraphNodes.length = 0;
+            _stackSCC.length                = 0;
+
+            traverseToOrderRenderGraphNodes( _orderedRenderGraphNodes, _stackSCC );
+        }
+
+        override public function dumpRenderGraph():void
+        {
+            setAllUnvisited();
+            trace( "==== RenderGraph: prerequsite lists ====" );
+            super.dumpRenderGraph();
+        }
+
+        public function dumpOrderedRenderGraphNodes():void
+        {
+            if ( !_orderedRenderGraphNodes )
+                return;
+
+            trace( "==== ordered RenderGraphNodes ====" );
+            var order:uint = 0;
+            for each ( var r:RenderGraphNode in _orderedRenderGraphNodes )
+            {
+                trace( "\t#" + order + ". " + r.name + ", shadow=" + r.isShadowEnabledTarget + ", swap=" + r.swappingEnabled );
+                order++;
+            }
+        }
+
+        public function renderOrdered( settings:RenderSettings, style:uint = 0 ):void
+        {
+            for each ( var r:RenderGraphNode in _orderedRenderGraphNodes )
+            {
+                trace("Rendering RGNode" + r.name);
+                settings.renderNode = r;
+                r.render( settings, style );
+            }
+        }
+    }
 }

@@ -17,41 +17,41 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	/**
-	 * Base class for elements that have support for the "asset" tag
-	 * 
-	 * All tags that can contain the "extra" tag are a superset of this class, except for "source"
-	 */
-	public class ColladaElementAsset extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var asset:ColladaAsset;								// <asset>			0 or 1
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaElementAsset( element:XML )
-		{
-			super( element );
-			
-			if ( element.asset.length > 0 )
-				asset = new ColladaAsset( element.asset );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( element:XML ):void
-		{
-			if ( asset )
-				element.prependChild( asset );
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    /**
+     * Base class for elements that have support for the "asset" tag
+     *
+     * All tags that can contain the "extra" tag are a superset of this class, except for "source"
+     */
+    public class ColladaElementAsset extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var asset:ColladaAsset;                              // <asset>          0 or 1
 
-			super.fillXML( element );
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaElementAsset( element:XML )
+        {
+            super( element );
+
+            if ( element.asset.length > 0 )
+                asset = new ColladaAsset( element.asset );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( element:XML ):void
+        {
+            if ( asset )
+                element.prependChild( asset );
+
+            super.fillXML( element );
+        }
+    }
 }

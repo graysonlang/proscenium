@@ -17,51 +17,51 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaInstanceCamera extends ColladaInstance
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String							= "instance_camera";
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; };
-		
-		public function get camera():ColladaCamera
-		{
-			return _collada.getCamera( url );
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaInstanceCamera( collada:Collada, instance:XML )
-		{
-			super( collada, instance );
-			if ( !instance )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public static function parseInstanceCameras( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceCamera>
-		{
-			if ( instances.length() == 0 )
-				return null;
-			
-			var result:Vector.<ColladaInstanceCamera> = new Vector.<ColladaInstanceCamera>();
-			for each ( var instance:XML in instances )
-			{
-				result.push( new ColladaInstanceCamera( collada, instance ) );
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaInstanceCamera extends ColladaInstance
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                          = "instance_camera";
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; };
+
+        public function get camera():ColladaCamera
+        {
+            return _collada.getCamera( url );
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaInstanceCamera( collada:Collada, instance:XML )
+        {
+            super( collada, instance );
+            if ( !instance )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseInstanceCameras( collada:Collada, instances:XMLList ):Vector.<ColladaInstanceCamera>
+        {
+            if ( instances.length() == 0 )
+                return null;
+
+            var result:Vector.<ColladaInstanceCamera> = new Vector.<ColladaInstanceCamera>();
+            for each ( var instance:XML in instances )
+            {
+                result.push( new ColladaInstanceCamera( collada, instance ) );
+            }
+
+            return result;
+        }
+    }
 }

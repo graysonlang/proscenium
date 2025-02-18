@@ -17,53 +17,53 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaBoolArray extends ColladaArrayElement
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "bool_array";
-			
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var values:Vector.<Boolean>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		override public function get tag():String { return TAG; }
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaBoolArray( arrayList:XMLList )
-		{
-			var array:XML = arrayList[0];
-			super( array );
-			if ( !array )
-				return;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		override protected function fillXML( array:XML ):void
-		{
-			array.setChildren( values.join( " " ) );
-			
-			super.fillXML( array );
-		}
-		
-		override protected function parseValues( boolArray:XML ):void
-		{
-			if ( boolArray.hasComplexContent() )
-				throw( new Error( "BAD ARRAY ELEMENT!" ) );
-			
-			values = Vector.<Boolean>( boolArray.text().toString().split( /\s+/ ) );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaBoolArray extends ColladaArrayElement
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "bool_array";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var values:Vector.<Boolean>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        override public function get tag():String { return TAG; }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaBoolArray( arrayList:XMLList )
+        {
+            var array:XML = arrayList[0];
+            super( array );
+            if ( !array )
+                return;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        override protected function fillXML( array:XML ):void
+        {
+            array.setChildren( values.join( " " ) );
+
+            super.fillXML( array );
+        }
+
+        override protected function parseValues( boolArray:XML ):void
+        {
+            if ( boolArray.hasComplexContent() )
+                throw( new Error( "BAD ARRAY ELEMENT!" ) );
+
+            values = Vector.<Boolean>( boolArray.text().toString().split( /\s+/ ) );
+        }
+    }
 }

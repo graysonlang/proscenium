@@ -17,52 +17,52 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.scenegraph.loaders.collada.ColladaNewparam;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaTechniqueFXShader extends ColladaTechniqueFX
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		;															// @id				xs:ID
-		;															// @sid				sid_type		Required
-		;															// <asset>			0 or 1
-		public var annotates:Vector.<ColladaAnnotate>;				// <annotate>		0 or more
-		public var newparams:Vector.<ColladaNewparam>;				// <pass>			1 or more
-		;															// <extra>			0 or more
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaTechniqueFXShader(technique:XML)
-		{
-			super( technique );
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------		
-		public static function parseTechniques( techniques:XMLList ):Vector.<ColladaTechniqueFXShader>
-		{
-			var result:Vector.<ColladaTechniqueFXShader> = new Vector.<ColladaTechniqueFXShader>();
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaTechniqueFXShader extends ColladaTechniqueFX
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        ;                                                           // @id              xs:ID
+        ;                                                           // @sid             sid_type        Required
+        ;                                                           // <asset>          0 or 1
+        public var annotates:Vector.<ColladaAnnotate>;              // <annotate>       0 or more
+        public var newparams:Vector.<ColladaNewparam>;              // <pass>           1 or more
+        ;                                                           // <extra>          0 or more
 
-			for each ( var technique:XML in techniques )
-			{
-				// TODO
-			}			
-			return result;
-		}
-		
-		public static function parseTechnique( technique:XML ):ColladaTechniqueFXShader
-		{
-			// TODO
-			return null
-		}
-	}
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaTechniqueFXShader(technique:XML)
+        {
+            super( technique );
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public static function parseTechniques( techniques:XMLList ):Vector.<ColladaTechniqueFXShader>
+        {
+            var result:Vector.<ColladaTechniqueFXShader> = new Vector.<ColladaTechniqueFXShader>();
+
+            for each ( var technique:XML in techniques )
+            {
+                // TODO
+            }
+            return result;
+        }
+
+        public static function parseTechnique( technique:XML ):ColladaTechniqueFXShader
+        {
+            // TODO
+            return null
+        }
+    }
 }

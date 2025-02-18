@@ -17,31 +17,31 @@
 // ============================================================================
 package com.adobe.utils
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class NumberUtils
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const EPSILON:Number = 1.0e-8;	
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		/**
-		 * Performs a "fuzzy" equality comparison of two floating point numbers
-		 */
-		public static function compare( v1:Number, v2:Number ):Number
-		{
-			var v:Number = v1 - v2;
-			return ( v > EPSILON ) ? 1 : ( ( v < -EPSILON ) ? -1 : 0 );
-		}
-		
-		public static function sign( v:Number ):Number
-		{
-			return ( v > EPSILON ) ? 1 : ( ( v < -EPSILON ) ? -1 : 0 );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class NumberUtils
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const EPSILON:Number = 1.0e-8;
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        /**
+         * Performs a "fuzzy" equality comparison of two floating point numbers
+         */
+        public static function compare( v1:Number, v2:Number ):Number
+        {
+            var v:Number = v1 - v2;
+            return ( v > EPSILON ) ? 1 : ( ( v < -EPSILON ) ? -1 : 0 );
+        }
+
+        public static function sign( v:Number ):Number
+        {
+            return ( v > EPSILON ) ? 1 : ( ( v < -EPSILON ) ? -1 : 0 );
+        }
+    }
 }

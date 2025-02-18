@@ -17,86 +17,86 @@
 // ============================================================================
 package com.adobe.scenegraph
 {
-	// ===========================================================================
-	//	Imports
-	// ---------------------------------------------------------------------------
-	import com.adobe.utils.BoundingBox;
+    // ===========================================================================
+    //  Imports
+    // ---------------------------------------------------------------------------
+    import com.adobe.utils.BoundingBox;
 
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ModelManifest
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var roots:Vector.<SceneNode>;
-		public var nodes:Vector.<SceneNode>;
-		public var bones:Vector.<SceneBone>;
-		public var meshes:Vector.<SceneMesh>;
-		public var lights:Vector.<SceneLight>;
-		public var cameras:Vector.<SceneCamera>;
-		public var materials:Vector.<Material>;
-		
-		// ======================================================================
-		//	Getters and Setters
-		// ----------------------------------------------------------------------
-		public function get boundingBox():BoundingBox
-		{
-			var result:BoundingBox = new BoundingBox();
-			
-			for each ( var root:SceneNode in roots ) {
-				result.combine( root.boundingBox );
-			}
-			
-			return result;
-		}
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ModelManifest()
-		{
-			roots = new Vector.<SceneNode>();
-			materials = new Vector.<Material>();
-			meshes = new Vector.<SceneMesh>();
-			nodes = new Vector.<SceneNode>();
-			bones = new Vector.<SceneBone>();
-			lights = new Vector.<SceneLight>();
-			cameras = new Vector.<SceneCamera>();
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		/** @private **/
-		public function toString():String
-		{
-			var result:String = "";
-			
-			var groups:Object = {
-				"Materials":materials,
-				"Meshes":meshes,
-				"Lights":lights,
-				"Nodes":nodes,
-				"Bones":bones,
-				"Cameras":cameras
-			};
-				
-			for ( var name:String in groups )
-			{
-				var group:* = groups[ name ];
-				
-				if ( group.length > 0 )
-					result += name + ":\n";
-				
-				var i:uint = 0;
-				for each ( var element:* in group ) {
-					result += "  " + (i++) + ': "' + element.name + '" ' + element + "\n";
-				}
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ModelManifest
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var roots:Vector.<SceneNode>;
+        public var nodes:Vector.<SceneNode>;
+        public var bones:Vector.<SceneBone>;
+        public var meshes:Vector.<SceneMesh>;
+        public var lights:Vector.<SceneLight>;
+        public var cameras:Vector.<SceneCamera>;
+        public var materials:Vector.<Material>;
+
+        // ======================================================================
+        //  Getters and Setters
+        // ----------------------------------------------------------------------
+        public function get boundingBox():BoundingBox
+        {
+            var result:BoundingBox = new BoundingBox();
+
+            for each ( var root:SceneNode in roots ) {
+                result.combine( root.boundingBox );
+            }
+
+            return result;
+        }
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ModelManifest()
+        {
+            roots = new Vector.<SceneNode>();
+            materials = new Vector.<Material>();
+            meshes = new Vector.<SceneMesh>();
+            nodes = new Vector.<SceneNode>();
+            bones = new Vector.<SceneBone>();
+            lights = new Vector.<SceneLight>();
+            cameras = new Vector.<SceneCamera>();
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        /** @private **/
+        public function toString():String
+        {
+            var result:String = "";
+
+            var groups:Object = {
+                "Materials":materials,
+                "Meshes":meshes,
+                "Lights":lights,
+                "Nodes":nodes,
+                "Bones":bones,
+                "Cameras":cameras
+            };
+
+            for ( var name:String in groups )
+            {
+                var group:* = groups[ name ];
+
+                if ( group.length > 0 )
+                    result += name + ":\n";
+
+                var i:uint = 0;
+                for each ( var element:* in group ) {
+                    result += "  " + (i++) + ': "' + element.name + '" ' + element + "\n";
+                }
+            }
+
+            return result;
+        }
+    }
 }

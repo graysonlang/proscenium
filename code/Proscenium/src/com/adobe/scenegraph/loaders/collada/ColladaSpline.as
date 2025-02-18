@@ -17,25 +17,25 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaSpline extends ColladaGeometryElement
-	{
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var closed:Boolean;
-		
-		public var sources:Vector.<ColladaSource>;
-		public var controlVertices:Vector.<ColladaInput>;
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaSpline( spline:XML )
-		{
-			super( spline );
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaSpline extends ColladaGeometryElement
+    {
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var closed:Boolean;
+
+        public var sources:Vector.<ColladaSource>;
+        public var controlVertices:Vector.<ColladaInput>;
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaSpline( spline:XML )
+        {
+            super( spline );
+        }
+    }
 }

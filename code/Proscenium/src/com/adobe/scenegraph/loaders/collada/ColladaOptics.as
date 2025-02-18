@@ -17,64 +17,64 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaOptics extends ColladaElementExtra
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "optics";
-		
-		public static const TYPE_ORTHOGRAPHIC:String				= "orthographic";
-		public static const TYPE_PERSPECTIVE:String					= "perspective";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------
-		public var technique:ColladaOpticsTechnique;				// <technique_common>		1
-		public var techniques:Vector.<ColladaTechnique>;			// <technique>				0 or more
-		;															// <extra>					0 or more
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaOptics extends ColladaElementExtra
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "optics";
 
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------
-		public function ColladaOptics( optics:XML = null )
-		{
-			super( optics );
-			
-			var child:XML = optics.technique_common.children()[0];
-			var type:String = child.name().localName;
-			
-			switch( type )
-			{
-				case TYPE_ORTHOGRAPHIC:
-				technique = new ColladaOrthographic( child );
-				break;
-				
-				case TYPE_PERSPECTIVE:
-				technique = new ColladaPerspective( child );
-				break;
-				
-				default:
-					throw( ColladaTechniqueCommon.ERROR_UNSUPPORTED_TECHNIQUE );
-			}
-		}
-		
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-				
-			if ( technique )
-			{
-				var techniqueCommon:XML = new XML( "<" + ColladaTechniqueCommon.TAG + "/>" );
-				techniqueCommon.appendChild( technique.toXML() );
-				result.appendChild( techniqueCommon );
-			}
-				
-			super.fillXML( result );
-			return result
-		}
-	}
+        public static const TYPE_ORTHOGRAPHIC:String                = "orthographic";
+        public static const TYPE_PERSPECTIVE:String                 = "perspective";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var technique:ColladaOpticsTechnique;                // <technique_common>       1
+        public var techniques:Vector.<ColladaTechnique>;            // <technique>              0 or more
+        ;                                                           // <extra>                  0 or more
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaOptics( optics:XML = null )
+        {
+            super( optics );
+
+            var child:XML = optics.technique_common.children()[0];
+            var type:String = child.name().localName;
+
+            switch( type )
+            {
+                case TYPE_ORTHOGRAPHIC:
+                technique = new ColladaOrthographic( child );
+                break;
+
+                case TYPE_PERSPECTIVE:
+                technique = new ColladaPerspective( child );
+                break;
+
+                default:
+                    throw( ColladaTechniqueCommon.ERROR_UNSUPPORTED_TECHNIQUE );
+            }
+        }
+
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            if ( technique )
+            {
+                var techniqueCommon:XML = new XML( "<" + ColladaTechniqueCommon.TAG + "/>" );
+                techniqueCommon.appendChild( technique.toXML() );
+                result.appendChild( techniqueCommon );
+            }
+
+            super.fillXML( result );
+            return result
+        }
+    }
 }

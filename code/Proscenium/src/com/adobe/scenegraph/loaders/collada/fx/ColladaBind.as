@@ -17,59 +17,59 @@
 // ============================================================================
 package com.adobe.scenegraph.loaders.collada.fx
 {
-	// ===========================================================================
-	//	Class
-	// ---------------------------------------------------------------------------
-	public class ColladaBind
-	{
-		// ======================================================================
-		//	Constants
-		// ----------------------------------------------------------------------
-		public static const TAG:String								= "bind";
-		
-		// ======================================================================
-		//	Properties
-		// ----------------------------------------------------------------------	
-		public var semantic:String;									// @semantic	xs:NCName		Required
-		public var target:String;									// @target		sidref_type		Required
-		
-		// ======================================================================
-		//	Constructor
-		// ----------------------------------------------------------------------	
-		public function ColladaBind( element:XML )
-		{
-			if ( !element )
-				return;
-			
-			semantic	= element.@semantic;
-			target		= element.@target;
-		}
-		
-		// ======================================================================
-		//	Methods
-		// ----------------------------------------------------------------------
-		public function toXML():XML
-		{
-			var result:XML = new XML( "<" + TAG + "/>" );
-			
-			result.@semantic	= semantic;
-			result.@target		= target;
-			
-			return result;
-		}
-		
-		public static function parseBinds( binds:XMLList ):Vector.<ColladaBind>
-		{
-			var length:uint = binds.length();
-			if ( length == 0 )
-				return null;
-			
-			var result:Vector.<ColladaBind> = new Vector.<ColladaBind>();
-			for each ( var bind:XML in binds ) {
-				result.push( new ColladaBind( bind ) );
-			}
-			
-			return result;
-		}
-	}
+    // ===========================================================================
+    //  Class
+    // ---------------------------------------------------------------------------
+    public class ColladaBind
+    {
+        // ======================================================================
+        //  Constants
+        // ----------------------------------------------------------------------
+        public static const TAG:String                              = "bind";
+
+        // ======================================================================
+        //  Properties
+        // ----------------------------------------------------------------------
+        public var semantic:String;                                 // @semantic    xs:NCName       Required
+        public var target:String;                                   // @target      sidref_type     Required
+
+        // ======================================================================
+        //  Constructor
+        // ----------------------------------------------------------------------
+        public function ColladaBind( element:XML )
+        {
+            if ( !element )
+                return;
+
+            semantic    = element.@semantic;
+            target      = element.@target;
+        }
+
+        // ======================================================================
+        //  Methods
+        // ----------------------------------------------------------------------
+        public function toXML():XML
+        {
+            var result:XML = new XML( "<" + TAG + "/>" );
+
+            result.@semantic    = semantic;
+            result.@target      = target;
+
+            return result;
+        }
+
+        public static function parseBinds( binds:XMLList ):Vector.<ColladaBind>
+        {
+            var length:uint = binds.length();
+            if ( length == 0 )
+                return null;
+
+            var result:Vector.<ColladaBind> = new Vector.<ColladaBind>();
+            for each ( var bind:XML in binds ) {
+                result.push( new ColladaBind( bind ) );
+            }
+
+            return result;
+        }
+    }
 }
