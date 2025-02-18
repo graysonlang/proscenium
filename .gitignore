@@ -5,7 +5,7 @@ bin-release/
 
 # Other files and folders
 .settings/
-.DS_store
+.DS_Store
 tools/Pixel Bender
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
